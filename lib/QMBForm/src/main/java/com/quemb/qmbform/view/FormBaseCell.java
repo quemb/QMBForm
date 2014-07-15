@@ -1,0 +1,46 @@
+package com.quemb.qmbform.view;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.View;
+
+/**
+ * Created by tonimoeckel on 14.07.14.
+ */
+public abstract class FormBaseCell extends Cell {
+
+
+    public FormBaseCell(Context context, RowDescriptor rowDescriptor) {
+
+        super(context, rowDescriptor);
+
+    }
+
+    public RowDescriptor getRowDescriptor() {
+        return (RowDescriptor) getFormItemDescriptor();
+    }
+
+    public void onValueChanged(Value<?> newValue){
+
+        RowDescriptor row = getRowDescriptor();
+        Value<?> oldValue = row.getValue();
+        if (!newValue.getValue().equals(oldValue.getValue())){
+            OnFormRowValueChangedListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFormRowValueChangedListener();
+            row.setValue(newValue);
+            if (listener != null){
+                listener.onValueChanged(row , oldValue, newValue);
+            }
+        }
+
+
+
+
+
+    }
+}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="section_cell_background">#DDDDDD</color>
+	<color name="section_cell_text">#000000</color>
+
+	<color name="form_cell_background">#FFFFFF</color>
+
+</resources>
