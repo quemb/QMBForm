@@ -30,7 +30,7 @@ public abstract class FormBaseCell extends Cell {
 
         RowDescriptor row = getRowDescriptor();
         Value<?> oldValue = row.getValue();
-        if (!newValue.getValue().equals(oldValue.getValue())){
+        if (oldValue == null || newValue == null || !newValue.getValue().equals(oldValue.getValue())){
             OnFormRowValueChangedListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFormRowValueChangedListener();
             row.setValue(newValue);
             if (listener != null){

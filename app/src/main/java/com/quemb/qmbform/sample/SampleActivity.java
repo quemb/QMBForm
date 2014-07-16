@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -68,6 +69,12 @@ public class SampleActivity extends Activity implements OnFormRowValueChangedLis
             }
         });
         sectionDescriptor3.addRow( button );
+
+        SectionDescriptor sectionDescriptor4 = SectionDescriptor.newInstance("sectionFour","Dates");
+        descriptor.addSection(sectionDescriptor4);
+
+        RowDescriptor dateInline = RowDescriptor.newInstance("dateInline",RowDescriptor.FormRowDescriptorTypeDateInline, "Date");
+        sectionDescriptor4.addRow( dateInline );
 
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, this);
