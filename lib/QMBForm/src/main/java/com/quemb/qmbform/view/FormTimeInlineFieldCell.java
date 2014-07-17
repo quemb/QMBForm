@@ -48,7 +48,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
         getTimePicker().setCurrentMinute(calendar.get(Calendar.MINUTE));
         getTimePicker().setOnTimeChangedListener(this);
         getTimePicker().setIs24HourView(true);
-        
+
     }
 
     @Override
