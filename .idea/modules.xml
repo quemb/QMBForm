@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/lib/QMBForm/QMBForm.iml" filepath="$PROJECT_DIR$/lib/QMBForm/QMBForm.iml" />
       <module fileurl="file://$PROJECT_DIR$/QMBFormSample.iml" filepath="$PROJECT_DIR$/QMBFormSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/QMBForm/lib-QMBForm.iml" filepath="$PROJECT_DIR$/lib/QMBForm/lib-QMBForm.iml" />
     </modules>
   </component>
 </project>

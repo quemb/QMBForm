@@ -3,7 +3,7 @@ package com.quemb.qmbform.descriptor;
 /**
  * Created by tonimoeckel on 14.07.14.
  */
-public class RowDescriptor extends FormItemDescriptor{
+public class RowDescriptor<T> extends FormItemDescriptor{
 
     public static String FormRowDescriptorTypeText = "text";
     public static String FormRowDescriptorTypeName = "name";
@@ -39,7 +39,7 @@ public class RowDescriptor extends FormItemDescriptor{
     public static String FormRowDescriptorTypeStepCounter = "stepCounter";
 
     private String mRowType;
-    private Value<?> mValue;
+    private Value<T> mValue;
     private Boolean mRequired = false;
 
     private SectionDescriptor mSectionDescriptor;
@@ -82,11 +82,11 @@ public class RowDescriptor extends FormItemDescriptor{
         mSectionDescriptor = sectionDescriptor;
     }
 
-    public Value<?> getValue() {
+    public Value<T> getValue() {
         return mValue;
     }
 
-    public void setValue(Value<?> value) {
+    public void setValue(Value<T> value) {
         mValue = value;
     }
 

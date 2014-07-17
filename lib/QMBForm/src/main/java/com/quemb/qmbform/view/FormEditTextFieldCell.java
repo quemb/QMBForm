@@ -14,9 +14,8 @@ import android.widget.TextView;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormEditTextFieldCell extends FormBaseCell {
+public class FormEditTextFieldCell extends FormTitleFieldCell {
 
-    private TextView mTextView;
     private EditText mEditView;
 
     public FormEditTextFieldCell(Context context,
@@ -28,13 +27,19 @@ public class FormEditTextFieldCell extends FormBaseCell {
     protected void init() {
 
         super.init();
-        mTextView = (TextView)findViewById(R.id.textView);
         mEditView = (EditText)findViewById(R.id.editText);
+
+    }
+
+    @Override
+    protected void afterInit() {
+        super.afterInit();
+
         mEditView.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
 
-                onValueChanged(new Value<String>(s.toString()));
+                FormEditTextFieldCell.this.onEditTextChanged(s.toString());
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -47,6 +52,10 @@ public class FormEditTextFieldCell extends FormBaseCell {
 
     }
 
+    protected void onEditTextChanged(String string) {
+        onValueChanged(new Value<String>(string));
+    }
+
     @Override
     protected int getResource() {
         return R.layout.edit_text_field_cell;
@@ -55,9 +64,13 @@ public class FormEditTextFieldCell extends FormBaseCell {
     @Override
     protected void update() {
 
-        String title = getFormItemDescriptor().getTitle();
-        mTextView.setText(title);
-        mTextView.setVisibility(title == null?GONE:VISIBLE);
+        super.update();
+
+        updateEditView();
+
+    }
+
+    protected void updateEditView() {
 
         Value<String> value = (Value<String>) getRowDescriptor().getValue();
         if (value != null){
@@ -66,4 +79,9 @@ public class FormEditTextFieldCell extends FormBaseCell {
         }
 
     }
+
+    public EditText getEditView() {
+        return mEditView;
+    }
+
 }

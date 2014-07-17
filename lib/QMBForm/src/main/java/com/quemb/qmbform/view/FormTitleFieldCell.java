@@ -9,12 +9,14 @@ import android.widget.TextView;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormTextFieldCell extends FormBaseCell {
+public class FormTitleFieldCell extends FormBaseCell {
+
+
 
     private TextView mTextView;
 
 
-    public FormTextFieldCell(Context context,
+    public FormTitleFieldCell(Context context,
             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
@@ -39,5 +41,9 @@ public class FormTextFieldCell extends FormBaseCell {
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
 
+    }
+
+    public TextView getTextView() {
+        return mTextView;
     }
 }

@@ -11,6 +11,7 @@ import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -48,9 +49,13 @@ public class SampleActivity extends Activity implements OnFormRowValueChangedLis
         SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("sectionOne","Text Inputs");
         descriptor.addSection(sectionDescriptor);
 
+        sectionDescriptor.addRow( RowDescriptor.newInstance("detail",RowDescriptor.FormRowDescriptorTypeName, "Title", new Value<String>("Detail")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test")) );
-
-        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ...")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeURL, "URL", new Value<String>("http://www.github.com/")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("textView",RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ...")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("number",RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456)) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55)) );
 
         SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("sectionTwo","Boolean Inputs");
         descriptor.addSection(sectionDescriptor2);
@@ -65,7 +70,9 @@ public class SampleActivity extends Activity implements OnFormRowValueChangedLis
         button.setOnFormRowClickListener(new OnFormRowClickListener() {
             @Override
             public void onFormRowClick(FormItemDescriptor itemDescriptor) {
-                Log.d(TAG, "button Click");
+                AlertDialog.Builder builder = new AlertDialog.Builder(SampleActivity.this);
+                builder.setTitle("Tapped");
+                builder.show();
             }
         });
         sectionDescriptor3.addRow( button );
@@ -73,8 +80,10 @@ public class SampleActivity extends Activity implements OnFormRowValueChangedLis
         SectionDescriptor sectionDescriptor4 = SectionDescriptor.newInstance("sectionFour","Dates");
         descriptor.addSection(sectionDescriptor4);
 
-        RowDescriptor dateInline = RowDescriptor.newInstance("dateInline",RowDescriptor.FormRowDescriptorTypeDateInline, "Date");
-        sectionDescriptor4.addRow( dateInline );
+        sectionDescriptor4.addRow( RowDescriptor.newInstance("dateInline",RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline", new Value<Date>(new Date()) ));
+        sectionDescriptor4.addRow( RowDescriptor.newInstance("dateDialog",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog") );
+        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeInline",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline") );
+        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeDialog",RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date())) );
 
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, this);
@@ -86,8 +95,8 @@ public class SampleActivity extends Activity implements OnFormRowValueChangedLis
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
 
         Log.d(TAG, "Value Changed: "+rowDescriptor.getTitle());
-        Log.d(TAG, "Old Value: "+oldValue);
-        Log.d(TAG, "New Value: "+newValue);
+//        Log.d(TAG, "Old Value: "+oldValue);
+//        Log.d(TAG, "New Value: "+newValue);
 
         mChangesMap.put(rowDescriptor.getTag(), newValue);
         updateSaveItem();

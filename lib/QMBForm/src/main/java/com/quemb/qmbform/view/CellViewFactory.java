@@ -27,12 +27,23 @@ public class CellViewFactory {
     public CellViewFactory(){
 
         mViewRowTypeMap = new HashMap<String, Class<? extends FormBaseCell>>();
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeName, FormDetailTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeText, FormEditTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTextView, FormEditTextViewFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanSwitch, FormBooleanFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanCheck, FormCheckFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeButton, FormButtonFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDate, FormDateDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDateInline, FormDateInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTime, FormTimeDialogFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTimeInline, FormTimeInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNumber, FormEditNumberFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeInteger, FormEditIntegerFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypePhone, FormEditPhoneFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeURL, FormEditURLFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypePassword, FormEditPasswordFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
+
     }
 
     public Cell createViewForFormItemDescriptor(Context context, FormItemDescriptor descriptor){

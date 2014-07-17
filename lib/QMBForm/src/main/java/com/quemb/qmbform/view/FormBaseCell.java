@@ -38,9 +38,5 @@ public abstract class FormBaseCell extends Cell {
             }
         }
 
-
-
-
-
     }
 }

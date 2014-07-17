@@ -20,6 +20,11 @@ public abstract class Cell extends LinearLayout {
         formItemDescriptor.setCell(this);
         init();
         update();
+        afterInit();
+    }
+
+    protected void afterInit(){
+
     }
 
     protected void init(){

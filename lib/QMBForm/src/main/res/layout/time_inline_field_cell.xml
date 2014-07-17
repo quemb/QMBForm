@@ -4,6 +4,7 @@
 			  android:orientation="vertical"
 			  android:background="@color/form_cell_background"
 			  android:padding="@dimen/cell_padding"
+			  android:descendantFocusability="blocksDescendants"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content">
 
@@ -28,6 +29,15 @@
 				android:id="@+id/detailTextView"/>
 
 	</LinearLayout>
+
+
+	<TimePicker
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			android:id="@+id/timePicker"
+
+			android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>
