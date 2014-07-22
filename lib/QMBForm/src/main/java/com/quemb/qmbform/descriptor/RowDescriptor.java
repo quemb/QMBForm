@@ -21,6 +21,8 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     public static String FormRowDescriptorTypeSelectorAlertView = "selectorAlertView";
     public static String FormRowDescriptorTypeSelectorPickerView = "selectorPickerView";
     public static String FormRowDescriptorTypeSelectorPickerViewInline = "selectorPickerViewInline";
+    public static String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
+    public static String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
     public static String FormRowDescriptorTypeMultipleSelector = "multipleSelector";
     public static String FormRowDescriptorTypeSelectorLeftRight = "selectorLeftRight";
     public static String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
@@ -40,6 +42,10 @@ public class RowDescriptor<T> extends FormItemDescriptor{
 
     private String mRowType;
     private Value<T> mValue;
+    /**
+     * A list of valid values to pick from (e.g. used for spinners)
+     */
+    private DataSource<T> mDataSource;
     private Boolean mRequired = false;
 
     private SectionDescriptor mSectionDescriptor;
@@ -100,5 +106,17 @@ public class RowDescriptor<T> extends FormItemDescriptor{
 
     public String getRowType() {
         return mRowType;
+    }
+
+    public boolean hasDataSource(){
+        return mDataSource != null;
+    }
+
+    public DataSource<T> getDataSource() {
+        return mDataSource;
+    }
+
+    public void setDataSource(DataSource<T> dataSource) {
+        mDataSource = dataSource;
     }
 }

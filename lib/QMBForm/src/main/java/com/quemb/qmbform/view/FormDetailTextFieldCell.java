@@ -37,8 +37,11 @@ public class FormDetailTextFieldCell extends FormTitleFieldCell {
 
         super.update();
 
-        Value<String> value = (Value<String>) getRowDescriptor().getValue();
-        getDetailTextView().setText(value.getValue());
+        Value<?> value = getRowDescriptor().getValue();
+        if (value != null && value.getValue() != null){
+            getDetailTextView().setText(value.getValue().toString());
+        }
+
 
     }
 

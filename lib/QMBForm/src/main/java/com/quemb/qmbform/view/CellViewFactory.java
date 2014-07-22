@@ -43,6 +43,8 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeURL, FormEditURLFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypePassword, FormEditPasswordFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSpinnerFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormPickerDialogFieldCell.class);
 
     }
 

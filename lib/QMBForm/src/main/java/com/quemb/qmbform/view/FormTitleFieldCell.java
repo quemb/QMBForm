@@ -40,6 +40,7 @@ public class FormTitleFieldCell extends FormBaseCell {
 
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
+        mTextView.setVisibility(title == null?GONE:VISIBLE);
 
     }
 
