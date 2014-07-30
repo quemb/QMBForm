@@ -11,6 +11,7 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     public static final String FormRowDescriptorTypeEmail = "email";
     public static final String FormRowDescriptorTypePassword = "password";
     public static final String FormRowDescriptorTypeNumber = "number";
+    public static final String FormRowDescriptorTypeCurrency = "currency";
     public static final String FormRowDescriptorTypePhone = "phone";
     public static final String FormRowDescriptorTypeTwitter = "twitter";
     public static final String FormRowDescriptorTypeAccount = "account";
