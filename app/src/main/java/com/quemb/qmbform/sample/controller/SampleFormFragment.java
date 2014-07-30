@@ -1,4 +1,4 @@
-package com.quemb.qmbform.sample;
+package com.quemb.qmbform.sample.controller;
 
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
@@ -8,6 +8,7 @@ import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.sample.R;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.Date;
 import java.util.HashMap;

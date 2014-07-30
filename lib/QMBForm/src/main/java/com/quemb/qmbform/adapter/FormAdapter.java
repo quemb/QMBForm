@@ -3,12 +3,11 @@ package com.quemb.qmbform.adapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.view.CellViewFactory;
+import com.quemb.qmbform.CellViewFactory;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;

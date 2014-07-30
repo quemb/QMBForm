@@ -1,8 +1,29 @@
-package com.quemb.qmbform.view;
+package com.quemb.qmbform;
 
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.view.Cell;
+import com.quemb.qmbform.view.FormBaseCell;
+import com.quemb.qmbform.view.FormBooleanFieldCell;
+import com.quemb.qmbform.view.FormButtonFieldCell;
+import com.quemb.qmbform.view.FormCheckFieldCell;
+import com.quemb.qmbform.view.FormDateDialogFieldCell;
+import com.quemb.qmbform.view.FormDateInlineFieldCell;
+import com.quemb.qmbform.view.FormDetailTextFieldCell;
+import com.quemb.qmbform.view.FormEditEmailFieldCell;
+import com.quemb.qmbform.view.FormEditIntegerFieldCell;
+import com.quemb.qmbform.view.FormEditNumberFieldCell;
+import com.quemb.qmbform.view.FormEditPasswordFieldCell;
+import com.quemb.qmbform.view.FormEditPhoneFieldCell;
+import com.quemb.qmbform.view.FormEditTextFieldCell;
+import com.quemb.qmbform.view.FormEditTextViewFieldCell;
+import com.quemb.qmbform.view.FormEditURLFieldCell;
+import com.quemb.qmbform.view.FormPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormSpinnerFieldCell;
+import com.quemb.qmbform.view.FormTimeDialogFieldCell;
+import com.quemb.qmbform.view.FormTimeInlineFieldCell;
+import com.quemb.qmbform.view.SectionCell;
 
 import android.content.Context;
 

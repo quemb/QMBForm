@@ -1,4 +1,4 @@
-package com.quemb.qmbform.sample;
+package com.quemb.qmbform.sample.controller;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

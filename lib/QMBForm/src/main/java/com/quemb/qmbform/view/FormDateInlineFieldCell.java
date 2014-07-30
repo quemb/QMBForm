@@ -62,14 +62,14 @@ public class FormDateInlineFieldCell extends FormDateFieldCell implements
         super.onCellSelected();
 
         mDatePicker.setVisibility(mDatePicker.getVisibility()==VISIBLE?GONE:VISIBLE);
-        ensureVisible();
+//        ensureVisible();
     }
 
-    public void ensureVisible()
-    {
-        ListView listView = (ListView) getParent();
-        int lastSelectedIndex = listView.getSelectedItemPosition();
-        listView.setSelection(lastSelectedIndex);
-
-    }
+//    public void ensureVisible()
+//    {
+//        ListView listView = (ListView) getParent();
+//        int lastSelectedIndex = listView.getSelectedItemPosition();
+//        listView.setSelection(lastSelectedIndex);
+//
+//    }
 }
