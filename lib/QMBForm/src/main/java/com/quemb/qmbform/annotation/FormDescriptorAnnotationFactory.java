@@ -105,7 +105,7 @@ public class FormDescriptorAnnotationFactory {
          */
         for (Field field:formFields){
             FormElement annotation = field.getAnnotation(FormElement.class);
-            String sectionTitle = getContext().getString(annotation.section());
+            String sectionTitle = annotation.section() == android.R.string.untitled ? "" : getContext().getString(annotation.section());
 
             Section section = null;
             for(Section iterateSection: sections){
@@ -141,13 +141,13 @@ public class FormDescriptorAnnotationFactory {
                         e.printStackTrace();
                     }
 
-                    RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag(),
+                    RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
                             annotation.rowDescriptorType(),
                             getContext().getString(annotation.label()),
                             value);
                     rowDescriptor.setRequired(annotation.required());
                     sectionDescriptor.addRow( rowDescriptor ) ;
-                    
+
                 }
 
             }
@@ -190,14 +190,16 @@ public class FormDescriptorAnnotationFactory {
 
     private class Section {
 
-        public String title;
-        public String tag;
-        public ArrayList<Field> fields;
+        public String title = "";
+        public String tag = "";
+        public ArrayList<Field> fields = new ArrayList<Field>();;
 
         public Section(String sectionTitle) {
-            title = sectionTitle;
-            tag = toCamelCase(sectionTitle);
-            fields = new ArrayList<Field>();
+            if (sectionTitle != null && sectionTitle.length()>0){
+                title = sectionTitle;
+                tag = toCamelCase(sectionTitle);
+            }
+
         }
     }
 }

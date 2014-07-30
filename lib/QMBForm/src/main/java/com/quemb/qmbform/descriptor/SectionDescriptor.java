@@ -79,6 +79,6 @@ public class SectionDescriptor extends FormItemDescriptor {
     }
 
     public boolean hasTitle() {
-        return getTitle() != null;
+        return getTitle() != null && getTitle().length() > 0;
     }
 }
