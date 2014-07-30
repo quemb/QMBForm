@@ -40,7 +40,8 @@ public class SectionCell extends Cell {
     @Override
     protected void update() {
 
-        mTextView.setText(getFormItemDescriptor().getTitle());
+        String title = getFormItemDescriptor().getTitle();
+        mTextView.setText(title);
 
     }
 

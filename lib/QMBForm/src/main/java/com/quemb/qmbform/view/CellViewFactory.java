@@ -81,4 +81,8 @@ public class CellViewFactory {
 
     }
 
+    public void setRowTypeMap(String descriptorType, Class<? extends FormBaseCell> clazz){
+        mViewRowTypeMap.put(descriptorType, clazz);
+    }
+
 }

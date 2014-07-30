@@ -77,4 +77,8 @@ public class SectionDescriptor extends FormItemDescriptor {
     private void removeRowAtIndex(int index){
         mRows.remove(index);
     }
+
+    public boolean hasTitle() {
+        return getTitle() != null;
+    }
 }

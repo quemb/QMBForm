@@ -53,7 +53,7 @@ public class FormDescriptor {
         return mSections;
     }
 
-    private void insertSectionAtIndex(SectionDescriptor section, int index){
+    public void insertSectionAtIndex(SectionDescriptor section, int index){
         section.setFormDescriptor(this);
         mSections.add(index, section);
     }

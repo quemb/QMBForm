@@ -34,7 +34,10 @@ public class FormAdapter extends BaseAdapter {
         mItems = new ArrayList<FormItemDescriptor>();
         for (SectionDescriptor sectionDescriptor : mFormDescriptor.getSections()){
 
-            mItems.add(sectionDescriptor);
+            if (sectionDescriptor.hasTitle()){
+                mItems.add(sectionDescriptor);
+            }
+
             mItems.addAll(sectionDescriptor.getRows());
         }
 
