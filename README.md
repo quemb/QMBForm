@@ -189,6 +189,13 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
     
   ```
 
+## To do
+
+- Validation
+- Simpler cell customisation
+- More form elements
+- Form model 
+
 ## Credits
 QMBForm is based on the ideas of [XMLForm](https://github.com/xmartlabs/XLForm) - the most flexible and powerful iOS library to create dynamic table-view forms.
 
