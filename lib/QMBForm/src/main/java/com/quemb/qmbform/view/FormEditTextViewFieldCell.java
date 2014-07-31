@@ -5,6 +5,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
+import android.text.InputType;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +22,14 @@ public class FormEditTextViewFieldCell extends FormEditTextFieldCell {
         super(context, rowDescriptor);
     }
 
+
+    @Override
+    protected void init() {
+        super.init();
+
+        EditText editView = getEditView();
+        editView.setRawInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+    }
 
     @Override
     protected int getResource() {

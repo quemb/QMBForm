@@ -7,6 +7,7 @@ import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
 
         super.init();
         mEditView = (EditText)findViewById(R.id.editText);
+        mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
     }
 
