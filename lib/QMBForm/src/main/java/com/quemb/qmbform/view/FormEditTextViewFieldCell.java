@@ -28,7 +28,7 @@ public class FormEditTextViewFieldCell extends FormEditTextFieldCell {
         super.init();
 
         EditText editView = getEditView();
-        editView.setRawInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+//        editView.setRawInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
     }
 
     @Override

@@ -6,9 +6,11 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -24,12 +26,15 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
         super(context, rowDescriptor);
     }
 
+    private Handler handler = new Handler();
+    private int lastFocussedPosition = -1;
+
     @Override
     protected void init() {
 
         super.init();
         mEditView = (EditText)findViewById(R.id.editText);
-        mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
     }
 
@@ -75,7 +80,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
     protected void updateEditView() {
 
         Value<String> value = (Value<String>) getRowDescriptor().getValue();
-        if (value != null){
+        if (value != null && value.getValue() != null){
             String valueString = value.getValue();
             mEditView.setText(valueString);
         }

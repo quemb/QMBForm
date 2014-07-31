@@ -44,7 +44,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
         mTextView.setVisibility(title == null?GONE:VISIBLE);
 
         Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
-        if (value == null){
+        if (value == null || value.getValue() == null){
             value = new Value<Date>(new Date());
         }else {
             updateDateLabel(value.getValue());

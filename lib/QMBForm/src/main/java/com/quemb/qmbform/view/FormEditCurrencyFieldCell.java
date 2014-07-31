@@ -27,10 +27,8 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
     protected void updateEditView() {
 
         Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
-        if (value != null){
+        if (value != null && value.getValue() != null){
             NumberFormat format = NumberFormat.getCurrencyInstance();
-            format.setCurrency(Currency.getInstance("EUR"));
-
             String valueString = format.format(value.getValue());//String.valueOf(value.getValue());
             getEditView().setText(valueString);
         }

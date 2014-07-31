@@ -5,9 +5,14 @@ import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.view.Cell;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -26,14 +31,17 @@ public class FormManager {
 
     }
 
-    public void setup(FormDescriptor formDescriptor, final ListView listView, Context context){
 
-//        mFormDescriptor = formDescriptor;
-//        mListView = listView;
+    public void setup(FormDescriptor formDescriptor, final ListView listView, Activity activity){
+
+        Context context = activity;
+
+//        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
         final FormAdapter adapter = FormAdapter.newInstance(formDescriptor, context);
         listView.setAdapter(adapter);
-
+        listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

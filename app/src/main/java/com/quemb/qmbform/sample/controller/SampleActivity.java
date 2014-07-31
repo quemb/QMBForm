@@ -1,11 +1,13 @@
 package com.quemb.qmbform.sample.controller;
 
 import com.quemb.qmbform.sample.R;
+import com.quemb.qmbform.sample.model.TabItem;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,8 @@ public class SampleActivity extends FragmentActivity {
 
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_page_view);
-        List<Fragment> fragments = getFragments();
+        List<TabItem> fragments = getTabItems();
         pageAdapter = new SamplePageAdapter(getSupportFragmentManager(), fragments);
         ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
         pager.setOffscreenPageLimit(1);
@@ -33,15 +34,16 @@ public class SampleActivity extends FragmentActivity {
 
     }
 
-    private List<Fragment> getFragments() {
-        List<Fragment> fList = new ArrayList<Fragment>();
+    private List<TabItem> getTabItems() {
+        List<TabItem> fList = new ArrayList<TabItem>();
 
-        fList.add(SampleAnnotationFormFragment.newInstance());
-        fList.add(SampleFormFragment.newInstance());
-        fList.add(SampleFormFragment.newInstance());
+        fList.add(new TabItem("Annotation",SampleAnnotationFormFragment.newInstance()));
+        fList.add(new TabItem("Manual", SampleFormFragment.newInstance()));
 
         return fList;
     }
+
+
 
 
 }

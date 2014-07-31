@@ -1,5 +1,7 @@
 package com.quemb.qmbform.sample.controller;
 
+import com.quemb.qmbform.sample.model.TabItem;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,24 +12,27 @@ import java.util.List;
  * Created by tonimoeckel on 17.07.14.
  */
 public class SamplePageAdapter  extends FragmentPagerAdapter {
-    private List<Fragment> fragments;
+    private List<TabItem> mTabItems;
+    private String[] mTitles = {"Annotation","Classic","Classic"};
 
-    public SamplePageAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public SamplePageAdapter(FragmentManager fm, List<TabItem> tabItems) {
         super(fm);
-        this.fragments = fragments;
+        mTabItems = tabItems;
     }
     @Override
     public Fragment getItem(int position) {
-        return this.fragments.get(position);
+        return mTabItems.get(position).getFragment();
     }
 
     @Override
     public int getCount() {
-        return this.fragments.size();
+        return mTabItems.size();
     }
 
     @Override
     public CharSequence getPageTitle (int position) {
-        return "Form - "+position;
+        return mTabItems.get(position).getTitle();
     }
+
+
 }
