@@ -3,6 +3,8 @@ QMBForm
 
 Create simple Android forms
 
+![Demo](resources/sample_cast.gif)
+
 ## Basic Usage
 
 1.  Create a "FromDescriptor" - It's the holder for the form
