@@ -81,4 +81,17 @@ public class SectionDescriptor extends FormItemDescriptor {
     public boolean hasTitle() {
         return getTitle() != null && getTitle().length() > 0;
     }
+
+    public RowDescriptor findRowDescriptor(String tag){
+        RowDescriptor rowDescriptor = null;
+
+        for (RowDescriptor iRowDescriptor:getRows()){
+            if (tag.equals(iRowDescriptor.getTag())){
+                rowDescriptor = iRowDescriptor;
+                break;
+            }
+        }
+
+        return rowDescriptor;
+    }
 }

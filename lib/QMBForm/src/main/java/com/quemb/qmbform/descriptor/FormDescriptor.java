@@ -70,6 +70,17 @@ public class FormDescriptor {
         return mOnFormRowValueChangedListener;
     }
 
+    public RowDescriptor findRowDescriptor(String tag){
+        RowDescriptor rowDescriptor = null;
+
+        for (SectionDescriptor sectionDescriptor:getSections()){
+            rowDescriptor = sectionDescriptor.findRowDescriptor(tag);
+            if (rowDescriptor != null) break;
+        }
+
+        return rowDescriptor;
+    }
+
     public void setOnFormRowValueChangedListener(
             OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;

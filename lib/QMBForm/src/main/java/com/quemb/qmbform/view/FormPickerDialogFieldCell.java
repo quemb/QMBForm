@@ -4,6 +4,7 @@ import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.DataSourceListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.exceptions.NoDataSourceException;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,44 +33,33 @@ public class FormPickerDialogFieldCell extends FormDetailTextFieldCell {
     @Override
     public void onCellSelected() {
         super.onCellSelected();
+        if (getRowDescriptor().getDataSource() == null){
+            throw new NoDataSourceException();
+        }else {
+            getRowDescriptor().getDataSource().loadData(new DataSourceListener() {
+                @Override
+                public void onDataSourceLoaded(ArrayList list) {
 
-        getRowDescriptor().getDataSource().loadData(new DataSourceListener() {
-            @Override
-            public void onDataSourceLoaded(ArrayList list) {
+                    final ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_selectable_list_item,list);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                /*
-                final ArrayAdapter adapter = new ArrayAdapter(getContext(),0,list);
+                    builder.setSingleChoiceItems(adapter,-1,new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(getRowDescriptor().getTitle())
-                        .setSingleChoiceItems(adapter,0,new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                onValueChanged(new Value<Object>(adapter.getItem(which)));
-                                update();
-                                dialog.dismiss();
-                            }
-                        });
-                builder.show();
-                */
-                final ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_selectable_list_item,list);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            onValueChanged(new Value<Object>(adapter.getItem(which)));
+                            update();
+                            dialog.dismiss();
+                        }
+                    })
+                            .setTitle(getRowDescriptor().getTitle());
 
-                builder.setSingleChoiceItems(adapter,-1,new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+        }
 
-                        onValueChanged(new Value<Object>(adapter.getItem(which)));
-                        update();
-                        dialog.dismiss();
-                    }
-                })
-                        .setTitle("Test");
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
 
 
     }

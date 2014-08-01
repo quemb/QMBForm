@@ -2,6 +2,8 @@ package com.quemb.qmbform.sample.controller;
 
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
+import com.quemb.qmbform.descriptor.DataSource;
+import com.quemb.qmbform.descriptor.DataSourceListener;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
@@ -11,6 +13,8 @@ import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.sample.R;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -71,7 +76,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         FormDescriptor descriptor = FormDescriptor.newInstance();
         descriptor.setOnFormRowValueChangedListener(this);
 
-        SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("sectionOne","Text Inputs");
+        SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("section","Text Inputs");
         descriptor.addSection(sectionDescriptor);
 
         sectionDescriptor.addRow( RowDescriptor
@@ -83,6 +88,22 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         sectionDescriptor.addRow( RowDescriptor.newInstance("textView",RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ...")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("number",RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456)) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55)) );
+
+        SectionDescriptor sectionDescriptor1 = SectionDescriptor.newInstance("sectionOne","Picker");
+        RowDescriptor pickerDescriptor = RowDescriptor.newInstance("picker",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, "Picker", new Value<String>("Item 5"));
+        pickerDescriptor.setDataSource(new DataSource() {
+
+            @Override
+            public void loadData(final DataSourceListener listener) {
+                // Can be async
+                CustomTask task = new CustomTask();
+                task.execute(listener);
+
+
+            }
+        });
+        sectionDescriptor1.addRow( pickerDescriptor );
+        descriptor.addSection(sectionDescriptor1);
 
         SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("sectionTwo","Boolean Inputs");
         descriptor.addSection(sectionDescriptor2);
@@ -158,5 +179,46 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
     private void updateSaveItem() {
         mSaveMenuItem.setVisible(mChangesMap.size()>0);
+    }
+
+    private class CustomTask extends AsyncTask<DataSourceListener, Void, ArrayList<String>> {
+
+        private DataSourceListener mListener;
+        private ProgressDialog mProgressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog = ProgressDialog.show(getActivity(), "Loading",
+                    "Do some work", true);
+        }
+
+        protected ArrayList<String> doInBackground(DataSourceListener... listeners) {
+
+            mListener = (DataSourceListener)listeners[0];
+
+            ArrayList<String> items = new ArrayList<String>();
+            for (Integer i=0;i<10;i++){
+                doFakeWork();
+                items.add("Item "+String.valueOf(i));
+            }
+
+            return items;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> strings) {
+            super.onPostExecute(strings);
+            mProgressDialog.dismiss();
+            mListener.onDataSourceLoaded(strings);
+        }
+
+        private void doFakeWork() {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
