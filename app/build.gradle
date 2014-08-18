@@ -1,13 +1,26 @@
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+
+        classpath 'com.github.jcandksolutions.gradle:android-unit-test:1.2.+'
+
+    }
+}
+
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 18
     buildToolsVersion "19.1.0"
 
     defaultConfig {
         applicationId "com.quemb.qmbform.sample"
-        minSdkVersion 19
-        targetSdkVersion 19
+        minSdkVersion 16
+        targetSdkVersion 18
         versionCode 1
         versionName "1.0"
     }
@@ -19,7 +32,23 @@ android {
     }
 }
 
+apply plugin: 'android-unit-test'
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(":lib:QMBForm")
+
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.robolectric:robolectric:2.3'
+
+}
+
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        testOutputDir = file('build/test-classes/debug')
+    }
 }
