@@ -20,6 +20,7 @@ import com.quemb.qmbform.view.FormEditPhoneFieldCell;
 import com.quemb.qmbform.view.FormEditTextFieldCell;
 import com.quemb.qmbform.view.FormEditTextViewFieldCell;
 import com.quemb.qmbform.view.FormEditURLFieldCell;
+import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
 import com.quemb.qmbform.view.FormPickerDialogFieldCell;
 import com.quemb.qmbform.view.FormSpinnerFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
@@ -69,6 +70,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSpinnerFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormPickerDialogFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeIntegerSlider, FormIntegerSliderFieldCell.class);
 
     }
 
