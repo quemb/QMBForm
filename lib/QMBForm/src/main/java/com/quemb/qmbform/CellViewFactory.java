@@ -11,6 +11,7 @@ import com.quemb.qmbform.view.FormCheckFieldCell;
 import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormDateInlineFieldCell;
 import com.quemb.qmbform.view.FormDetailTextFieldCell;
+import com.quemb.qmbform.view.FormDetailTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormEditCurrencyFieldCell;
 import com.quemb.qmbform.view.FormEditEmailFieldCell;
 import com.quemb.qmbform.view.FormEditIntegerFieldCell;
@@ -51,6 +52,7 @@ public class CellViewFactory {
 
         mViewRowTypeMap = new HashMap<String, Class<? extends FormBaseCell>>();
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeName, FormDetailTextFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNameVertical, FormDetailTextVerticalFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeText, FormEditTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTextView, FormEditTextViewFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanSwitch, FormBooleanFieldCell.class);
