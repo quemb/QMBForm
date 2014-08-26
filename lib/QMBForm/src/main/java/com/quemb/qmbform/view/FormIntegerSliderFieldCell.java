@@ -9,6 +9,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by tonimoeckel on 25.08.14.
@@ -16,6 +17,7 @@ import java.util.Date;
 public class FormIntegerSliderFieldCell extends FormDetailTextFieldCell {
 
     private SeekBar mSeekBar;
+    public final static String CellConfigMaxKey = "CellConfigMaxKey";
 
     public FormIntegerSliderFieldCell(Context context, RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
@@ -61,7 +63,10 @@ public class FormIntegerSliderFieldCell extends FormDetailTextFieldCell {
 
         Value<Integer> value = (Value<Integer>) getRowDescriptor().getValue();
 
-        mSeekBar.setMax(100);
+        HashMap<String, Object> config = getRowDescriptor().getCellConfig();
+        Integer max = config.containsKey(CellConfigMaxKey) ? (Integer) config.get(CellConfigMaxKey) : 100;
+
+        mSeekBar.setMax(max);
         mSeekBar.setProgress(value.getValue());
 
     }
