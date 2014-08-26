@@ -10,9 +10,7 @@ import android.widget.TextView;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormDetailTextVerticalFieldCell extends FormTitleFieldCell {
-
-    private TextView mDetailTextView;
+public class FormDetailTextVerticalFieldCell extends FormDetailTextFieldCell {
 
     public FormDetailTextVerticalFieldCell(Context context,
             RowDescriptor rowDescriptor) {
@@ -20,32 +18,7 @@ public class FormDetailTextVerticalFieldCell extends FormTitleFieldCell {
     }
 
     @Override
-    protected void init() {
-
-        super.init();
-        mDetailTextView = (TextView)findViewById(R.id.detailTextView);
-
-    }
-
-    @Override
     protected int getResource() {
         return R.layout.detail_text_vertical_field_cell;
-    }
-
-    @Override
-    protected void update() {
-
-        super.update();
-
-        Value<?> value = getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null){
-            getDetailTextView().setText(value.getValue().toString());
-        }
-
-
-    }
-
-    public TextView getDetailTextView() {
-        return mDetailTextView;
     }
 }
