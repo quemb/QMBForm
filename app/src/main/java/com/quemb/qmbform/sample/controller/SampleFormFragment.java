@@ -79,9 +79,8 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("section","Text Inputs");
         descriptor.addSection(sectionDescriptor);
 
-        sectionDescriptor.addRow( RowDescriptor
-                .newInstance("detail", RowDescriptor.FormRowDescriptorTypeName, "Title",
-                        new Value<String>("Detail")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeName, "Title",new Value<String>("Detail")) );
+        sectionDescriptor.addRow( RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeNameVertical, "Title",new Value<String>("Detail")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeURL, "URL", new Value<String>("http://www.github.com/")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com")) );
