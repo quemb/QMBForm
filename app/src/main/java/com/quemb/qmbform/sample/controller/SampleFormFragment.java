@@ -41,6 +41,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
     private MenuItem mSaveMenuItem;
 
     public static String TAG = "SampleFormFragment";
+    private FormManager mFormManager;
 
     public static final SampleFormFragment newInstance()
     {
@@ -118,6 +119,10 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         button.setOnFormRowClickListener(new OnFormRowClickListener() {
             @Override
             public void onFormRowClick(FormItemDescriptor itemDescriptor) {
+
+                itemDescriptor.setTitle("New Title");
+                mFormManager.updateRows();
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Tapped");
                 builder.show();
@@ -133,9 +138,12 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         sectionDescriptor4.addRow( RowDescriptor.newInstance("timeInline",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline") );
         sectionDescriptor4.addRow( RowDescriptor.newInstance("timeDialog",RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date())) );
 
-        FormManager formManager = new FormManager();
-        formManager.setup(descriptor, mListView, getActivity());
-        formManager.setOnFormRowClickListener(this);
+        mFormManager = new FormManager();
+        mFormManager.setup(descriptor, mListView, getActivity());
+        mFormManager.setOnFormRowClickListener(this);
+
+
+
     }
 
     @Override
@@ -175,6 +183,9 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
         mChangesMap.put(rowDescriptor.getTag(), newValue);
         updateSaveItem();
+
+
+
     }
 
     private void updateSaveItem() {

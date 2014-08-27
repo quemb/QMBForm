@@ -13,6 +13,9 @@ public class FormItemDescriptor {
     protected Cell mCell;
 
     protected String mTag;
+
+
+
     protected String mTitle;
     private OnFormRowClickListener mOnFormRowClickListener;
     private HashMap<String, Object> mCellConfig;
@@ -20,6 +23,10 @@ public class FormItemDescriptor {
 
     public String getTitle() {
         return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
     }
 
     public String getTag() {

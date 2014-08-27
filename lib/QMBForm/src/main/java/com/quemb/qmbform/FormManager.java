@@ -62,7 +62,7 @@ public class FormManager {
                 }
             }
         });
-
+        mListView = listView;
 
     }
 
@@ -72,5 +72,10 @@ public class FormManager {
 
     public void setOnFormRowClickListener(OnFormRowClickListener onFormRowClickListener) {
         mOnFormRowClickListener = onFormRowClickListener;
+    }
+
+    public void updateRows(){
+        FormAdapter adapter = (FormAdapter) mListView.getAdapter();
+        adapter.notifyDataSetChanged();
     }
 }
