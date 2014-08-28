@@ -1,12 +1,21 @@
+package qmbform;
+
 import android.app.Activity;
 import android.widget.ListView;
 import com.quemb.qmbform.descriptor.FormDescriptor;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import com.quemb.qmbform.FormManager;
 
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -27,7 +36,7 @@ public class FormManagerTest {
     @Test
     public void shouldSetupListView(){
 
-        ListView listView = new ListView();
+        ListView listView = new ListView(activity);
         FormDescriptor formDescriptor = new FormDescriptor();
         formManager.setup(formDescriptor, listView, activity);
 

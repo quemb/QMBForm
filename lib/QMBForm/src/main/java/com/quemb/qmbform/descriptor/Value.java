@@ -9,6 +9,7 @@ public class Value<T> {
 
 
     private T mValue;
+    private OnValueChangeListener mOnValueChangeListener;
 
 
     public Value() { }
@@ -21,9 +22,17 @@ public class Value<T> {
         return mValue;
     }
 
+
+
     public void setValue(T value){
         mValue = value;
+        if (mOnValueChangeListener != null){
+            mOnValueChangeListener.onChange(value);
+        }
     }
 
 
+    public void setOnValueChangeListener(OnValueChangeListener listener) {
+        this.mOnValueChangeListener = listener;
+    }
 }

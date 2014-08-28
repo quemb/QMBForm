@@ -87,7 +87,9 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("textView",RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ...")) );
         sectionDescriptor.addRow( RowDescriptor.newInstance("number",RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456)) );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55)) );
+
+        final RowDescriptor integerRow = RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55));
+        sectionDescriptor.addRow( integerRow );
         sectionDescriptor.addRow( RowDescriptor.newInstance("integerSlider",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50)) );
 
         SectionDescriptor sectionDescriptor1 = SectionDescriptor.newInstance("sectionOne","Picker");
@@ -120,8 +122,11 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
             @Override
             public void onFormRowClick(FormItemDescriptor itemDescriptor) {
 
-                itemDescriptor.setTitle("New Title");
-                mFormManager.updateRows();
+//                You need to call updateRows in order to update titles
+//                itemDescriptor.setTitle("New Title");
+//                mFormManager.updateRows();
+
+                integerRow.getValue().setValue(100);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Tapped");
