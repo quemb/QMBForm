@@ -29,6 +29,7 @@ import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
 
 import android.content.Context;
+import android.os.Build;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -50,12 +51,14 @@ public class CellViewFactory {
 
     public CellViewFactory(){
 
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
         mViewRowTypeMap = new HashMap<String, Class<? extends FormBaseCell>>();
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeName, FormDetailTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNameVertical, FormDetailTextVerticalFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeText, FormEditTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTextView, FormEditTextViewFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanSwitch, FormBooleanFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanSwitch, currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH ? FormBooleanFieldCell.class : FormCheckFieldCell.class );
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeBooleanCheck, FormCheckFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeButton, FormButtonFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDate, FormDateDialogFieldCell.class);

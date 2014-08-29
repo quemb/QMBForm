@@ -19,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "com.quemb.qmbform.sample"
-        minSdkVersion 16
+        minSdkVersion 10
         targetSdkVersion 18
         versionCode 1
         versionName "1.0"

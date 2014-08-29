@@ -140,7 +140,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
         sectionDescriptor4.addRow( RowDescriptor.newInstance("dateInline",RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline", new Value<Date>(new Date()) ));
         sectionDescriptor4.addRow( RowDescriptor.newInstance("dateDialog",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog") );
-        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeInline",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline") );
+        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeInline",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline" , new Value<Date>(new Date())) );
         sectionDescriptor4.addRow( RowDescriptor.newInstance("timeDialog",RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date())) );
 
         mFormManager = new FormManager();
@@ -182,19 +182,19 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
     @Override
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
-        Log.d(TAG, "Value Changed: " + rowDescriptor.getTitle());
-//        Log.d(TAG, "Old Value: "+oldValue);
-//        Log.d(TAG, "New Value: "+newValue);
 
+        Log.d(TAG, "Value Changed: " + rowDescriptor.getTitle());
+//
         mChangesMap.put(rowDescriptor.getTag(), newValue);
         updateSaveItem();
-
 
 
     }
 
     private void updateSaveItem() {
-        mSaveMenuItem.setVisible(mChangesMap.size()>0);
+        if (mSaveMenuItem != null){
+            mSaveMenuItem.setVisible(mChangesMap.size()>0);
+        }
     }
 
     private class CustomTask extends AsyncTask<DataSourceListener, Void, ArrayList<String>> {
