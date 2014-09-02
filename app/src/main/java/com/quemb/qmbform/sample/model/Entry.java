@@ -44,4 +44,14 @@ public class Entry {
     )
     public Date dateInline;
 
+    @FormElement(
+            label = R.string.lb_boolean_check,
+            rowDescriptorType = RowDescriptor.FormRowDescriptorTypeBooleanSwitch,
+            disabled = true,
+            tag = "checkSwitch",
+            sortId = 5,
+            section = R.string.section_boolean
+    )
+    public Boolean checkSwitch;
+
 }

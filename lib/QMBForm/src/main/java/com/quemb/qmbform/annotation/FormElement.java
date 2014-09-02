@@ -24,5 +24,5 @@ public @interface FormElement {
     public boolean required() default false;
     public String dateFormat() default "yyyy-MM-dd HH:mm:ss";
     public int section() default android.R.string.untitled;
-
+    public boolean disabled() default false;
 }
