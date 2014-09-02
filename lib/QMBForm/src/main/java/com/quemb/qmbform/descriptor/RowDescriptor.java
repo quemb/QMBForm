@@ -50,6 +50,7 @@ public class RowDescriptor<T> extends FormItemDescriptor{
      */
     private DataSource<T> mDataSource;
     private Boolean mRequired = false;
+    private Boolean mDisabled = false;
 
     private SectionDescriptor mSectionDescriptor;
 
@@ -121,5 +122,13 @@ public class RowDescriptor<T> extends FormItemDescriptor{
 
     public void setDataSource(DataSource<T> dataSource) {
         mDataSource = dataSource;
+    }
+
+    public Boolean getDisabled() {
+        return mDisabled;
+    }
+
+    public void setDisabled(Boolean disabled) {
+        mDisabled = disabled;
     }
 }

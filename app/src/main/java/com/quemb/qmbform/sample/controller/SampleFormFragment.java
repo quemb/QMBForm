@@ -102,10 +102,14 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
                 CustomTask task = new CustomTask();
                 task.execute(listener);
 
-
             }
         });
         sectionDescriptor1.addRow( pickerDescriptor );
+
+        RowDescriptor pickerDisabledDescriptor = RowDescriptor.newInstance("pickerDisabled",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, "Picker Disabled", new Value<String>("Value"));
+        pickerDisabledDescriptor.setDisabled(true);
+        sectionDescriptor1.addRow(pickerDisabledDescriptor);
+
         descriptor.addSection(sectionDescriptor1);
 
         SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("sectionTwo","Boolean Inputs");

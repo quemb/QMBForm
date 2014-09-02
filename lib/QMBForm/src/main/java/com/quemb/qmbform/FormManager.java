@@ -3,6 +3,7 @@ package com.quemb.qmbform;
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.view.Cell;
 
 import android.app.Activity;
@@ -48,8 +49,11 @@ public class FormManager {
                 FormItemDescriptor itemDescriptor = adapter.getItem(position);
 
                 Cell cell = itemDescriptor.getCell();
-                if (cell != null){
-                    cell.onCellSelected();
+                if (cell != null && itemDescriptor instanceof RowDescriptor){
+                    RowDescriptor rowDescriptor = (RowDescriptor) itemDescriptor;
+                    if (!rowDescriptor.getDisabled()){
+                        cell.onCellSelected();
+                    }
                 }
 
                 OnFormRowClickListener descriptorListener = itemDescriptor.getOnFormRowClickListener();
