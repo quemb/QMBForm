@@ -55,7 +55,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
         mSwitch.setEnabled(!getRowDescriptor().getDisabled());
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
-        if (value != null){
+        if (value != null && value.getValue() != null){
             mSwitch.setChecked(value.getValue());
         }
 

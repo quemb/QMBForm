@@ -116,6 +116,9 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         descriptor.addSection(sectionDescriptor2);
 
         sectionDescriptor2.addRow( RowDescriptor.newInstance("boolean",RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch", new Value<Boolean>(true)) );
+        RowDescriptor booleanDisabled = RowDescriptor.newInstance("booleanDisabled",RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch", new Value<Boolean>(true));
+        booleanDisabled.setDisabled(true);
+        sectionDescriptor2.addRow( booleanDisabled );
         sectionDescriptor2.addRow( RowDescriptor.newInstance("check",RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check", new Value<Boolean>(true)) );
 
         SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("sectionThree","Button");
