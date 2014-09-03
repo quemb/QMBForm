@@ -1,15 +1,17 @@
 package com.quemb.qmbform.sample.model;
 
 import com.quemb.qmbform.annotation.FormElement;
+import com.quemb.qmbform.annotation.FormElementDelegate;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.sample.R;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 
 /**
  * Created by tonimoeckel on 30.07.14.
  */
-public class Entry {
+public class Entry implements FormElementDelegate {
 
     @FormElement(
             label = R.string.lb_title,
@@ -54,4 +56,23 @@ public class Entry {
     )
     public Boolean checkSwitch;
 
+    /**
+     * Use this interface method to decide at runtime if the generate rowDescriptor should be added to the form descriptor
+     * Also use this as a hook, to manual set RowDescriptor properties
+     *
+     * @param rowDescriptor
+     * @param field
+     * @return
+     */
+    @Override
+    public boolean shouldAddRowDescriptorForField(RowDescriptor rowDescriptor, Field field) {
+
+        // For some reason you don't want "description" to be added
+        if (field.getName().equals("description")){
+            return false;
+        }
+
+        return true;
+
+    }
 }

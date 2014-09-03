@@ -147,7 +147,16 @@ public class FormDescriptorAnnotationFactory {
                             value);
                     rowDescriptor.setRequired(annotation.required());
                     rowDescriptor.setDisabled(annotation.disabled());
-                    sectionDescriptor.addRow( rowDescriptor ) ;
+
+                    boolean shouldAdd = true;
+                    if (object instanceof FormElementDelegate){
+                        FormElementDelegate delegate = (FormElementDelegate) object;
+                        shouldAdd = delegate.shouldAddRowDescriptorForField(rowDescriptor, field);
+                    }
+
+                    if (shouldAdd){
+                        sectionDescriptor.addRow( rowDescriptor ) ;
+                    }
 
                 }
 
