@@ -60,7 +60,5 @@ public class FormPickerDialogFieldCell extends FormDetailTextFieldCell {
             });
         }
 
-
-
     }
 }

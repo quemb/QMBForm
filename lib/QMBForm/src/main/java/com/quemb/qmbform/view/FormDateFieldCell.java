@@ -56,6 +56,11 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
         initDatePicker(calendar);
 
+        mTextView.setEnabled(!getRowDescriptor().getDisabled());
+        if(getRowDescriptor().getDisabled()) {
+            mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
+        }
+
 
     }
 
@@ -88,5 +93,9 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
         super.onCellSelected();
 
 
+    }
+
+    public TextView getTextView(){
+        return mTextView;
     }
 }

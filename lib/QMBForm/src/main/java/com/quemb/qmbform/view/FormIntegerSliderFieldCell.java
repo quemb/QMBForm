@@ -68,6 +68,10 @@ public class FormIntegerSliderFieldCell extends FormDetailTextFieldCell {
 
         mSeekBar.setMax(max);
         mSeekBar.setProgress(value.getValue());
+        mSeekBar.setEnabled(!getRowDescriptor().getDisabled());
 
+    }
+    public SeekBar getSeekBar(){
+        return mSeekBar;
     }
 }

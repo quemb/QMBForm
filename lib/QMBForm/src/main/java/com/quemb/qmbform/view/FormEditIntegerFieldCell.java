@@ -12,6 +12,8 @@ import android.widget.EditText;
  */
 public class FormEditIntegerFieldCell extends FormEditTextFieldCell {
 
+    private EditText mEditView;
+
     public FormEditIntegerFieldCell(Context context,
             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
@@ -22,8 +24,8 @@ public class FormEditIntegerFieldCell extends FormEditTextFieldCell {
     protected void init() {
         super.init();
 
-        EditText editView = getEditView();
-        editView.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mEditView = getEditView();
+        mEditView.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
 
@@ -48,5 +50,9 @@ public class FormEditIntegerFieldCell extends FormEditTextFieldCell {
             e.printStackTrace();
         }
 
+    }
+
+    public EditText getEditText() {
+        return mEditView;
     }
 }
