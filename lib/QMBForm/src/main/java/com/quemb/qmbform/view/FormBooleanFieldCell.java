@@ -17,8 +17,6 @@ import android.widget.TextView;
  */
 public class FormBooleanFieldCell extends FormBaseCell {
 
-
-
     private Switch mSwitch;
 
     public FormBooleanFieldCell(Context context,

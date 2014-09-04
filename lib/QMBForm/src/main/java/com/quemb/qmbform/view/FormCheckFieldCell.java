@@ -46,11 +46,16 @@ public class FormCheckFieldCell extends FormBaseCell {
 
         String title = getFormItemDescriptor().getTitle();
         mCheckBox.setText(title);
+        mCheckBox.setEnabled(!getRowDescriptor().getDisabled());
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null){
             mCheckBox.setChecked(value.getValue());
         }
 
+    }
+
+    public CheckBox getCheckBox() {
+        return mCheckBox;
     }
 }

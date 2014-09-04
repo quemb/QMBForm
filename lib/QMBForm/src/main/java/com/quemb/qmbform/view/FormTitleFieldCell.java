@@ -42,6 +42,11 @@ public class FormTitleFieldCell extends FormBaseCell {
         mTextView.setText(title);
         mTextView.setVisibility(title == null?GONE:VISIBLE);
 
+
+        if(getRowDescriptor().getDisabled()){
+            getRowDescriptor().setOnFormRowClickListener(null);
+            mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
+        }
     }
 
     public TextView getTextView() {

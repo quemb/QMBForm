@@ -75,6 +75,8 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
 
         updateEditView();
 
+        mEditView.setEnabled(!getRowDescriptor().getDisabled());
+
     }
 
     protected void updateEditView() {
