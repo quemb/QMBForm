@@ -179,6 +179,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         });
         buttonDisabled.setDisabled(true);
         sectionDescriptor3.addRow(buttonDisabled);
+        sectionDescriptor3.addRow(RowDescriptor.newInstance("external",RowDescriptor.FormRowDescriptorTypeExternal, "github.com", new Value<String>("http://github.com")));
 
         SectionDescriptor sectionDescriptor4 = SectionDescriptor.newInstance("sectionFour","Dates");
         descriptor.addSection(sectionDescriptor4);
