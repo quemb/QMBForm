@@ -52,28 +52,37 @@ public class FormSpinnerFieldCell extends FormTitleFieldCell {
             @Override
             public void onDataSourceLoaded(ArrayList list) {
 
-                ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item);
-                adapter.addAll(list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mSpinner.setAdapter(adapter);
-                Value value = getRowDescriptor().getValue();
-                if (value != null){
-                    mSpinner.setSelection(adapter.getPosition(value.getValue()));
+                if (list.size()>0){
+                    ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item);
+                    adapter.addAll(list);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    mSpinner.setAdapter(adapter);
+                    Value value = getRowDescriptor().getValue();
+                    if (value != null){
+                        mSpinner.setSelection(adapter.getPosition(value.getValue()));
+                    }else {
+                        mSpinner.setSelection(-1);
+                    }
+                    mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position,
+                                long id) {
+                            onValueChanged(new Value(mSpinner.getAdapter().getItem(position)));
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
                 }else {
-                    mSpinner.setSelection(-1);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle(R.string.title_no_entries);
+                    builder.setMessage(R.string.msg_no_entries);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
                 }
-                mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position,
-                            long id) {
-                        onValueChanged(new Value(mSpinner.getAdapter().getItem(position)));
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
             }
         });
 

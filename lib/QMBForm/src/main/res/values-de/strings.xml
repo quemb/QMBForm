@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QMBForm</string>
+    <string name="title_no_entries">Keine Einträge</string>
+    <string name="msg_no_entries">Zur Zeit liegen keine Einträge vor</string>
+    <string name="msg_check_form">Bitte überprüfen Sie Ihre Eingaben</string>
+    <string name="msg_x_is_required">ist ein erforderliches Feld</string>
+</resources>

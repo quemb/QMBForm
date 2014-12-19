@@ -14,8 +14,6 @@ import android.widget.TextView;
  */
 public class FormEditTextViewFieldCell extends FormEditTextFieldCell {
 
-    private TextView mTextView;
-    private EditText mEditView;
 
     public FormEditTextViewFieldCell(Context context,
             RowDescriptor rowDescriptor) {
@@ -23,13 +21,6 @@ public class FormEditTextViewFieldCell extends FormEditTextFieldCell {
     }
 
 
-    @Override
-    protected void init() {
-        super.init();
-
-        EditText editView = getEditView();
-//        mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT| InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
-    }
 
     @Override
     protected int getResource() {

@@ -40,22 +40,32 @@ public class FormPickerDialogFieldCell extends FormDetailTextFieldCell {
                 @Override
                 public void onDataSourceLoaded(ArrayList list) {
 
-                    final ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_selectable_list_item,list);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    if (list.size()>0){
+                        final ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_selectable_list_item,list);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                    builder.setSingleChoiceItems(adapter,-1,new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        builder.setSingleChoiceItems(adapter,-1,new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                            onValueChanged(new Value<Object>(adapter.getItem(which)));
-                            update();
-                            dialog.dismiss();
-                        }
-                    })
-                            .setTitle(getRowDescriptor().getTitle());
+                                onValueChanged(new Value<Object>(adapter.getItem(which)));
+                                update();
+                                dialog.dismiss();
+                            }
+                        })
+                                .setTitle(getRowDescriptor().getTitle());
 
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle(R.string.title_no_entries);
+                        builder.setMessage(R.string.msg_no_entries);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+
+
                 }
             });
         }

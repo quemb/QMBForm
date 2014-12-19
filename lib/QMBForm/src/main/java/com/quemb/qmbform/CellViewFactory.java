@@ -14,6 +14,7 @@ import com.quemb.qmbform.view.FormDetailTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormEditCurrencyFieldCell;
 import com.quemb.qmbform.view.FormEditEmailFieldCell;
+import com.quemb.qmbform.view.FormEditHTMLTextViewFieldCell;
 import com.quemb.qmbform.view.FormEditIntegerFieldCell;
 import com.quemb.qmbform.view.FormEditNumberFieldCell;
 import com.quemb.qmbform.view.FormEditPasswordFieldCell;
@@ -24,6 +25,7 @@ import com.quemb.qmbform.view.FormEditURLFieldCell;
 import com.quemb.qmbform.view.FormExternalButtonFieldCell;
 import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
 import com.quemb.qmbform.view.FormPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormPickerDialogVerticalFieldCell;
 import com.quemb.qmbform.view.FormSpinnerFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeInlineFieldCell;
@@ -76,8 +78,10 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSpinnerFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormPickerDialogFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialogVertical, FormPickerDialogVerticalFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeIntegerSlider, FormIntegerSliderFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeExternal, FormExternalButtonFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHTMLText,FormEditHTMLTextViewFieldCell.class);
 
     }
 

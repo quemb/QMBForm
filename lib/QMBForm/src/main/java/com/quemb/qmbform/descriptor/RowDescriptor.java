@@ -1,11 +1,19 @@
 package com.quemb.qmbform.descriptor;
 
+import com.quemb.qmbform.R;
+
+import android.content.Context;
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
  * Created by tonimoeckel on 14.07.14.
  */
 public class RowDescriptor<T> extends FormItemDescriptor{
 
     public static final String FormRowDescriptorTypeText = "text";
+    public static final String FormRowDescriptorTypeHTMLText = "htmlText";
     public static final String FormRowDescriptorTypeName = "name";
     public static final String FormRowDescriptorTypeNameVertical = "nameVertical";
     public static final String FormRowDescriptorTypeURL = "url";
@@ -26,6 +34,7 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     public static final String FormRowDescriptorTypeSelectorPickerViewInline = "selectorPickerViewInline";
     public static final String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
     public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorPickerDialogVertical = "selectorPickerDialogVertical";
     public static final String FormRowDescriptorTypeMultipleSelector = "multipleSelector";
     public static final String FormRowDescriptorTypeSelectorLeftRight = "selectorLeftRight";
     public static final String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
@@ -55,6 +64,8 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     private Boolean mDisabled = false;
 
     private SectionDescriptor mSectionDescriptor;
+
+    private int mHint = android.R.string.untitled;
 
     public static RowDescriptor newInstance(String tag){
 
@@ -132,5 +143,43 @@ public class RowDescriptor<T> extends FormItemDescriptor{
 
     public void setDisabled(Boolean disabled) {
         mDisabled = disabled;
+    }
+
+    public void setHint(int hint) {
+        mHint = hint;
+    }
+
+    public int getHint() {
+        return mHint;
+    }
+
+    public String getHint(Context context){
+
+        if (mHint == android.R.string.untitled){
+            return null;
+        }
+        return context.getString(mHint);
+
+    }
+
+    public boolean isValid(){
+        if (getRequired()){
+            return getValue() != null && getValue().getValue() != null;
+        }
+
+        return true;
+    }
+
+    public ArrayList<RowValidationError> getValidationErrors() {
+
+        if (getRequired()) {
+            if(!(getValue() != null && getValue().getValue() != null)){
+                ArrayList<RowValidationError> rowValidationErrors = new ArrayList<RowValidationError>();
+                rowValidationErrors.add(new RowValidationError(this, R.string.validation_is_required));
+                return rowValidationErrors;
+            }
+        }
+
+        return null;
     }
 }

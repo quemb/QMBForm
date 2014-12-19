@@ -19,7 +19,7 @@ public @interface FormElement {
     public int label() default android.R.string.untitled;
     public String rowDescriptorType() default RowDescriptor.FormRowDescriptorTypeName;
     public String tag() default "";
-    public String hint() default "";
+    public int hint() default android.R.string.untitled;
     public int sortId() default 100;
     public boolean required() default false;
     public String dateFormat() default "yyyy-MM-dd HH:mm:ss";

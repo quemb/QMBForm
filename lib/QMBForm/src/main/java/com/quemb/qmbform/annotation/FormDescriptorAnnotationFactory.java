@@ -145,6 +145,7 @@ public class FormDescriptorAnnotationFactory {
                             annotation.rowDescriptorType(),
                             getContext().getString(annotation.label()),
                             value);
+                    rowDescriptor.setHint(annotation.hint());
                     rowDescriptor.setRequired(annotation.required());
                     rowDescriptor.setDisabled(annotation.disabled());
 

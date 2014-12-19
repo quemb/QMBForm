@@ -8,6 +8,7 @@ import com.quemb.qmbform.view.Cell;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,8 @@ import java.text.Normalizer;
 public class FormManager {
 
     private FormDescriptor mFormDescriptor;
-    private ListView mListView;
-    private OnFormRowClickListener mOnFormRowClickListener;
+    protected ListView mListView;
+    protected OnFormRowClickListener mOnFormRowClickListener;
 
     public FormManager(){
 
@@ -82,4 +83,6 @@ public class FormManager {
         FormAdapter adapter = (FormAdapter) mListView.getAdapter();
         adapter.notifyDataSetChanged();
     }
+
+
 }

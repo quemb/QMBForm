@@ -86,4 +86,30 @@ public class FormDescriptor {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
 
+    public boolean isValid(){
+
+        FormValidation formValidation = getFormValidation();
+
+        if (formValidation.getRowValidationErrors().size()>0){
+            return false;
+        }
+        return true;
+    }
+
+    public FormValidation getFormValidation() {
+
+        FormValidation formValidation = new FormValidation();
+        for (SectionDescriptor sectionDescriptor : getSections()){
+            for (RowDescriptor rowDescriptor : sectionDescriptor.getRows()){
+                if (!rowDescriptor.isValid()){
+                    ArrayList<RowValidationError> rowValidationErrors = rowDescriptor.getValidationErrors();
+                    formValidation.getRowValidationErrors().addAll(rowValidationErrors);
+                }
+            }
+        }
+        return formValidation;
+
+    }
+
+
 }
