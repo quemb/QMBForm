@@ -1,20 +1,21 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.OnValueChangeListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
-import android.util.AttributeSet;
+import android.graphics.Color;
 import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * Created by tonimoeckel on 14.07.14.
  */
 public abstract class FormBaseCell extends Cell  {
+
+
 
 
     public FormBaseCell(Context context, RowDescriptor rowDescriptor) {
@@ -27,7 +28,7 @@ public abstract class FormBaseCell extends Cell  {
     protected void init() {
         super.init();
 
-        if (getRowDescriptor().getValue() != null){
+        if (getRowDescriptor().getValue() != null) {
             getRowDescriptor().getValue().setOnValueChangeListener(new OnValueChangeListener() {
                 @Override
                 public void onChange(Object value) {
@@ -35,6 +36,8 @@ public abstract class FormBaseCell extends Cell  {
                 }
             });
         }
+
+
 
     }
 
@@ -55,4 +58,6 @@ public abstract class FormBaseCell extends Cell  {
         }
 
     }
+
+
 }

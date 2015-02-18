@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SampleActivity" >
+      xmlns:tools="http://schemas.android.com/tools"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      tools:context=".SampleActivity">
     <item android:id="@+id/action_save"
         android:title="@string/action_save"
-		android:icon="@drawable/abc_ic_cab_done_holo_dark"
         android:orderInCategory="100"
-        android:showAsAction="always|withText" />
+        app:showAsAction="always|withText" />
 </menu>

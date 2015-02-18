@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-			  android:background="@color/form_cell_background"
-			  android:padding="@dimen/cell_padding"
-			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:padding="@dimen/cell_padding"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
     <Switch
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/switchControl"
-        android:checked="false"
-        tools:ignore="NewApi" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchControl"
+            android:checked="false"
+            tools:ignore="NewApi" />
 
 </LinearLayout>

@@ -28,7 +28,11 @@ public class SectionCell extends Cell {
     protected void init() {
 
         super.init();
+
+        setClickable(false);
+
         mTextView = (TextView)findViewById(R.id.textView);
+        mTextView.setTextColor(getThemeValue(R.attr.colorAccent));
 
     }
 
@@ -43,6 +47,11 @@ public class SectionCell extends Cell {
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
 
+    }
+
+    @Override
+    public boolean shouldAddDivider() {
+        return false;
     }
 
     public SectionDescriptor getSectionDescriptor() {

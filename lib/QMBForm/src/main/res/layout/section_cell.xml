@@ -2,8 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
-			  android:background="@color/section_cell_background"
-			  android:padding="@dimen/cell_padding"
+			  android:padding="@dimen/section_padding"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content">
 
@@ -11,9 +10,6 @@
 	<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:textColor="@color/section_cell_text"
-			android:text="Section Title"
 			android:id="@+id/textView"/>
 
 </LinearLayout>

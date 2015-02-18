@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Grays -->
+    <color name="black25PercentColor">#404040</color>
+    <color name="black50PercentColor">#808080</color>
+    <color name="black75PercentColor">#c0c0c0</color>
+    <color name="black">#000000</color>
+
+</resources>

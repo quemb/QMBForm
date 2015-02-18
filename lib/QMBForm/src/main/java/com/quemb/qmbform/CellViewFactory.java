@@ -30,6 +30,7 @@ import com.quemb.qmbform.view.FormSpinnerFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
+import com.quemb.qmbform.view.SeperatorSectionCell;
 
 import android.content.Context;
 import android.os.Build;
@@ -82,6 +83,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeIntegerSlider, FormIntegerSliderFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeExternal, FormExternalButtonFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHTMLText,FormEditHTMLTextViewFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSectionSeperator,SeperatorSectionCell.class);
 
     }
 

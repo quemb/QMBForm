@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Cell">
+
+        <attr name="qmbFromSectionBackgroundColor" format="color" />
+
+        <attr name="qmbFromRowBackgroundColor" format="color" />
+        <attr name="qmbFromRowDividerColor" format="color" />
+        <attr name="qmbFromRowTitleColor" format="color" />
+    </declare-styleable>
+
+</resources>
