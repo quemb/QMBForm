@@ -1,6 +1,6 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.FormManager;
+import com.quemb.qmbform.descriptor.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.descriptor.DataSource;
 import com.quemb.qmbform.descriptor.DataSourceListener;
@@ -75,7 +75,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         mChangesMap = new HashMap<String, Value<?>>();
 
         FormDescriptor descriptor = FormDescriptor.newInstance();
-        descriptor.setOnFormRowValueChangedListener(this);
+
 
         SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("section","Text Inputs");
         descriptor.addSection(sectionDescriptor);
@@ -204,6 +204,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         mFormManager = new FormManager();
         mFormManager.setup(descriptor, mListView, getActivity());
         mFormManager.setOnFormRowClickListener(this);
+        mFormManager.setOnFormRowValueChangedListener(this);
 
 
 

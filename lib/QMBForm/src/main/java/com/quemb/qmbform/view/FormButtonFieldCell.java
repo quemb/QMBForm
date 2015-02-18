@@ -23,6 +23,13 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
     }
 
     @Override
+    protected void update() {
+        super.update();
+
+        getTextView().setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
+    }
+
+    @Override
     public void onCellSelected() {
         super.onCellSelected();
 

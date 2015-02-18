@@ -27,7 +27,7 @@ public class FormTitleFieldCell extends FormBaseCell {
         super.init();
         mTextView = (TextView)findViewById(R.id.textView);
         mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), android.R.style.TextAppearance_Small);
+        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
 
     }
 

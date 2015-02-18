@@ -1,18 +1,16 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.FormManager;
+import com.quemb.qmbform.descriptor.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.sample.R;
 import com.quemb.qmbform.sample.model.Entry;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ListView;
 
 import java.util.Date;
@@ -81,6 +78,7 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, getActivity());
         formManager.setOnFormRowClickListener(this);
+        formManager.setOnFormRowValueChangedListener(this);
     }
 
     @Override

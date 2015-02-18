@@ -24,7 +24,7 @@ public class FormDetailTextFieldCell extends FormTitleFieldCell {
 
         super.init();
         mDetailTextView = (TextView)findViewById(R.id.detailTextView);
-
+        mDetailTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
     }
 
     @Override

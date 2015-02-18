@@ -35,7 +35,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
         super.init();
         mEditView = (EditText)findViewById(R.id.editText);
         mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        mEditView.setTextAppearance(getContext(), android.R.style.TextAppearance_Small);
+        mEditView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
     }
 
     @Override

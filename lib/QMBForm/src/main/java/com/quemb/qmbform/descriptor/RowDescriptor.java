@@ -183,4 +183,13 @@ public class RowDescriptor<T> extends FormItemDescriptor{
 
         return null;
     }
+
+    public static RowDescriptor newInstance(RowDescriptor rowDescriptor) {
+
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        RowDescriptor newInstance = RowDescriptor.newInstance(rowDescriptor.getTag()+"_"+ts,rowDescriptor.getRowType());
+        newInstance.setDataSource(rowDescriptor.getDataSource());
+        return newInstance;
+    }
 }

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class SectionDescriptor extends FormItemDescriptor {
 
     private FormDescriptor mFormDescriptor;
-
     private ArrayList<RowDescriptor> mRows;
+    private Boolean mMultivalueSection = false;
 
     public static SectionDescriptor newInstance(String tag){
 
@@ -54,9 +54,7 @@ public class SectionDescriptor extends FormItemDescriptor {
 
     public void removeRow(RowDescriptor row){
         int index = mRows.indexOf(row);
-        if (index>0){
-            removeRowAtIndex(index);
-        }
+        removeRowAtIndex(index);
     }
 
     public int getRowCount(){
@@ -71,11 +69,20 @@ public class SectionDescriptor extends FormItemDescriptor {
         if (mRows.size()>=index){
             row.setSectionDescriptor(this);
             mRows.add(index, row);
+            if (getFormDescriptor() != null){
+                getFormDescriptor().didInsertRow(row, this);
+            }
+
         }
     }
 
     private void removeRowAtIndex(int index){
+        RowDescriptor rowDescriptor = mRows.get(index);
         mRows.remove(index);
+        if (getFormDescriptor() != null){
+            getFormDescriptor().didRemoveRow(rowDescriptor, this);
+        }
+
     }
 
     public boolean hasTitle() {
@@ -93,5 +100,17 @@ public class SectionDescriptor extends FormItemDescriptor {
         }
 
         return rowDescriptor;
+    }
+
+    public int getIndexOfRowDescriptor(RowDescriptor rowDescriptor){
+        return mRows.indexOf(rowDescriptor);
+    }
+
+    public Boolean isMultivalueSection() {
+        return mMultivalueSection;
+    }
+
+    public void setMultivalueSection(Boolean multivalueSection) {
+        mMultivalueSection = multivalueSection;
     }
 }

@@ -5,6 +5,7 @@ import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.CellViewFactory;
+import com.quemb.qmbform.view.Cell;
 
 import android.content.Context;
 import android.view.View;
@@ -65,8 +66,11 @@ public class FormAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext,getItem(position));
     }
+
 
     public Boolean getEnableSectionSeperator() {
         return mEnableSectionSeperator;

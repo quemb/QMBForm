@@ -1,7 +1,5 @@
 package qmbform;
 
-import com.quemb.qmbform.FormManager;
-import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.view.FormBooleanFieldCell;
 
@@ -13,7 +11,6 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import android.app.Activity;
-import android.widget.ListView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

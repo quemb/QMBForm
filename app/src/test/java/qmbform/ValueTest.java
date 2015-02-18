@@ -1,10 +1,5 @@
 package qmbform;
 
-import android.app.Activity;
-import android.widget.ListView;
-
-import com.quemb.qmbform.FormManager;
-import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.OnValueChangeListener;
 import com.quemb.qmbform.descriptor.Value;
 
@@ -12,7 +7,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import static org.hamcrest.MatcherAssert.assertThat;

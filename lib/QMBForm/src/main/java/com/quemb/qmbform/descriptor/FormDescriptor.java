@@ -10,6 +10,7 @@ public class FormDescriptor {
     private String mTitle;
     private ArrayList<SectionDescriptor> mSections;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
+    private OnFormRowChangeListener mOnFormRowChangeListener;
 
     public static FormDescriptor newInstance(){
         return FormDescriptor.newInstance(null);
@@ -81,7 +82,7 @@ public class FormDescriptor {
         return rowDescriptor;
     }
 
-    public void setOnFormRowValueChangedListener(
+    protected void setOnFormRowValueChangedListener(
             OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
@@ -111,5 +112,24 @@ public class FormDescriptor {
 
     }
 
+    protected void didInsertRow(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor){
+        if (mOnFormRowChangeListener != null){
+            mOnFormRowChangeListener.onRowAdded(rowDescriptor, sectionDescriptor);
+        }
+    }
 
+    protected void didRemoveRow(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor){
+        if (mOnFormRowChangeListener != null){
+            mOnFormRowChangeListener.onRowRemoved(rowDescriptor, sectionDescriptor);
+        }
+    }
+
+
+    protected OnFormRowChangeListener getOnFormRowChangeListener() {
+        return mOnFormRowChangeListener;
+    }
+
+    protected void setOnFormRowChangeListener(OnFormRowChangeListener onFormRowChangeListener) {
+        mOnFormRowChangeListener = onFormRowChangeListener;
+    }
 }

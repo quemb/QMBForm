@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class SamplePageAdapter  extends FragmentPagerAdapter {
     private List<TabItem> mTabItems;
-    private String[] mTitles = {"Annotation","Classic","Classic"};
 
     public SamplePageAdapter(FragmentManager fm, List<TabItem> tabItems) {
         super(fm);

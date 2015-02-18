@@ -15,6 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -48,13 +49,17 @@ public abstract class Cell extends LinearLayout {
 
         int resource = getResource();
         if (resource>0){
-            inflate(getContext(), getResource(), this);
+            inflate(getContext(), getResource(), getSuperViewForLayoutInflation());
         }
 
         if (shouldAddDivider()){
             addView(getDividerView());
         }
 
+    }
+
+    protected ViewGroup getSuperViewForLayoutInflation(){
+        return this;
     }
 
     protected abstract int getResource();
@@ -105,6 +110,10 @@ public abstract class Cell extends LinearLayout {
 
     public boolean shouldAddDivider(){
         return true;
+    }
+
+    public void lastInSection(){
+
     }
 
     protected void setDividerView(View dividerView) {
