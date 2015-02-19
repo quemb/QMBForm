@@ -113,4 +113,16 @@ public class SectionDescriptor extends FormItemDescriptor {
     public void setMultivalueSection(Boolean multivalueSection) {
         mMultivalueSection = multivalueSection;
     }
+
+    public ArrayList getRowValues(){
+
+        ArrayList<Object> values = new ArrayList<>();
+        for (RowDescriptor rowDescriptor : mRows){
+            if (rowDescriptor.getValue() != null && rowDescriptor.getValue().getValue() != null){
+                values.add(rowDescriptor.getValue().getValue());
+            }
+        }
+        return values;
+
+    }
 }
