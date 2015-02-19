@@ -33,6 +33,10 @@ public class FormItemDescriptor {
         return mTag;
     }
 
+    public void setTag(String tag) {
+        mTag = tag;
+    }
+
     public Cell getCell() {
         return mCell;
     }

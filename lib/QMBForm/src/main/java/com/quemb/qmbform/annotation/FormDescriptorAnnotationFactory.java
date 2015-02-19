@@ -146,6 +146,7 @@ public class FormDescriptorAnnotationFactory {
                     }
 
                     if (section.multiValue){
+                        sectionDescriptor.setTag(field.getName());
                         int index = 0;
                         if ((value != null ? value.getValue() : null) instanceof ArrayList){
                             ArrayList<Object> list = (ArrayList<Object>) value.getValue();
