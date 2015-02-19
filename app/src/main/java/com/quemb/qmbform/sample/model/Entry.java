@@ -6,6 +6,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.sample.R;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -55,6 +56,15 @@ public class Entry implements FormElementDelegate {
             section = R.string.section_boolean
     )
     public Boolean checkSwitch;
+
+    @FormElement(
+            rowDescriptorType = RowDescriptor.FormRowDescriptorTypeText,
+            sortId = 6,
+            section = R.string.section_multiValue,
+            hint = R.string.lb_add_new_tag,
+            multiValue = true
+    )
+    public ArrayList<String> multiValue;
 
     /**
      * Use this interface method to decide at runtime if the generate rowDescriptor should be added to the form descriptor

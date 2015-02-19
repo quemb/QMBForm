@@ -14,5 +14,8 @@
 	<string name="lb_date_inline">Date Inline</string>
     <string name="section_boolean">Boolean</string>
     <string name="lb_boolean_check">Check</string>
+    <string name="lb_multi_value">Multiple Value</string>
+    <string name="section_multiValue">Multiple Value</string>
+    <string name="lb_add_new_tag">Add new tag</string>
 
 </resources>

@@ -117,6 +117,9 @@ public class FormDescriptorAnnotationFactory {
                 section = new Section(sectionTitle);
                 sections.add(section);
             }
+            if (!section.multiValue){
+                section.multiValue = annotation.multiValue();
+            }
 
             section.fields.add(field);
         }
@@ -128,6 +131,7 @@ public class FormDescriptorAnnotationFactory {
             ArrayList<Field> fields = section.fields;
 
             SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance(section.tag, section.title);
+            sectionDescriptor.setMultivalueSection(section.multiValue);
 
             for (Field field:fields) {
 
@@ -141,27 +145,51 @@ public class FormDescriptorAnnotationFactory {
                         e.printStackTrace();
                     }
 
-                    RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
-                            annotation.rowDescriptorType(),
-                            getContext().getString(annotation.label()),
-                            value);
-                    rowDescriptor.setHint(annotation.hint());
-                    rowDescriptor.setRequired(annotation.required());
-                    rowDescriptor.setDisabled(annotation.disabled());
-
-                    boolean shouldAdd = true;
-                    if (object instanceof FormElementDelegate){
-                        FormElementDelegate delegate = (FormElementDelegate) object;
-                        shouldAdd = delegate.shouldAddRowDescriptorForField(rowDescriptor, field);
-                    }
-
-                    if (shouldAdd){
+                    if (section.multiValue){
+                        int index = 0;
+                        if ((value != null ? value.getValue() : null) instanceof ArrayList){
+                            ArrayList<Object> list = (ArrayList<Object>) value.getValue();
+                            for (Object item : list){
+                                RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
+                                        annotation.rowDescriptorType());
+                                rowDescriptor.setValue(new Value<Object>(item));
+                                rowDescriptor.setHint(annotation.hint());
+                                sectionDescriptor.addRow( rowDescriptor ) ;
+                                index++;
+                            }
+                        }
+                        RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
+                                annotation.rowDescriptorType());
+                        rowDescriptor.setHint(annotation.hint());
                         sectionDescriptor.addRow( rowDescriptor ) ;
+                    }else {
+                        RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
+                                annotation.rowDescriptorType(),
+                                getContext().getString(annotation.label()),
+                                value);
+                        rowDescriptor.setHint(annotation.hint());
+                        rowDescriptor.setRequired(annotation.required());
+                        rowDescriptor.setDisabled(annotation.disabled());
+
+                        boolean shouldAdd = true;
+                        if (object instanceof FormElementDelegate){
+                            FormElementDelegate delegate = (FormElementDelegate) object;
+                            shouldAdd = delegate.shouldAddRowDescriptorForField(rowDescriptor, field);
+                        }
+
+                        if (shouldAdd){
+                            sectionDescriptor.addRow( rowDescriptor ) ;
+                        }
+
                     }
+
+
+
 
                 }
 
             }
+
 
             formDescriptor.addSection(sectionDescriptor);
 
@@ -203,6 +231,7 @@ public class FormDescriptorAnnotationFactory {
 
         public String title = "";
         public String tag = "";
+        public Boolean multiValue = false;
         public ArrayList<Field> fields = new ArrayList<Field>();;
 
         public Section(String sectionTitle) {

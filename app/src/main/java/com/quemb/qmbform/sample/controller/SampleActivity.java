@@ -38,8 +38,8 @@ public class SampleActivity extends ActionBarActivity {
     private List<TabItem> getTabItems() {
         List<TabItem> fList = new ArrayList<TabItem>();
 
-        fList.add(new TabItem("Multi Value Section", SampleMultivalueSectionFormFragment.newInstance()));
         fList.add(new TabItem("Annotation",SampleAnnotationFormFragment.newInstance()));
+        fList.add(new TabItem("Multi Value Section", SampleMultivalueSectionFormFragment.newInstance()));
         fList.add(new TabItem("Manual", SampleFormFragment.newInstance()));
 
         return fList;

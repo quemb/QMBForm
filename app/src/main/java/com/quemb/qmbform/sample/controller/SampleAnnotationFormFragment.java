@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -71,6 +72,10 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         entry.description = "World";
         entry.date = new Date();
         entry.dateInline = new Date();
+        entry.multiValue = new ArrayList<String>();
+        entry.multiValue.add("multiple");
+        entry.multiValue.add("tags");
+        entry.multiValue.add("allowed");
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry);
