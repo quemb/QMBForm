@@ -82,7 +82,7 @@ public class FormDescriptor {
         return rowDescriptor;
     }
 
-    protected void setOnFormRowValueChangedListener(
+    public void setOnFormRowValueChangedListener(
             OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
@@ -129,7 +129,7 @@ public class FormDescriptor {
         return mOnFormRowChangeListener;
     }
 
-    protected void setOnFormRowChangeListener(OnFormRowChangeListener onFormRowChangeListener) {
+    public void setOnFormRowChangeListener(OnFormRowChangeListener onFormRowChangeListener) {
         mOnFormRowChangeListener = onFormRowChangeListener;
     }
 }

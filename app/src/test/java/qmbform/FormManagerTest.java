@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import com.quemb.qmbform.descriptor.FormManager;
+import com.quemb.qmbform.FormManager;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;

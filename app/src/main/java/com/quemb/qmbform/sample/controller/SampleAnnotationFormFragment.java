@@ -1,6 +1,6 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.descriptor.FormManager;
+import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
 import com.quemb.qmbform.descriptor.FormDescriptor;
