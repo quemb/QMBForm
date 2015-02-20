@@ -108,6 +108,22 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
         });
         sectionDescriptor2.addRow( pickerDescriptor2 );
 
+        SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("multiPicker","Pick a color");
+        sectionDescriptor3.setMultivalueSection(true);
+        descriptor.addSection(sectionDescriptor3);
+        RowDescriptor pickerDescriptor3 = RowDescriptor.newInstance("picker3",RowDescriptor.FormRowDescriptorTypeTextPickerDialog);
+        pickerDescriptor3.setDataSource(new DataSource() {
+
+            @Override
+            public void loadData(final DataSourceListener listener) {
+
+                listener.onDataSourceLoaded(values);
+
+            }
+        });
+        sectionDescriptor3.addRow( pickerDescriptor3 );
+
+
         mFormManager = new FormManager();
         mFormManager.setup(descriptor, mListView, getActivity());
         mFormManager.setOnFormRowClickListener(this);
