@@ -33,6 +33,7 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     public static final String FormRowDescriptorTypeSelectorPickerView = "selectorPickerView";
     public static final String FormRowDescriptorTypeSelectorPickerViewInline = "selectorPickerViewInline";
     public static final String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
+    public static final String FormRowDescriptorTypeTextPickerDialog = "textPickerDialog";
     public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
     public static final String FormRowDescriptorTypeSelectorPickerDialogVertical = "selectorPickerDialogVertical";
     public static final String FormRowDescriptorTypeMultipleSelector = "multipleSelector";

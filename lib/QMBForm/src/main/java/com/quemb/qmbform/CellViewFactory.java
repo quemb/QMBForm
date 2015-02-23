@@ -27,6 +27,7 @@ import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
 import com.quemb.qmbform.view.FormPickerDialogFieldCell;
 import com.quemb.qmbform.view.FormPickerDialogVerticalFieldCell;
 import com.quemb.qmbform.view.FormSpinnerFieldCell;
+import com.quemb.qmbform.view.FormTextPickerDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
@@ -77,6 +78,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeURL, FormEditURLFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypePassword, FormEditPasswordFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTextPickerDialog, FormTextPickerDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSpinnerFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormPickerDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialogVertical, FormPickerDialogVerticalFieldCell.class);
