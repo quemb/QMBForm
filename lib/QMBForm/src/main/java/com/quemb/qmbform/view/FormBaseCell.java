@@ -42,7 +42,7 @@ public abstract class FormBaseCell extends Cell  {
     protected void init() {
         super.init();
 
-        if (getRowDescriptor().getValue() != null) {
+        if (getRowDescriptor() != null && getRowDescriptor().getValue() != null) {
             getRowDescriptor().getValue().setOnValueChangeListener(new OnValueChangeListener() {
                 @Override
                 public void onChange(Object value) {
@@ -57,7 +57,7 @@ public abstract class FormBaseCell extends Cell  {
 
     protected ViewGroup getSuperViewForLayoutInflation(){
 
-        if (this.getRowDescriptor().getSectionDescriptor().isMultivalueSection()){
+        if (getRowDescriptor().getSectionDescriptor() != null && this.getRowDescriptor().getSectionDescriptor().isMultivalueSection()){
             LinearLayout linearLayout = createMultiValueWrapper();
             addView(linearLayout);
             return linearLayout;

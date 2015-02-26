@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
@@ -45,4 +46,5 @@ public class SeperatorSectionCell extends FormBaseCell {
     protected void update() {
 
     }
+
 }
