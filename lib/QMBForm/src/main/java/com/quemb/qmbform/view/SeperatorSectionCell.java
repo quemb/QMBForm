@@ -27,11 +27,6 @@ public class SeperatorSectionCell extends FormBaseCell {
         super.init();
 
         setOrientation(LinearLayout.VERTICAL);
-        setLayoutParams(new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                22
-        ));
-        setBackgroundResource(R.drawable.section_seperator_background);
         setClickable(false);
 
     }
@@ -43,7 +38,7 @@ public class SeperatorSectionCell extends FormBaseCell {
 
     @Override
     protected int getResource() {
-        return 0;
+        return R.layout.section_seperator_cell;
     }
 
     @Override
