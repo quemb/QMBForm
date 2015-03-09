@@ -98,4 +98,8 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
         return mEditView;
     }
 
+    public void focusEditText() {
+        mEditView.requestFocus();
+    }
+
 }

@@ -10,6 +10,8 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.view.Cell;
+import com.quemb.qmbform.view.FormEditTextFieldCell;
+import com.quemb.qmbform.view.FormEditTextViewFieldCell;
 
 import android.app.Activity;
 import android.content.Context;
@@ -42,7 +44,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
 
-    public void setup(FormDescriptor formDescriptor, final ListView listView, Activity activity){
+    public void setup(final FormDescriptor formDescriptor, final ListView listView, Activity activity){
 
         Context context = activity;
 
@@ -53,7 +55,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
 
         final FormAdapter adapter = FormAdapter.newInstance(mFormDescriptor, context);
         listView.setAdapter(adapter);
-        listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+        //listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
