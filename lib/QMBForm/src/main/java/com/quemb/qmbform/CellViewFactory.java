@@ -10,6 +10,7 @@ import com.quemb.qmbform.view.FormButtonFieldCell;
 import com.quemb.qmbform.view.FormCheckFieldCell;
 import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormDateInlineFieldCell;
+import com.quemb.qmbform.view.FormDetailHtmlTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormDetailTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormEditCurrencyFieldCell;
@@ -56,7 +57,7 @@ public class CellViewFactory {
 
     public CellViewFactory(){
 
-        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        int currentapiVersion = Build.VERSION.SDK_INT;
 
         mViewRowTypeMap = new HashMap<String, Class<? extends FormBaseCell>>();
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeName, FormDetailTextFieldCell.class);
@@ -86,6 +87,8 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeExternal, FormExternalButtonFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHTMLText,FormEditHTMLTextViewFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSectionSeperator,SeperatorSectionCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHtmlVertical,FormDetailHtmlTextVerticalFieldCell.class);
+
 
     }
 

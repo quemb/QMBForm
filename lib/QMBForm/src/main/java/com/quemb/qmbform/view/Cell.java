@@ -91,7 +91,7 @@ public abstract class Cell extends LinearLayout {
 
     private void configDivider(View dividerView) {
 
-        dividerView.setLayoutParams(new LinearLayout.LayoutParams(
+        dividerView.setLayoutParams(new LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 1
         ));

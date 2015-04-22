@@ -55,6 +55,9 @@ public class RowDescriptor<T> extends FormItemDescriptor{
     public static final String FormRowDescriptorTypeExternal = "external";
     public static final String FormRowDescriptorTypeStepCounter = "stepCounter";
     public static final String FormRowDescriptorTypeSectionSeperator = "sectionSeperator";
+    public static final String FormRowDescriptorTypeHtmlVertical = "htmlVertical";
+
+
 
     private String mRowType;
     private Value<T> mValue;

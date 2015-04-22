@@ -1,14 +1,12 @@
-package com.quemb.qmbform;
+package com.quemb.qmbform.descriptor;
 
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.view.Cell;
 
 import android.app.Activity;
