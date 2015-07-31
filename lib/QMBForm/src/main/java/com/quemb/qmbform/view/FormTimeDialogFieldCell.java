@@ -45,10 +45,11 @@ public class FormTimeDialogFieldCell extends FormTimeFieldCell implements
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Date date = new Date();
-        date.setTime(TimeUnit.HOURS.toMillis(hourOfDay)+TimeUnit.MINUTES.toMillis(minute));
+        Calendar calendar = getCalendar();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
 
-        onDateChanged(date);
+        onDateChanged(calendar.getTime());
 
     }
 
