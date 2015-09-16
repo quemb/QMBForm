@@ -1,16 +1,15 @@
 package com.quemb.qmbform.adapter;
 
-import com.quemb.qmbform.descriptor.FormDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.CellViewFactory;
-import com.quemb.qmbform.view.Cell;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.quemb.qmbform.CellViewFactory;
+import com.quemb.qmbform.descriptor.FormDescriptor;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,7 @@ public class FormAdapter extends BaseAdapter {
     private Context mContext;
     private Boolean mEnableSectionSeperator;
 
-    public static FormAdapter newInstance(FormDescriptor formDescriptor, Context context){
+    public static FormAdapter newInstance(FormDescriptor formDescriptor, Context context) {
         FormAdapter formAdapter = new FormAdapter();
         formAdapter.mFormDescriptor = formDescriptor;
         formAdapter.mContext = context;
@@ -36,15 +35,15 @@ public class FormAdapter extends BaseAdapter {
     public int getCount() {
         mItems = new ArrayList<FormItemDescriptor>();
         int sectionCount = 1;
-        for (SectionDescriptor sectionDescriptor : mFormDescriptor.getSections()){
+        for (SectionDescriptor sectionDescriptor : mFormDescriptor.getSections()) {
 
-            if (sectionDescriptor.hasTitle()){
+            if (sectionDescriptor.hasTitle()) {
                 mItems.add(sectionDescriptor);
             }
 
             mItems.addAll(sectionDescriptor.getRows());
 
-            if (getEnableSectionSeperator() && sectionCount<mFormDescriptor.getSections().size()){
+            if (getEnableSectionSeperator() && sectionCount < mFormDescriptor.getSections().size()) {
                 mItems.add(RowDescriptor.newInstance(null, RowDescriptor.FormRowDescriptorTypeSectionSeperator));
             }
             sectionCount++;
@@ -68,7 +67,7 @@ public class FormAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-        return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext,getItem(position));
+        return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext, getItem(position));
     }
 
 

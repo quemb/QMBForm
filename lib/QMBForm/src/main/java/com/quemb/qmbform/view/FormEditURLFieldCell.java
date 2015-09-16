@@ -1,10 +1,10 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.content.Context;
 import android.text.InputType;
 import android.widget.EditText;
+
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class FormEditURLFieldCell extends FormEditTextFieldCell {
 
     public FormEditURLFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -24,7 +24,6 @@ public class FormEditURLFieldCell extends FormEditTextFieldCell {
         EditText editView = getEditView();
         editView.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
     }
-
 
 
 }

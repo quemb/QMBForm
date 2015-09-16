@@ -1,6 +1,12 @@
 package com.quemb.qmbform;
 
-import com.quemb.qmbform.OnFormRowClickListener;
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
@@ -10,21 +16,6 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.view.Cell;
-
-import android.app.Activity;
-import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.text.Normalizer;
-import java.util.ArrayList;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -37,12 +28,12 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     private OnFormRowChangeListener mOnFormRowChangeListener;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
 
-    public FormManager(){
+    public FormManager() {
 
     }
 
 
-    public void setup(FormDescriptor formDescriptor, final ListView listView, Activity activity){
+    public void setup(FormDescriptor formDescriptor, final ListView listView, Activity activity) {
 
         Context context = activity;
 
@@ -53,6 +44,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
 
         final FormAdapter adapter = FormAdapter.newInstance(mFormDescriptor, context);
         listView.setAdapter(adapter);
+        listView.setDividerHeight(1);
         listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -60,19 +52,19 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
                 FormItemDescriptor itemDescriptor = adapter.getItem(position);
 
                 Cell cell = itemDescriptor.getCell();
-                if (cell != null && itemDescriptor instanceof RowDescriptor){
+                if (cell != null && itemDescriptor instanceof RowDescriptor) {
                     RowDescriptor rowDescriptor = (RowDescriptor) itemDescriptor;
-                    if (!rowDescriptor.getDisabled()){
+                    if (!rowDescriptor.getDisabled()) {
                         cell.onCellSelected();
                     }
                 }
 
                 OnFormRowClickListener descriptorListener = itemDescriptor.getOnFormRowClickListener();
-                if (descriptorListener != null){
+                if (descriptorListener != null) {
                     descriptorListener.onFormRowClick(itemDescriptor);
                 }
 
-                if (mOnFormRowClickListener != null){
+                if (mOnFormRowClickListener != null) {
                     mOnFormRowClickListener.onFormRowClick(itemDescriptor);
                 }
             }
@@ -89,9 +81,9 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
         mOnFormRowClickListener = onFormRowClickListener;
     }
 
-    public void updateRows(){
+    public void updateRows() {
         FormAdapter adapter = (FormAdapter) mListView.getAdapter();
-        if (adapter != null){
+        if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
     }
@@ -108,7 +100,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     @Override
     public void onRowAdded(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
-        if (mOnFormRowChangeListener != null){
+        if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowAdded(rowDescriptor, sectionDescriptor);
         }
     }
@@ -116,7 +108,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     @Override
     public void onRowRemoved(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
-        if (mOnFormRowChangeListener != null){
+        if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowRemoved(rowDescriptor, sectionDescriptor);
         }
     }
@@ -124,27 +116,16 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     @Override
     public void onRowChanged(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
-        if (mOnFormRowChangeListener != null){
+        if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowChanged(rowDescriptor, sectionDescriptor);
         }
     }
 
     @Override
     public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
-        if (mOnFormRowValueChangedListener != null){
+        if (mOnFormRowValueChangedListener != null) {
             mOnFormRowValueChangedListener.onValueChanged(rowDescriptor, oldValue, newValue);
         }
-
-        ArrayList<String> updateWhiteList = new ArrayList<>();
-        updateWhiteList.add(RowDescriptor.FormRowDescriptorTypeDatePicker);
-        updateWhiteList.add(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog);
-        updateWhiteList.add(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialogVertical);
-        updateWhiteList.add(RowDescriptor.FormRowDescriptorTypePicker);
-
-        if (updateWhiteList.contains(rowDescriptor.getRowType())){
-            updateRows();
-        }
-
     }
 
     public void setOnFormRowValueChangedListener(
@@ -152,3 +133,4 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
 }
+

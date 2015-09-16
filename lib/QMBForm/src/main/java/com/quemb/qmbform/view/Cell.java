@@ -1,23 +1,14 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -38,27 +29,27 @@ public abstract class Cell extends LinearLayout {
 
     }
 
-    protected void afterInit(){
+    protected void afterInit() {
 
     }
 
-    protected void init(){
+    protected void init() {
 
         setOrientation(LinearLayout.VERTICAL);
         setGravity(Gravity.CENTER);
 
         int resource = getResource();
-        if (resource>0){
+        if (resource > 0) {
             inflate(getContext(), getResource(), getSuperViewForLayoutInflation());
         }
 
-        if (shouldAddDivider()){
+        if (shouldAddDivider()) {
             addView(getDividerView());
         }
 
     }
 
-    protected ViewGroup getSuperViewForLayoutInflation(){
+    protected ViewGroup getSuperViewForLayoutInflation() {
         return this;
     }
 
@@ -77,12 +68,12 @@ public abstract class Cell extends LinearLayout {
 
     }
 
-    public void onCellSelected(){
+    public void onCellSelected() {
 
     }
 
     protected View getDividerView() {
-        if (mDividerView == null){
+        if (mDividerView == null) {
             mDividerView = new View(getContext());
             configDivider(mDividerView);
         }
@@ -108,11 +99,11 @@ public abstract class Cell extends LinearLayout {
         return typedValue.data;
     }
 
-    public boolean shouldAddDivider(){
+    public boolean shouldAddDivider() {
         return true;
     }
 
-    public void lastInSection(){
+    public void lastInSection() {
 
     }
 

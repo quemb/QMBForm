@@ -3,10 +3,8 @@ package com.quemb.qmbform.view;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.quemb.qmbform.R;
@@ -33,7 +31,7 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
     protected void init() {
 
         super.init();
-        mImageButton = (ImageButton)findViewById(R.id.imageButton);
+        mImageButton = (ImageButton) findViewById(R.id.imageButton);
         addListenerOnButton();
     }
 
@@ -56,18 +54,18 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
     @Override
     public void onCellSelected() {
         super.onCellSelected();
-        if (getRowDescriptor().getDataSource() == null){
+        if (getRowDescriptor().getDataSource() == null) {
             throw new NoDataSourceException();
-        }else {
+        } else {
             getRowDescriptor().getDataSource().loadData(new DataSourceListener() {
                 @Override
                 public void onDataSourceLoaded(ArrayList list) {
 
-                    if (list.size()>0){
-                        final ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_selectable_list_item,list);
+                    if (list.size() > 0) {
+                        final ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_selectable_list_item, list);
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                        builder.setSingleChoiceItems(adapter,-1,new DialogInterface.OnClickListener() {
+                        builder.setSingleChoiceItems(adapter, -1, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -80,7 +78,7 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
 
                         AlertDialog dialog = builder.create();
                         dialog.show();
-                    }else {
+                    } else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setTitle(R.string.title_no_entries);
                         builder.setMessage(R.string.msg_no_entries);

@@ -1,28 +1,24 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
 import android.widget.DatePicker;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import java.text.DateFormat;
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+
 import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by tonimoeckel on 15.07.14.
+ * Created by pmaccamp on 9/4/2015.
  */
 public class FormDateInlineFieldCell extends FormDateFieldCell implements
-        DatePicker.OnDateChangedListener{
+        DatePicker.OnDateChangedListener {
 
     private DatePicker mDatePicker;
 
     public FormDateInlineFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                   RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -30,7 +26,7 @@ public class FormDateInlineFieldCell extends FormDateFieldCell implements
     protected void init() {
 
         super.init();
-        mDatePicker = (DatePicker)findViewById(R.id.datePicker);
+        mDatePicker = (DatePicker) findViewById(R.id.datePicker);
 
 
     }
@@ -43,7 +39,7 @@ public class FormDateInlineFieldCell extends FormDateFieldCell implements
 
     @Override
     protected void initDatePicker(Calendar calendar) {
-        mDatePicker.init(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),this);
+        mDatePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), this);
     }
 
     @Override
@@ -61,7 +57,7 @@ public class FormDateInlineFieldCell extends FormDateFieldCell implements
     public void onCellSelected() {
         super.onCellSelected();
 
-        mDatePicker.setVisibility(mDatePicker.getVisibility()==VISIBLE?GONE:VISIBLE);
+        mDatePicker.setVisibility(mDatePicker.getVisibility() == VISIBLE ? GONE : VISIBLE);
 //        ensureVisible();
     }
 

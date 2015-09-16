@@ -1,7 +1,9 @@
 package qmbform;
 
+import android.app.Activity;
+
 import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.view.FormPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormCheckFieldCell;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,17 +12,14 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
-import android.app.Activity;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.nullValue;
 
 /**
  * Created by tonimoeckel on 02.09.14.
  */
 @RunWith(RobolectricTestRunner.class)
-public class FormPickerFieldCellTest {
+public class FormSelectorSegmentedControlFieldCellTest {
 
 
     private Activity activity;
@@ -33,12 +32,12 @@ public class FormPickerFieldCellTest {
     @Test
     public void shouldBeDisabled(){
 
-        RowDescriptor rowDescriptor = RowDescriptor.newInstance("picker",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me");
+        RowDescriptor rowDescriptor = RowDescriptor.newInstance("disabled", RowDescriptor.FormRowDescriptorTypeBooleanCheck);
         rowDescriptor.setDisabled(true);
 
-        FormPickerDialogFieldCell testCell = new FormPickerDialogFieldCell(activity, rowDescriptor);
+        FormCheckFieldCell testCell = new FormCheckFieldCell(activity, rowDescriptor);
 
-        assertThat( testCell.getTextView().isClickable(), is(false));
+        assertThat(testCell.getCheckBox().isEnabled(), is(false));
 
     }
 
