@@ -118,37 +118,94 @@ Create simple Android forms
     FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry);
     ```
 
+## Validation
+1. Define custom validators by implementing ```FormValidator```
+    ```java
+    public class EmailValidator implements FormValidator {
+	    private static final String EMAIL_PATTERN =
+	            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	
+	    @Override
+	    public RowValidationError validate(RowDescriptor descriptor) {
+	        Value value = descriptor.getValue();
+	        if (value.getValue() != null && value.getValue() instanceof String) {
+	            String val = (String) value.getValue();
+	            return (val.matches(EMAIL_PATTERN)) ? null : new RowValidationError(descriptor,  R.string.validation_invalid_email);
+	        }
+	        return new RowValidationError(descriptor, R.string.validation_invalid_email);
+	    }
+}
+    ```
+
+2. With annotations
+    Specify validator classes as an array of .class items 
+    ```java
+    @FormElement(
+            label = R.string.email,
+            rowDescriptorType = RowDescriptor.FormRowDescriptorTypeEmailInline,
+            sortId = 2,
+            validatorClasses = {EmailValidator.class, BlankStringValidator.class}
+    )
+    public String email;
+    ```
+
+3. Or add validators to rowdescriptors manually
+    ```java
+    RowDescriptor rowDescriptor = RowDescriptor.newInstance("valid",
+	    RowDescriptor.FormRowDescriptorTypeEmail,
+	    "Email Test",
+	    new Value<String>("notavalidemail"));
+
+    rowDescriptor.addValidator(new EmailValidator());
+    ```
+    
 ## Installation
 
-QMBForm is not available at the maven reposetory yet. But it's a gradly based android-library project. 
+QMBForm is not available at the maven repository yet. But it's a gradly based android-library project. 
 
-1. Just include the QMBFrom directory as a library modul in your application
+1. Include the QMBFrom directory as a library module in your application
 2. see sample application: 
 
+Add this to your build.gradle dependencies section
   ```
   compile project(":lib:QMBForm")
+  ```
+Add this to your settings.gradle
+  ```
+  include ':app', ':lib:QMBForm'
   ```
 
 QMBForm **has no** dependencies to other third party libs (but compile 'com.android.support:appcompat-v7:19.+') is needed
 
 ## Supported Form Elements
+Most elements have an inline version (label on the same line as the displayed value) and a normal version (label on separate line above displayed value).
 
-- Avaiable elements:
+- Available elements:
   ```java
     public static final String FormRowDescriptorTypeName = "name";
   
     public static final String FormRowDescriptorTypeText = "text";
+    public static final String FormRowDescriptorTypeTextInline = "textInline";
+    public static final String FormRowDescriptorTypeDetail = "detail";
+    public static final String FormRowDescriptorTypeDetailInline = "detailInline";
     public static final String FormRowDescriptorTypeTextView = "textView";
+    public static final String FormRowDescriptorTypeTextViewInline = "textViewInline";
     public static final String FormRowDescriptorTypeURL = "url";
     public static final String FormRowDescriptorTypeEmail = "email";
+    public static final String FormRowDescriptorTypeEmailInline = "emailInline";
     public static final String FormRowDescriptorTypePassword = "password";
+    public static final String FormRowDescriptorTypePasswordInline = "passwordInline";
     public static final String FormRowDescriptorTypeNumber = "number";
+    public static final String FormRowDescriptorTypeNumberInline = "numberInline";
     public static final String FormRowDescriptorTypeCurrency = "currency";
     public static final String FormRowDescriptorTypePhone = "phone";
     
     public static final String FormRowDescriptorTypeInteger = "integer";
-    
+    public static final String FormRowDescriptorTypeIntegerInline = "integerInline";
+   
     public static final String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
+    public static final String FormRowDescriptorTypeSelectorSpinnerInline = "selectorSpinnerInline";
     public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
     
     public static final String FormRowDescriptorTypeDateInline = "dateInline";
@@ -160,7 +217,10 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
     public static final String FormRowDescriptorTypeBooleanSwitch = "booleanSwitch";
     
     public static final String FormRowDescriptorTypeButton = "button";
-    
+    public static final String FormRowDescriptorTypeButtonInline = "buttonInline";
+
+    public static final String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
+    public static final String FormRowDescriptorTypeSelectorSegmentedControlInline = "selectorSegmentedControlInline";
     
   ```
 - Coming elements: (Avaiable at XLForm)
@@ -177,7 +237,6 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
     
     public static final String FormRowDescriptorTypeMultipleSelector = "multipleSelector";
     public static final String FormRowDescriptorTypeSelectorLeftRight = "selectorLeftRight";
-    public static final String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
     
     public static final String FormRowDescriptorTypeDateTimeInline = "datetimeInline";
     public static final String FormRowDescriptorTypeDateTime = "datetime";
@@ -191,7 +250,6 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
 
 ## To do
 
-- Validation
 - Simpler cell customisation
 - More form elements
 - Form model 
