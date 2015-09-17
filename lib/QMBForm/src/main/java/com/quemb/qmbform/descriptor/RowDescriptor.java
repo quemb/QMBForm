@@ -3,9 +3,13 @@ package com.quemb.qmbform.descriptor;
 import android.content.Context;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormValidator;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+
+import static com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory.convertFormOptionsAnnotation;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -114,6 +118,21 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     }
 
+    public static RowDescriptor newInstanceFromAnnotatedField(Field field, Value value, Context context) {
+        FormElement annotation = field.getAnnotation(FormElement.class);
+        RowDescriptor rowDescriptor = RowDescriptor.newInstance(
+                annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
+                annotation.rowDescriptorType(),
+                context.getString(annotation.label()),
+                value);
+        rowDescriptor.setHint(annotation.hint());
+        rowDescriptor.setRequired(annotation.required());
+        rowDescriptor.setDisabled(annotation.disabled());
+        rowDescriptor.setSelectorOptions(convertFormOptionsAnnotation(
+                annotation.selectorOptions()));
+        return rowDescriptor;
+    }
+
     public SectionDescriptor getSectionDescriptor() {
         return mSectionDescriptor;
     }
@@ -188,8 +207,12 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
         if (getRequired()) {
             valid = getValue() != null && getValue().getValue() != null;
-        }
 
+            if (getSelectorOptions() != null && getSelectorOptions().size() > 0) {
+                valid = valid &&
+                        FormOptionsObject.formOptionsObjectFromArrayWithValue(getValue().getValue(), getSelectorOptions()) != null;
+            }
+        }
         if (getValidators() != null && valid) {
             for (FormValidator validator : getValidators()) {
                 if (validator.validate(this) != null) {
@@ -216,6 +239,10 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         if (getRequired()) {
             if (!(getValue() != null && getValue().getValue() != null)) {
                 rowValidationErrors.add(new RowValidationError(this, R.string.validation_is_required));
+            } else if (getSelectorOptions() != null && getSelectorOptions().size() > 0) {
+                if (FormOptionsObject.formOptionsObjectFromArrayWithValue(getValue().getValue(), getSelectorOptions()) == null) {
+                    rowValidationErrors.add(new RowValidationError(this, R.string.validation_is_required));
+                }
             }
         }
 

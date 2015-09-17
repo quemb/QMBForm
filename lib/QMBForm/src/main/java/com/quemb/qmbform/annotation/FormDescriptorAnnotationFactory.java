@@ -9,6 +9,7 @@ import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -132,6 +133,7 @@ public class FormDescriptorAnnotationFactory {
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
                                 annotation.rowDescriptorType());
                         rowDescriptor.setHint(annotation.hint());
+                        addValidators(rowDescriptor, annotation);
                         sectionDescriptor.addRow(rowDescriptor);
                     } else {
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
@@ -143,6 +145,7 @@ public class FormDescriptorAnnotationFactory {
                         rowDescriptor.setDisabled(annotation.disabled());
                         rowDescriptor.setSelectorOptions(convertFormOptionsAnnotation(
                                 annotation.selectorOptions()));
+                        addValidators(rowDescriptor, annotation);
                         boolean shouldAdd = true;
                         if (object instanceof FormElementDelegate) {
                             FormElementDelegate delegate = (FormElementDelegate) object;
@@ -163,7 +166,25 @@ public class FormDescriptorAnnotationFactory {
 
     }
 
-    public ArrayList<FormOptionsObject> convertFormOptionsAnnotation(FormOptionsObjectElement[] options) {
+    public void addValidators(RowDescriptor rowDescriptor, FormElement annotation) {
+        for (Class validator : annotation.validatorClasses()) {
+            try {
+                rowDescriptor.addValidator((FormValidator) validator.getConstructor().newInstance());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (ClassCastException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static ArrayList<FormOptionsObject> convertFormOptionsAnnotation(FormOptionsObjectElement[] options) {
         ArrayList<FormOptionsObject> optionsArrayList = new ArrayList<FormOptionsObject>();
         for (FormOptionsObjectElement option : options) {
             if (option.valueType() == FormOptionsObjectElement.ValueTypes.INT) {

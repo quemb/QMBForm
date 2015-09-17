@@ -47,6 +47,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
+
         mSwitch.setText(title);
         mSwitch.setEnabled(!getRowDescriptor().getDisabled());
 
