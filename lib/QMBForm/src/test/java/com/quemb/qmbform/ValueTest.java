@@ -1,4 +1,4 @@
-package qmbform;
+package com.quemb.qmbform;
 
 import com.quemb.qmbform.descriptor.OnValueChangeListener;
 import com.quemb.qmbform.descriptor.Value;
@@ -7,16 +7,17 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * Created by tonimoeckel on 28.08.14.
  */
-@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
+@RunWith(RobolectricGradleTestRunner.class)
 public class ValueTest {
 
     private Value<Integer> value;

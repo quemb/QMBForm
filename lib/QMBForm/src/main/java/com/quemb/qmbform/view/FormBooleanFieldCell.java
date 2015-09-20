@@ -1,16 +1,14 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -20,7 +18,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     private Switch mSwitch;
 
     public FormBooleanFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -28,7 +26,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     protected void init() {
 
         super.init();
-        
+
         mSwitch = (Switch) findViewById(R.id.switchControl);
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -49,11 +47,12 @@ public class FormBooleanFieldCell extends FormBaseCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
+
         mSwitch.setText(title);
         mSwitch.setEnabled(!getRowDescriptor().getDisabled());
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null){
+        if (value != null && value.getValue() != null) {
             mSwitch.setChecked(value.getValue());
         }
 

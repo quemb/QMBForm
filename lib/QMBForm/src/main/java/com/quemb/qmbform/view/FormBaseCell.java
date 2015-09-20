@@ -1,29 +1,25 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
 import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.OnValueChangeListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-
 /**
  * Created by tonimoeckel on 14.07.14.
  */
-public abstract class FormBaseCell extends Cell  {
+public abstract class FormBaseCell extends Cell {
 
 
     private static final int REMOVE_BUTTON_ID = R.id.end;
@@ -52,12 +48,11 @@ public abstract class FormBaseCell extends Cell  {
         }
 
 
-
     }
 
-    protected ViewGroup getSuperViewForLayoutInflation(){
+    protected ViewGroup getSuperViewForLayoutInflation() {
 
-        if (getRowDescriptor().getSectionDescriptor() != null && this.getRowDescriptor().getSectionDescriptor().isMultivalueSection()){
+        if (getRowDescriptor().getSectionDescriptor() != null && this.getRowDescriptor().getSectionDescriptor().isMultivalueSection()) {
             LinearLayout linearLayout = createMultiValueWrapper();
             addView(linearLayout);
             return linearLayout;
@@ -118,12 +113,12 @@ public abstract class FormBaseCell extends Cell  {
         });
         linearLayout.addView(addButton);
 
-        SectionDescriptor sectionDescriptor =getRowDescriptor().getSectionDescriptor();
+        SectionDescriptor sectionDescriptor = getRowDescriptor().getSectionDescriptor();
         int index = sectionDescriptor.getIndexOfRowDescriptor(getRowDescriptor());
-        if (index == sectionDescriptor.getRowCount()-1){
+        if (index == sectionDescriptor.getRowCount() - 1) {
             addButton.setVisibility(VISIBLE);
             deleteButton.setVisibility(GONE);
-        }else {
+        } else {
             addButton.setVisibility(GONE);
             deleteButton.setVisibility(VISIBLE);
         }
@@ -143,15 +138,14 @@ public abstract class FormBaseCell extends Cell  {
         return (RowDescriptor) getFormItemDescriptor();
     }
 
-    public void onValueChanged(Value<?> newValue){
-
+    public void onValueChanged(Value<?> newValue) {
         RowDescriptor row = getRowDescriptor();
         Value<?> oldValue = row.getValue();
-        if (oldValue == null || newValue == null || !newValue.getValue().equals(oldValue.getValue())){
+        if (oldValue == null || newValue == null || !newValue.getValue().equals(oldValue.getValue())) {
             OnFormRowValueChangedListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFormRowValueChangedListener();
             row.setValue(newValue);
-            if (listener != null){
-                listener.onValueChanged(row , oldValue, newValue);
+            if (listener != null) {
+                listener.onValueChanged(row, oldValue, newValue);
             }
         }
 

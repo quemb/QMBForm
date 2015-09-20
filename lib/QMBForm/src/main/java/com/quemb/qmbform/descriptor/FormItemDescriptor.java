@@ -15,7 +15,6 @@ public class FormItemDescriptor {
     protected String mTag;
 
 
-
     protected String mTitle;
     private OnFormRowClickListener mOnFormRowClickListener;
     private HashMap<String, Object> mCellConfig;

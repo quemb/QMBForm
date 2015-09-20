@@ -21,4 +21,26 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'info.hoang8f:android-segmented:1.0.5'
+
+    testCompile 'org.hamcrest:hamcrest-core:1.2.1'
+    testCompile 'org.robolectric:robolectric:3.0'
+}
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        testOutputDir = file('build/test-classes/debug')
+    }
+}
+
+
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        testOutputDir = file('build/test-classes/debug')
+    }
 }

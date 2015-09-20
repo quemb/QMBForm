@@ -3,6 +3,15 @@
     <string name="title_no_entries">No entries</string>
     <string name="msg_no_entries">No entries are made</string>
     <string name="validation_is_required">is required</string>
+    <string name="validation_invalid_email">is not a valid email</string>
     <string name="msg_check_form">Please check your entries</string>
     <string name="msg_x_is_required">is a required field</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="done_button_text">Done</string>
+    <string name="height_picker_dialog_title">Select your height</string>
+    <string name="feet_label">feet</string>
+    <string name="inches_label">inches</string>
+    <string name="cm_label">cm</string>
+    <string name="test_error"/>
+    <string name="nonpositive_number_error">must be greater than zero</string>
 </resources>

@@ -1,14 +1,10 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
-import android.widget.TextView;
+
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -17,13 +13,13 @@ import java.util.Date;
 public class FormTimeFieldCell extends FormDateFieldCell {
 
     public FormTimeFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
 
     @Override
-    protected void updateDateLabel(Date date){
+    protected void updateDateLabel(Date date) {
 
         DateFormat dateFormat = android.text.format.DateFormat.getTimeFormat(getContext());
         String s = dateFormat.format(date);

@@ -1,16 +1,15 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
-import android.content.Context;
-import android.widget.TextView;
-
 /**
  * Created by schmidtma on 19.02.15.
  */
-public class FormDetailHtmlTextVerticalFieldCell extends FormDetailTextVerticalFieldCell {
+public class FormDetailHtmlTextVerticalFieldCell extends FormDetailTextFieldCell {
 
     public FormDetailHtmlTextVerticalFieldCell(Context context,
                                                RowDescriptor rowDescriptor) {
@@ -35,6 +34,7 @@ public class FormDetailHtmlTextVerticalFieldCell extends FormDetailTextVerticalF
             }
         }
     }
+
     @Override
     protected int getResource() {
         return R.layout.detail_html_text_vertical_field_cell;

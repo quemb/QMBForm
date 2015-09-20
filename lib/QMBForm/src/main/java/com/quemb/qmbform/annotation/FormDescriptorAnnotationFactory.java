@@ -1,44 +1,18 @@
 package com.quemb.qmbform.annotation;
 
+import android.content.Context;
+
 import com.quemb.qmbform.descriptor.FormDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.FormOptionsObject;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-import com.quemb.qmbform.view.Cell;
-import com.quemb.qmbform.view.FormBaseCell;
-import com.quemb.qmbform.view.FormBooleanFieldCell;
-import com.quemb.qmbform.view.FormButtonFieldCell;
-import com.quemb.qmbform.view.FormCheckFieldCell;
-import com.quemb.qmbform.view.FormDateDialogFieldCell;
-import com.quemb.qmbform.view.FormDateInlineFieldCell;
-import com.quemb.qmbform.view.FormDetailTextFieldCell;
-import com.quemb.qmbform.view.FormEditEmailFieldCell;
-import com.quemb.qmbform.view.FormEditIntegerFieldCell;
-import com.quemb.qmbform.view.FormEditNumberFieldCell;
-import com.quemb.qmbform.view.FormEditPasswordFieldCell;
-import com.quemb.qmbform.view.FormEditPhoneFieldCell;
-import com.quemb.qmbform.view.FormEditTextFieldCell;
-import com.quemb.qmbform.view.FormEditTextViewFieldCell;
-import com.quemb.qmbform.view.FormEditURLFieldCell;
-import com.quemb.qmbform.view.FormPickerDialogFieldCell;
-import com.quemb.qmbform.view.FormSpinnerFieldCell;
-import com.quemb.qmbform.view.FormTimeDialogFieldCell;
-import com.quemb.qmbform.view.FormTimeInlineFieldCell;
-import com.quemb.qmbform.view.SectionCell;
-
-import android.content.Context;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.text.Normalizer;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -46,11 +20,9 @@ import java.util.HashMap;
 public class FormDescriptorAnnotationFactory {
 
 
-
-
     private Context mContext;
 
-    public FormDescriptorAnnotationFactory(Context context){
+    public FormDescriptorAnnotationFactory(Context context) {
 
         mContext = context;
 
@@ -60,25 +32,25 @@ public class FormDescriptorAnnotationFactory {
         return mContext;
     }
 
-    public FormDescriptor createFormDescriptorFromAnnotatedClass(Object object){
-
-        FormDescriptor formDescriptor = FormDescriptor.newInstance();
-
-
+    public FormDescriptor createFormDescriptorFromAnnotatedClass(Object object) {
         Class objClass = object.getClass();
 
-        ArrayList<Field> declaredFields = getAllFields(new ArrayList<Field>(),objClass);
+        ArrayList<Field> declaredFields = getAllFields(new ArrayList<Field>(), objClass);
+
+        return createFormDescriptorFromFields(declaredFields, object);
+    }
+
+    public FormDescriptor createFormDescriptorFromFields(ArrayList<Field> fields, Object object) {
+        FormDescriptor formDescriptor = FormDescriptor.newInstance();
+
         ArrayList<Field> formFields = new ArrayList<Field>();
-//        HashMap<String, ArrayList<Field>> sectionMap = new HashMap<String, ArrayList<Field>>();
-
         ArrayList<Section> sections = new ArrayList<Section>();
-
 
         /**
          * Get all annotated class fields
          */
-        for (Field field:declaredFields){
-            if (field.getAnnotation(FormElement.class)!=null){
+        for (Field field : fields) {
+            if (field.getAnnotation(FormElement.class) != null) {
                 formFields.add(field);
             }
         }
@@ -103,13 +75,13 @@ public class FormDescriptorAnnotationFactory {
         /**
          * Get all annotated class fields
          */
-        for (Field field:formFields){
+        for (Field field : formFields) {
             FormElement annotation = field.getAnnotation(FormElement.class);
             String sectionTitle = annotation.section() == android.R.string.untitled ? "" : getContext().getString(annotation.section());
 
             Section section = null;
-            for(Section iterateSection: sections){
-                if (iterateSection.title == sectionTitle){
+            for (Section iterateSection : sections) {
+                if (iterateSection.title == sectionTitle) {
                     section = iterateSection;
                 }
             }
@@ -117,7 +89,7 @@ public class FormDescriptorAnnotationFactory {
                 section = new Section(sectionTitle);
                 sections.add(section);
             }
-            if (!section.multiValue){
+            if (!section.multiValue) {
                 section.multiValue = annotation.multiValue();
             }
 
@@ -127,17 +99,16 @@ public class FormDescriptorAnnotationFactory {
         /**
          * Sort fields by sortId - annotation property
          */
-        for (Section section : sections){
-            ArrayList<Field> fields = section.fields;
+        for (Section section : sections) {
+            ArrayList<Field> sectionFields = section.fields;
 
             SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance(section.tag, section.title);
             sectionDescriptor.setMultivalueSection(section.multiValue);
 
-            for (Field field:fields) {
+            for (Field field : sectionFields) {
 
                 FormElement annotation = field.getAnnotation(FormElement.class);
-                if (annotation != null){
-
+                if (annotation != null) {
                     Value<Object> value = null;
                     try {
                         value = new Value<Object>(field.get(object));
@@ -145,25 +116,26 @@ public class FormDescriptorAnnotationFactory {
                         e.printStackTrace();
                     }
 
-                    if (section.multiValue){
+                    if (section.multiValue) {
                         sectionDescriptor.setTag(field.getName());
                         int index = 0;
-                        if ((value != null ? value.getValue() : null) instanceof ArrayList){
+                        if ((value != null ? value.getValue() : null) instanceof ArrayList) {
                             ArrayList<Object> list = (ArrayList<Object>) value.getValue();
-                            for (Object item : list){
+                            for (Object item : list) {
                                 RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
                                         annotation.rowDescriptorType());
                                 rowDescriptor.setValue(new Value<Object>(item));
                                 rowDescriptor.setHint(annotation.hint());
-                                sectionDescriptor.addRow( rowDescriptor ) ;
+                                sectionDescriptor.addRow(rowDescriptor);
                                 index++;
                             }
                         }
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
                                 annotation.rowDescriptorType());
                         rowDescriptor.setHint(annotation.hint());
-                        sectionDescriptor.addRow( rowDescriptor ) ;
-                    }else {
+                        addValidators(rowDescriptor, annotation);
+                        sectionDescriptor.addRow(rowDescriptor);
+                    } else {
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
                                 annotation.rowDescriptorType(),
                                 getContext().getString(annotation.label()),
@@ -171,38 +143,63 @@ public class FormDescriptorAnnotationFactory {
                         rowDescriptor.setHint(annotation.hint());
                         rowDescriptor.setRequired(annotation.required());
                         rowDescriptor.setDisabled(annotation.disabled());
-
+                        rowDescriptor.setSelectorOptions(convertFormOptionsAnnotation(
+                                annotation.selectorOptions()));
+                        addValidators(rowDescriptor, annotation);
                         boolean shouldAdd = true;
-                        if (object instanceof FormElementDelegate){
+                        if (object instanceof FormElementDelegate) {
                             FormElementDelegate delegate = (FormElementDelegate) object;
                             shouldAdd = delegate.shouldAddRowDescriptorForField(rowDescriptor, field);
                         }
 
-                        if (shouldAdd){
-                            sectionDescriptor.addRow( rowDescriptor ) ;
+                        if (shouldAdd) {
+                            sectionDescriptor.addRow(rowDescriptor);
                         }
-
                     }
-
-
-
-
                 }
-
             }
 
-
             formDescriptor.addSection(sectionDescriptor);
-
         }
-
 
         return formDescriptor;
 
     }
 
+    public void addValidators(RowDescriptor rowDescriptor, FormElement annotation) {
+        for (Class validator : annotation.validatorClasses()) {
+            try {
+                rowDescriptor.addValidator((FormValidator) validator.getConstructor().newInstance());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (ClassCastException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static ArrayList<FormOptionsObject> convertFormOptionsAnnotation(FormOptionsObjectElement[] options) {
+        ArrayList<FormOptionsObject> optionsArrayList = new ArrayList<FormOptionsObject>();
+        for (FormOptionsObjectElement option : options) {
+            if (option.valueType() == FormOptionsObjectElement.ValueTypes.INT) {
+                optionsArrayList.add(FormOptionsObject.createFormOptionsObject(Integer.valueOf(option.value()), option.displayText()));
+            } else if (option.valueType() == FormOptionsObjectElement.ValueTypes.DOUBLE) {
+                optionsArrayList.add(FormOptionsObject.createFormOptionsObject(Double.valueOf(option.value()), option.displayText()));
+            } else {
+                optionsArrayList.add(FormOptionsObject.createFormOptionsObject(option.value(), option.displayText()));
+            }
+        }
+        return optionsArrayList;
+    }
+
     public ArrayList<Field> getAllFields(ArrayList<Field> fields, Class<?> type) {
-        for (Field field: type.getDeclaredFields()) {
+        for (Field field : type.getDeclaredFields()) {
             fields.add(field);
         }
 
@@ -213,10 +210,10 @@ public class FormDescriptorAnnotationFactory {
         return fields;
     }
 
-    private String toCamelCase(String s){
+    private String toCamelCase(String s) {
         String[] parts = s.split("_");
         String camelCaseString = "";
-        for (String part : parts){
+        for (String part : parts) {
             camelCaseString = camelCaseString + toProperCase(part);
         }
         return camelCaseString;
@@ -233,10 +230,11 @@ public class FormDescriptorAnnotationFactory {
         public String title = "";
         public String tag = "";
         public Boolean multiValue = false;
-        public ArrayList<Field> fields = new ArrayList<Field>();;
+        public ArrayList<Field> fields = new ArrayList<Field>();
+        ;
 
         public Section(String sectionTitle) {
-            if (sectionTitle != null && sectionTitle.length()>0){
+            if (sectionTitle != null && sectionTitle.length() > 0) {
                 title = sectionTitle;
                 tag = toCamelCase(sectionTitle);
             }

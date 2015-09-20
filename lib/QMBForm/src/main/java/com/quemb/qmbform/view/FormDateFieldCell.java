@@ -1,11 +1,11 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.TextView;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -14,12 +14,12 @@ import java.util.Date;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormDateFieldCell extends FormDetailTextFieldCell {
+public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
     private TextView mTextView;
 
     public FormDateFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -27,7 +27,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
     protected void init() {
 
         super.init();
-        mTextView = (TextView)findViewById(R.id.textView);
+        mTextView = (TextView) findViewById(R.id.textView);
 
     }
 
@@ -41,12 +41,12 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
-        mTextView.setVisibility(title == null?GONE:VISIBLE);
+        mTextView.setVisibility(title == null ? GONE : VISIBLE);
 
         Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
-        if (value == null || value.getValue() == null){
+        if (value == null || value.getValue() == null) {
             value = new Value<Date>(new Date());
-        }else {
+        } else {
             updateDateLabel(value.getValue());
         }
 
@@ -57,7 +57,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
         initDatePicker(calendar);
 
         mTextView.setEnabled(!getRowDescriptor().getDisabled());
-        if(getRowDescriptor().getDisabled()) {
+        if (getRowDescriptor().getDisabled()) {
             mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
         }
 
@@ -80,7 +80,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
     }
 
-    protected void updateDateLabel(Date date){
+    protected void updateDateLabel(Date date) {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
         String s = dateFormat.format(date);
@@ -95,7 +95,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
     }
 
-    public TextView getTextView(){
+    public TextView getTextView() {
         return mTextView;
     }
 }

@@ -11,13 +11,13 @@ public class SectionDescriptor extends FormItemDescriptor {
     private ArrayList<RowDescriptor> mRows;
     private Boolean mMultivalueSection = false;
 
-    public static SectionDescriptor newInstance(String tag){
+    public static SectionDescriptor newInstance(String tag) {
 
         return SectionDescriptor.newInstance(tag, null);
 
     }
 
-    public static SectionDescriptor newInstance(String tag, String title){
+    public static SectionDescriptor newInstance(String tag, String title) {
 
         SectionDescriptor descriptor = new SectionDescriptor();
         descriptor.mTitle = title;
@@ -26,7 +26,7 @@ public class SectionDescriptor extends FormItemDescriptor {
 
     }
 
-    public SectionDescriptor(){
+    public SectionDescriptor() {
 
         mRows = new ArrayList<RowDescriptor>();
 
@@ -44,42 +44,42 @@ public class SectionDescriptor extends FormItemDescriptor {
         return mTitle;
     }
 
-    public void addRow(RowDescriptor row){
+    public void addRow(RowDescriptor row) {
         insertRowAtIndex(row, mRows.size());
     }
 
-    public void addRow(RowDescriptor row, int index){
+    public void addRow(RowDescriptor row, int index) {
         insertRowAtIndex(row, index);
     }
 
-    public void removeRow(RowDescriptor row){
+    public void removeRow(RowDescriptor row) {
         int index = mRows.indexOf(row);
         removeRowAtIndex(index);
     }
 
-    public int getRowCount(){
+    public int getRowCount() {
         return mRows.size();
     }
 
-    public ArrayList<RowDescriptor> getRows(){
+    public ArrayList<RowDescriptor> getRows() {
         return mRows;
     }
 
-    private void insertRowAtIndex(RowDescriptor row, int index){
-        if (mRows.size()>=index){
+    private void insertRowAtIndex(RowDescriptor row, int index) {
+        if (mRows.size() >= index) {
             row.setSectionDescriptor(this);
             mRows.add(index, row);
-            if (getFormDescriptor() != null){
+            if (getFormDescriptor() != null) {
                 getFormDescriptor().didInsertRow(row, this);
             }
 
         }
     }
 
-    private void removeRowAtIndex(int index){
+    private void removeRowAtIndex(int index) {
         RowDescriptor rowDescriptor = mRows.get(index);
         mRows.remove(index);
-        if (getFormDescriptor() != null){
+        if (getFormDescriptor() != null) {
             getFormDescriptor().didRemoveRow(rowDescriptor, this);
         }
 
@@ -89,11 +89,11 @@ public class SectionDescriptor extends FormItemDescriptor {
         return getTitle() != null && getTitle().length() > 0;
     }
 
-    public RowDescriptor findRowDescriptor(String tag){
+    public RowDescriptor findRowDescriptor(String tag) {
         RowDescriptor rowDescriptor = null;
 
-        for (RowDescriptor iRowDescriptor:getRows()){
-            if (tag.equals(iRowDescriptor.getTag())){
+        for (RowDescriptor iRowDescriptor : getRows()) {
+            if (tag.equals(iRowDescriptor.getTag())) {
                 rowDescriptor = iRowDescriptor;
                 break;
             }
@@ -102,7 +102,7 @@ public class SectionDescriptor extends FormItemDescriptor {
         return rowDescriptor;
     }
 
-    public int getIndexOfRowDescriptor(RowDescriptor rowDescriptor){
+    public int getIndexOfRowDescriptor(RowDescriptor rowDescriptor) {
         return mRows.indexOf(rowDescriptor);
     }
 
@@ -114,11 +114,11 @@ public class SectionDescriptor extends FormItemDescriptor {
         mMultivalueSection = multivalueSection;
     }
 
-    public ArrayList getRowValues(){
+    public ArrayList getRowValues() {
 
         ArrayList<Object> values = new ArrayList<>();
-        for (RowDescriptor rowDescriptor : mRows){
-            if (rowDescriptor.getValue() != null && rowDescriptor.getValue().getValue() != null){
+        for (RowDescriptor rowDescriptor : mRows) {
+            if (rowDescriptor.getValue() != null && rowDescriptor.getValue().getValue() != null) {
                 values.add(rowDescriptor.getValue().getValue());
             }
         }

@@ -1,4 +1,6 @@
-package qmbform;
+package com.quemb.qmbform;
+
+import android.app.Activity;
 
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.view.FormCheckFieldCell;
@@ -8,9 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-
-import android.app.Activity;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -18,7 +19,8 @@ import static org.hamcrest.core.Is.is;
 /**
  * Created by tonimoeckel on 02.09.14.
  */
-@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
+@RunWith(RobolectricGradleTestRunner.class)
 public class FormCheckFieldCellTest {
 
 
