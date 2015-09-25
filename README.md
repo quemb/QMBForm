@@ -167,6 +167,7 @@ The following preset cell configurations are available
         PADDING, // Specified as an int[4] in the order {left, top, right, bottom}
         TYPEFACE,  // Specified as a Typeface enum such as Typeface.BOLD.  Only applicable to instances of TextView
         INPUT_TYPE,  // Specified as an InputType enum such as InputType.TYPE_NUMBER_FLAG_DECIMAL.  Only applicable to instances of TextView
+        IME_OPTIONS,  // Specified as an imeOptions enum such as IME_ACTION_DONE.  Only applicable to instances of TextView
         TEXT_ALIGNMENT, // Specified as an View enum such as TEXT_ALIGNMENT_CENTER (only available on api 17+)
         MAX_LINES, // Specified as an int.  Only applicable to instances of TextView
         MIN_LINES, // Specified as an int.  Only applicable to instances of TextView
@@ -219,7 +220,7 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
 Most elements have an inline version (label on the same line as the displayed value) and a normal version (label on separate line above displayed value).
 
 - Available elements:
-- 
+
   ```java
     public static final String FormRowDescriptorTypeText = "text";
     public static final String FormRowDescriptorTypeTextInline = "textInline";
@@ -265,8 +266,8 @@ Most elements have an inline version (label on the same line as the displayed va
   ```
   
 - Coming elements: (Avaiable at XLForm)
+
   ```java
-  
     public static final String FormRowDescriptorTypeTwitter = "twitter";
     public static final String FormRowDescriptorTypeAccount = "account";
   
@@ -287,7 +288,6 @@ Most elements have an inline version (label on the same line as the displayed va
     public static final String FormRowDescriptorTypeImage = "image";
     public static final String FormRowDescriptorTypeWeb = "web";
     public static final String FormRowDescriptorTypeStepCounter = "stepCounter";
-    
   ```
 
 ## To do

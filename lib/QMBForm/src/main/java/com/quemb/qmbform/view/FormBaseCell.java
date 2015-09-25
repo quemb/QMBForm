@@ -116,6 +116,12 @@ public abstract class FormBaseCell extends Cell {
                     ((TextView) view).setInputType(inputType);
                 }
                 break;
+            case IME_OPTIONS:
+                int imeOptions = (int) config.configValue;
+                if (view instanceof TextView) {
+                    ((TextView) view).setImeOptions(imeOptions);
+                }
+                break;
             case TEXT_ALIGNMENT:
                 int textAlignment = (int) config.configValue;
                 // Only supported on api 17 and higher
