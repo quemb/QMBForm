@@ -5,17 +5,17 @@ package com.quemb.qmbform.descriptor;
  */
 public class CellConfigObject {
     public enum CONFIG_TYPE {
-        PADDING,
-        TYPEFACE,
-        INPUT_TYPE,
-        TEXT_ALIGNMENT,
-        MAX_LINES,
-        MIN_LINES,
-        MINIMUM_HEIGHT,
-        MINIMUM_WIDTH,
-        BACKGROUND_COLOR,
-        TEXT_COLOR,
-        GRAVITY
+        PADDING, // Specified as an int[4] in the order {left, top, right, bottom}
+        TYPEFACE,  // Specified as a Typeface enum such as Typeface.BOLD
+        INPUT_TYPE,  // Specified as an InputType enum such as InputType.TYPE_NUMBER_FLAG_DECIMAL
+        TEXT_ALIGNMENT, // Specified as an View enum such as TEXT_ALIGNMENT_CENTER (only available on api 17+)
+        MAX_LINES, // Specified as an int
+        MIN_LINES, // Specified as an int
+        MINIMUM_HEIGHT, // Specified as an int
+        MINIMUM_WIDTH, // Specified as an int
+        BACKGROUND_COLOR, // Specified as color reference id
+        TEXT_COLOR, // Specified as color reference id
+        GRAVITY // Specified as a Gravity enum such as Gravity.CENTER
     }
 
     public CONFIG_TYPE configType;
