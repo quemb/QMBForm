@@ -1,7 +1,6 @@
 package com.quemb.qmbform.view;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.quemb.qmbform.R;
@@ -24,7 +23,6 @@ public class FormTitleFieldCell extends FormBaseCell {
         mLabelTextView = (TextView) findViewById(R.id.labelTextView);
         mLabelTextView.setTextColor(R.attr.editTextColor);
         mLabelTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
-        mLabelTextView.setTypeface(mLabelTextView.getTypeface(), Typeface.BOLD);
     }
 
     @Override

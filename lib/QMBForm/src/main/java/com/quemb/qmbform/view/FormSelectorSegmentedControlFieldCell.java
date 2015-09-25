@@ -1,7 +1,6 @@
 package com.quemb.qmbform.view;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -37,7 +36,6 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         mLabelTextView = (TextView) findViewById(R.id.labelTextView);
         mLabelTextView.setTextColor(R.attr.editTextColor);
         mLabelTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
-        mLabelTextView.setTypeface(mLabelTextView.getTypeface(), Typeface.BOLD);
     }
 
     @Override
