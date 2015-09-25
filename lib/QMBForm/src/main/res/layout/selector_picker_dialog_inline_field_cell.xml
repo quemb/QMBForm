@@ -8,17 +8,27 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/labelTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="3"/>
 
-    <Spinner
-        android:id="@+id/spinner"
+    <TextView
+        android:id="@+id/detailTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"/>
+        android:layout_weight="4"
+        android:ellipsize="end"
+        android:layout_gravity="center_vertical"
+        android:gravity="right"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_gravity="center_vertical"
+        android:text="@string/dropdown_arrow"/>
 
 
 </LinearLayout>

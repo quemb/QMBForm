@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
-        TimePicker.OnTimeChangedListener {
+    TimePicker.OnTimeChangedListener {
 
     private TimePicker mTimePicker;
 

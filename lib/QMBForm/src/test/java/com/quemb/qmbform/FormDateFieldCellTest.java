@@ -25,8 +25,6 @@ import static org.hamcrest.core.Is.is;
 @Config(constants = BuildConfig.class)
 @RunWith(RobolectricGradleTestRunner.class)
 public class FormDateFieldCellTest {
-
-
     private Activity activity;
 
     @Before
@@ -41,7 +39,7 @@ public class FormDateFieldCellTest {
 
         FormTimeDialogFieldCell testCell = new FormTimeDialogFieldCell(activity, rowDescriptor);
 
-        assertThat(testCell.getTextView().isEnabled(), is(false));
+        assertThat(testCell.getLabelTextView().isEnabled(), is(false));
 
     }
 

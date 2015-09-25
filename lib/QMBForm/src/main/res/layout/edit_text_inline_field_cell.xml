@@ -8,11 +8,11 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/labelTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:layout_weight="3"/>
+        android:layout_weight="3"
+        android:paddingRight="10dp"/>
 
     <EditText
         android:id="@+id/editText"

@@ -11,15 +11,14 @@
         android:id="@+id/labelTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="3"/>
 
-    <TextView
-        android:id="@+id/detailTextView"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:ellipsize="end"
-        android:gravity="right"/>
+        android:layout_weight="5"/>
 
 
 </LinearLayout>

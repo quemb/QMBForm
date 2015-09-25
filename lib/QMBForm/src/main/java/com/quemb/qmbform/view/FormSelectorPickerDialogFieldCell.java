@@ -8,15 +8,16 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormDetailTextVerticalFieldCell extends FormDetailTextFieldCell {
+public class FormSelectorPickerDialogFieldCell extends FormSelectorPickerDialogInlineFieldCell {
 
-    public FormDetailTextVerticalFieldCell(Context context,
-                                           RowDescriptor rowDescriptor) {
+
+    public FormSelectorPickerDialogFieldCell(Context context,
+                                             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
     @Override
     protected int getResource() {
-        return R.layout.detail_text_vertical_field_cell;
+        return R.layout.selector_picker_dialog_field_cell;
     }
 }

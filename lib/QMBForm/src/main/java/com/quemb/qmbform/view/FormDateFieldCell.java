@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
-    private TextView mTextView;
+    private TextView mLabelTextView;
 
     public FormDateFieldCell(Context context,
                              RowDescriptor rowDescriptor) {
@@ -27,7 +27,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
     protected void init() {
 
         super.init();
-        mTextView = (TextView) findViewById(R.id.textView);
+        mLabelTextView = (TextView) findViewById(R.id.labelTextView);
 
     }
 
@@ -40,8 +40,8 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
-        mTextView.setText(title);
-        mTextView.setVisibility(title == null ? GONE : VISIBLE);
+        mLabelTextView.setText(title);
+        mLabelTextView.setVisibility(title == null ? GONE : VISIBLE);
 
         Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
         if (value == null || value.getValue() == null) {
@@ -56,9 +56,9 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
         initDatePicker(calendar);
 
-        mTextView.setEnabled(!getRowDescriptor().getDisabled());
+        mLabelTextView.setEnabled(!getRowDescriptor().getDisabled());
         if (getRowDescriptor().getDisabled()) {
-            mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
+            mLabelTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
         }
 
 
@@ -95,7 +95,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
     }
 
-    public TextView getTextView() {
-        return mTextView;
+    public TextView getLabelTextView() {
+        return mLabelTextView;
     }
 }

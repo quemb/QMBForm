@@ -65,8 +65,6 @@ public class FormAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext, getItem(position));
     }
 

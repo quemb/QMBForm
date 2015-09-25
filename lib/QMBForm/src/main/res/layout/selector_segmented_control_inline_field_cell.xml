@@ -5,23 +5,23 @@
               android:padding="@dimen/cell_padding">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/labelTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:layout_gravity="center_vertical"
+        android:layout_weight="3"
         android:paddingRight="@dimen/cell_padding"/>
 
     <info.hoang8f.android.segmented.SegmentedGroup
-        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
         android:id="@+id/segmentedGroup"
+        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:orientation="horizontal"
         segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_checked_text_color="@android:color/secondary_text_light"
         segmentedgroup:sc_corner_radius="10dp"
-        segmentedgroup:sc_tint_color="@android:color/secondary_text_dark"
-        segmentedgroup:sc_checked_text_color="@android:color/secondary_text_light"/>
+        segmentedgroup:sc_tint_color="@android:color/secondary_text_dark"/>
 
 </LinearLayout>

@@ -13,7 +13,7 @@ public class SectionCell extends Cell {
 
     private SectionDescriptor mSectionDescriptor;
 
-    private TextView mTextView;
+    private TextView mLabelTextView;
 
     public SectionCell(Context context,
                        SectionDescriptor sectionDescriptor) {
@@ -28,8 +28,8 @@ public class SectionCell extends Cell {
 
         setClickable(false);
 
-        mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(getThemeValue(R.attr.colorAccent));
+        mLabelTextView = (TextView) findViewById(R.id.labelTextView);
+        mLabelTextView.setTextColor(getThemeValue(R.attr.colorAccent));
 
     }
 
@@ -40,10 +40,8 @@ public class SectionCell extends Cell {
 
     @Override
     protected void update() {
-
         String title = getFormItemDescriptor().getTitle();
-        mTextView.setText(title);
-
+        mLabelTextView.setText(title.toUpperCase());
     }
 
     @Override

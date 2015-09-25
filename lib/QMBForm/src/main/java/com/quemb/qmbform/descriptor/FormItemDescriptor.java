@@ -17,8 +17,8 @@ public class FormItemDescriptor {
 
     protected String mTitle;
     private OnFormRowClickListener mOnFormRowClickListener;
-    private HashMap<String, Object> mCellConfig;
-
+    private HashMap<String, CellConfigObject[]> mCellConfig;
+    private HashMap<String, Object> mCustomCellConfig;
 
     public String getTitle() {
         return mTitle;
@@ -44,7 +44,6 @@ public class FormItemDescriptor {
         mCell = cell;
     }
 
-
     public OnFormRowClickListener getOnFormRowClickListener() {
         return mOnFormRowClickListener;
     }
@@ -53,11 +52,19 @@ public class FormItemDescriptor {
         mOnFormRowClickListener = onFormRowClickListener;
     }
 
-    public HashMap<String, Object> getCellConfig() {
+    public HashMap<String, CellConfigObject[]> getCellConfig() {
         return mCellConfig;
     }
 
-    public void setCellConfig(HashMap<String, Object> cellConfig) {
+    public void setCellConfig(HashMap<String, CellConfigObject[]> cellConfig) {
         mCellConfig = cellConfig;
+    }
+
+    public HashMap<String, Object> getCustomCellConfig() {
+        return mCustomCellConfig;
+    }
+
+    public void setCustomCellConfig(HashMap<String, Object> customCellConfig) {
+        mCustomCellConfig = customCellConfig;
     }
 }

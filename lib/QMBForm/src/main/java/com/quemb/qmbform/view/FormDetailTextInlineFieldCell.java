@@ -32,10 +32,7 @@ public class FormDetailTextInlineFieldCell extends FormTitleFieldCell {
         return R.layout.detail_text_inline_field_cell;
     }
 
-    @Override
-    protected void update() {
-        super.update();
-
+    protected void updateDetail(){
         if (getRowDescriptor().getHint(getContext()) != null) {
             getDetailTextView().setHint(getRowDescriptor().getHint(getContext()));
         }
@@ -49,7 +46,13 @@ public class FormDetailTextInlineFieldCell extends FormTitleFieldCell {
 
             }
         }
+    }
 
+    @Override
+    protected void update() {
+        super.update();
+
+        updateDetail();
     }
 
     public TextView getDetailTextView() {

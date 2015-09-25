@@ -14,7 +14,7 @@ import com.quemb.qmbform.view.FormButtonInlineFieldCell;
 import com.quemb.qmbform.view.FormCheckFieldCell;
 import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormDateInlineFieldCell;
-import com.quemb.qmbform.view.FormDetailHtmlTextVerticalFieldCell;
+import com.quemb.qmbform.view.FormDetailHtmlTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextInlineFieldCell;
 import com.quemb.qmbform.view.FormEditCurrencyFieldCell;
@@ -35,13 +35,13 @@ import com.quemb.qmbform.view.FormEditTextViewInlineFieldCell;
 import com.quemb.qmbform.view.FormEditURLFieldCell;
 import com.quemb.qmbform.view.FormExternalButtonFieldCell;
 import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
-import com.quemb.qmbform.view.FormPickerDialogFieldCell;
-import com.quemb.qmbform.view.FormPickerDialogVerticalFieldCell;
+import com.quemb.qmbform.view.FormSelectorPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormSelectorPickerDialogInlineFieldCell;
 import com.quemb.qmbform.view.FormSelectorSegmentedControlFieldCell;
 import com.quemb.qmbform.view.FormSelectorSegmentedControlInlineFieldCell;
-import com.quemb.qmbform.view.FormSpinnerFieldCell;
-import com.quemb.qmbform.view.FormSpinnerInlineFieldCell;
-import com.quemb.qmbform.view.FormTextPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormSelectorSpinnerFieldCell;
+import com.quemb.qmbform.view.FormSelectorSpinnerInlineFieldCell;
+import com.quemb.qmbform.view.FormTextPickerDialogInlineFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
@@ -57,17 +57,6 @@ public class CellViewFactory {
 
     private static CellViewFactory instance = null;
     private HashMap<String, Class<? extends FormBaseCell>> mViewRowTypeMap;
-
-    public static CellViewFactory getInstance() {
-        if (instance == null) {
-            instance = new CellViewFactory();
-        }
-        return instance;
-    }
-
-    public static void addFormRowDescriptor(String descriptorName, Class descriptorClass) {
-        getInstance().mViewRowTypeMap.put(descriptorName, descriptorClass);
-    }
 
     public CellViewFactory() {
 
@@ -100,18 +89,29 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypePasswordInline, FormEditPasswordInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmail, FormEditEmailFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeEmailInline, FormEditEmailInlineFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTextPickerDialog, FormTextPickerDialogFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorTextPickerDialogInline, FormTextPickerDialogInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSegmentedControlInline, FormSelectorSegmentedControlInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSegmentedControl, FormSelectorSegmentedControlFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSpinnerFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinnerInline, FormSpinnerInlineFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormPickerDialogFieldCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialogVertical, FormPickerDialogVerticalFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinner, FormSelectorSpinnerFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorSpinnerInline, FormSelectorSpinnerInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialogInline, FormSelectorPickerDialogInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, FormSelectorPickerDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeIntegerSlider, FormIntegerSliderFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeExternal, FormExternalButtonFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHTMLText, FormEditHTMLTextViewFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeSectionSeperator, SeperatorSectionCell.class);
-        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHtmlVertical, FormDetailHtmlTextVerticalFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeHtml, FormDetailHtmlTextFieldCell.class);
+    }
+
+    public static CellViewFactory getInstance() {
+        if (instance == null) {
+            instance = new CellViewFactory();
+        }
+        return instance;
+    }
+
+    public static void addFormRowDescriptor(String descriptorName, Class descriptorClass) {
+        getInstance().mViewRowTypeMap.put(descriptorName, descriptorClass);
     }
 
     public Cell createViewForFormItemDescriptor(Context context, FormItemDescriptor descriptor) {
@@ -129,7 +129,7 @@ public class CellViewFactory {
                 FormBaseCell formBaseCell;
 
                 formBaseCell = mViewRowTypeMap.get(row.getRowType()).getConstructor(Context.class, RowDescriptor.class).newInstance(
-                        context, row);
+                    context, row);
                 rowView = formBaseCell;
             } catch (InstantiationException e) {
                 e.printStackTrace();
