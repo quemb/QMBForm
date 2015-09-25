@@ -3,6 +3,7 @@ package com.quemb.qmbform.view;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,9 +98,16 @@ public abstract class FormBaseCell extends Cell {
                 view.setPadding(padding[0], padding[1], padding[2], padding[3]);
                 break;
             case TYPEFACE:
-                int typeface = (int) config.configValue;
                 if (view instanceof TextView) {
-                    ((TextView) view).setTypeface(null, typeface);
+                    if (config.configValue instanceof Typeface) {
+                        Typeface typeface = (Typeface) config.configValue;
+
+                        ((TextView) view).setTypeface(typeface);
+                    } else {
+                        int typeface = (int) config.configValue;
+
+                        ((TextView) view).setTypeface(null, typeface);
+                    }
                 }
                 break;
             case INPUT_TYPE:
