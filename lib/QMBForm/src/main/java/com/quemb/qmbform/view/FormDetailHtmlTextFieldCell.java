@@ -9,10 +9,10 @@ import com.quemb.qmbform.descriptor.Value;
 /**
  * Created by schmidtma on 19.02.15.
  */
-public class FormDetailHtmlTextVerticalFieldCell extends FormDetailTextFieldCell {
+public class FormDetailHtmlTextFieldCell extends FormDetailTextFieldCell {
 
-    public FormDetailHtmlTextVerticalFieldCell(Context context,
-                                               RowDescriptor rowDescriptor) {
+    public FormDetailHtmlTextFieldCell(Context context,
+                                       RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -37,6 +37,6 @@ public class FormDetailHtmlTextVerticalFieldCell extends FormDetailTextFieldCell
 
     @Override
     protected int getResource() {
-        return R.layout.detail_html_text_vertical_field_cell;
+        return R.layout.detail_html_text_field_cell;
     }
 }

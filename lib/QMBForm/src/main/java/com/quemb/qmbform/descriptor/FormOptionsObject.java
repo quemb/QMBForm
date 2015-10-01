@@ -19,9 +19,11 @@ public class FormOptionsObject {
     }
 
     public static FormOptionsObject formOptionsObjectFromArrayWithValue(Object searchValue, ArrayList<FormOptionsObject> options) {
-        for (FormOptionsObject option : options) {
-            if (option.mValue.equals(searchValue)) {
-                return option;
+        if (options != null) {
+            for (FormOptionsObject option : options) {
+                if (option.mValue.equals(searchValue)) {
+                    return option;
+                }
             }
         }
         return null;
@@ -29,11 +31,13 @@ public class FormOptionsObject {
 
     public static int indexOfFormOptionsObjectFromArrayWithValue(Object searchValue, ArrayList<FormOptionsObject> options) {
         int counter = 0;
-        for (FormOptionsObject option : options) {
-            if (option.mValue.equals(searchValue)) {
-                return counter;
+        if (options != null) {
+            for (FormOptionsObject option : options) {
+                if (option.mValue.equals(searchValue)) {
+                    return counter;
+                }
+                counter++;
             }
-            counter++;
         }
         return -1;
     }

@@ -64,7 +64,7 @@ Create simple Android forms
     RowDescriptor customRow = RowDescriptor.newInstance("custom",customType, "title", new Value<String>("value"));
     HashMap<String, Object> cellConfig = new HashMap();
     cellConfig.put("config",configObject);
-    customRow.setCellConfig(cellConfig);
+    customRow.setCustomCellConfig(cellConfig);
     section.addRow(customRow);
     ```
 
@@ -159,7 +159,56 @@ Create simple Android forms
 
     rowDescriptor.addValidator(new EmailValidator());
     ```
-    
+
+## Cell style configuration
+The following preset cell configurations are available
+```java
+    public enum CONFIG_TYPE {
+        PADDING, // Specified as an int[4] in the order {left, top, right, bottom}
+        TYPEFACE,  // Specified as a Typeface enum such as Typeface.BOLD.  Only applicable to instances of TextView
+        INPUT_TYPE,  // Specified as an InputType enum such as InputType.TYPE_NUMBER_FLAG_DECIMAL.  Only applicable to instances of TextView
+        IME_OPTIONS,  // Specified as an imeOptions enum such as IME_ACTION_DONE.  Only applicable to instances of TextView
+        TEXT_ALIGNMENT, // Specified as an View enum such as TEXT_ALIGNMENT_CENTER (only available on api 17+)
+        MAX_LINES, // Specified as an int.  Only applicable to instances of TextView
+        MIN_LINES, // Specified as an int.  Only applicable to instances of TextView
+        MINIMUM_HEIGHT, // Specified as an int
+        MINIMUM_WIDTH, // Specified as an int
+        BACKGROUND_COLOR, // Specified as color reference id
+        TEXT_COLOR, // Specified as color reference id.  Only applicable to instances of TextView
+        GRAVITY, // Specified as a Gravity enum such as Gravity.CENTER.  Only applicable to instances of TextView
+        VISIBILITY // Specified as a View enum such as VIEW.GONE or View.INVISIBLE
+    }
+```
+They can be used on any view in a cell that has a public accessor.  In this example I modify the styles for the labelTextView and detailTextView of the FormRowDescriptorTypeDetail type cell -
+```java
+RowDescriptor rowDescriptor = RowDescriptor.newInstance("valid",
+        RowDescriptor.FormRowDescriptorTypeDetail,
+        "Test",
+        new Value<String>("Test"));
+
+HashMap<String, CellConfigObject[]> cellConfig = new HashMap<String, CellConfigObject[]>();
+int[] padding = {12, 13, 14, 15};
+CellConfigObject[] config = {
+        new CellConfigObject(CellConfigObject.CONFIG_TYPE.PADDING, padding),
+        new CellConfigObject(CellConfigObject.CONFIG_TYPE.TYPEFACE, Typeface.BOLD_ITALIC),
+        new CellConfigObject(CellConfigObject.CONFIG_TYPE.INPUT_TYPE, InputType.TYPE_NUMBER_FLAG_DECIMAL),
+        new CellConfigObject(CellConfigObject.CONFIG_TYPE.GRAVITY, Gravity.CENTER),
+};
+cellConfig.put("getLabelTextView", config); //getLabelTextView is the function name of the getter for this view
+cellConfig.put("getDetailTextView", config);
+rowDescriptor.setCellConfig(cellConfig);
+```
+
+another use case is to hide parts of an form cell such as the label
+```java
+HashMap<String, CellConfigObject[]> cellConfig = new HashMap<String, CellConfigObject[]>();
+CellConfigObject[] config = {
+    new CellConfigObject(CellConfigObject.CONFIG_TYPE.VISIBILITY, View.GONE)
+};
+cellConfig.put("getLabelTextView", config);
+row.setCellConfig(cellConfig);
+```
+
 ## Installation
 
 QMBForm is not available at the maven repository yet. But it's a gradly based android-library project. 
@@ -182,15 +231,13 @@ QMBForm **has no** dependencies to other third party libs (but compile 'com.andr
 Most elements have an inline version (label on the same line as the displayed value) and a normal version (label on separate line above displayed value).
 
 - Available elements:
+
   ```java
-    public static final String FormRowDescriptorTypeName = "name";
-  
     public static final String FormRowDescriptorTypeText = "text";
     public static final String FormRowDescriptorTypeTextInline = "textInline";
-    public static final String FormRowDescriptorTypeDetail = "detail";
+    public static final String FormRowDescriptorTypeHTMLText = "htmlText";
     public static final String FormRowDescriptorTypeDetailInline = "detailInline";
-    public static final String FormRowDescriptorTypeTextView = "textView";
-    public static final String FormRowDescriptorTypeTextViewInline = "textViewInline";
+    public static final String FormRowDescriptorTypeDetail = "detail";
     public static final String FormRowDescriptorTypeURL = "url";
     public static final String FormRowDescriptorTypeEmail = "email";
     public static final String FormRowDescriptorTypeEmailInline = "emailInline";
@@ -198,34 +245,40 @@ Most elements have an inline version (label on the same line as the displayed va
     public static final String FormRowDescriptorTypePasswordInline = "passwordInline";
     public static final String FormRowDescriptorTypeNumber = "number";
     public static final String FormRowDescriptorTypeNumberInline = "numberInline";
+    public static final String FormRowDescriptorTypeIntegerSlider = "integerSlider";
     public static final String FormRowDescriptorTypeCurrency = "currency";
     public static final String FormRowDescriptorTypePhone = "phone";
-    
     public static final String FormRowDescriptorTypeInteger = "integer";
     public static final String FormRowDescriptorTypeIntegerInline = "integerInline";
-   
+    public static final String FormRowDescriptorTypeTextView = "textView";
+    public static final String FormRowDescriptorTypeTextViewInline = "textViewInline";
+    
     public static final String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
     public static final String FormRowDescriptorTypeSelectorSpinnerInline = "selectorSpinnerInline";
-    public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorTextPickerDialogInline = "textPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorPickerDialogInline = "selectorPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialogVertical";
+    public static final String FormRowDescriptorTypeSelectorSegmentedControlInline = "selectorSegmentedControlInline";
+    public static final String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
     
     public static final String FormRowDescriptorTypeDateInline = "dateInline";
     public static final String FormRowDescriptorTypeTimeInline = "timeInline";
     public static final String FormRowDescriptorTypeDate = "date";
     public static final String FormRowDescriptorTypeTime = "time";
+    public static final String FormRowDescriptorTypeDatePicker = "datePicker";
     
     public static final String FormRowDescriptorTypeBooleanCheck = "booleanCheck";
     public static final String FormRowDescriptorTypeBooleanSwitch = "booleanSwitch";
-    
     public static final String FormRowDescriptorTypeButton = "button";
     public static final String FormRowDescriptorTypeButtonInline = "buttonInline";
-
-    public static final String FormRowDescriptorTypeSelectorSegmentedControl = "selectorSegmentedControl";
-    public static final String FormRowDescriptorTypeSelectorSegmentedControlInline = "selectorSegmentedControlInline";
-    
+    public static final String FormRowDescriptorTypeExternal = "external";
+    public static final String FormRowDescriptorTypeSectionSeperator = "sectionSeperator";
+    public static final String FormRowDescriptorTypeHtml = "html";
   ```
-- Coming elements: (Avaiable at XLForm)
-  ```java
   
+- Coming elements: (Avaiable at XLForm)
+
+  ```java
     public static final String FormRowDescriptorTypeTwitter = "twitter";
     public static final String FormRowDescriptorTypeAccount = "account";
   
@@ -244,8 +297,8 @@ Most elements have an inline version (label on the same line as the displayed va
     public static final String FormRowDescriptorTypePicker = "picker";
     
     public static final String FormRowDescriptorTypeImage = "image";
+    public static final String FormRowDescriptorTypeWeb = "web";
     public static final String FormRowDescriptorTypeStepCounter = "stepCounter";
-    
   ```
 
 ## To do

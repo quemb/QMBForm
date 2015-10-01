@@ -12,13 +12,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FormOptionsObjectElement {
-    enum ValueTypes {
-        INT, DOUBLE, STRING
-    }
-
     public String value() default "";
 
     public ValueTypes valueType() default ValueTypes.STRING;
 
     public String displayText();
+
+    enum ValueTypes {
+        INT, DOUBLE, STRING
+    }
 }

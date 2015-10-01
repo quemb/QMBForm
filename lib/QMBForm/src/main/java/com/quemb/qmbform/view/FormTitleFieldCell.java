@@ -10,7 +10,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormTitleFieldCell extends FormBaseCell {
-    private TextView mTextView;
+    private TextView mLabelTextView;
 
     public FormTitleFieldCell(Context context,
                               RowDescriptor rowDescriptor) {
@@ -20,9 +20,9 @@ public class FormTitleFieldCell extends FormBaseCell {
     @Override
     protected void init() {
         super.init();
-        mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
+        mLabelTextView = (TextView) findViewById(R.id.labelTextView);
+        mLabelTextView.setTextColor(R.attr.editTextColor);
+        mLabelTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
     }
 
     @Override
@@ -30,20 +30,24 @@ public class FormTitleFieldCell extends FormBaseCell {
         return R.layout.text_field_cell;
     }
 
-    @Override
-    protected void update() {
+    protected void updateTitle() {
         String title = getFormItemDescriptor().getTitle();
-        mTextView.setText(title);
-        mTextView.setVisibility(title == null ? GONE : VISIBLE);
+        mLabelTextView.setText(title);
+        mLabelTextView.setVisibility(title == null ? GONE : VISIBLE);
 
 
         if (getRowDescriptor().getDisabled()) {
             getRowDescriptor().setOnFormRowClickListener(null);
-            mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
+            mLabelTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
         }
     }
 
-    public TextView getTextView() {
-        return mTextView;
+    @Override
+    protected void update() {
+        updateTitle();
+    }
+
+    public TextView getLabelTextView() {
+        return mLabelTextView;
     }
 }

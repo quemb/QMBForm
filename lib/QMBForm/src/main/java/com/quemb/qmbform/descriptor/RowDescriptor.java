@@ -44,9 +44,9 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     public static final String FormRowDescriptorTypeSelectorPickerViewInline = "selectorPickerViewInline";
     public static final String FormRowDescriptorTypeSelectorSpinner = "selectorSpinner";
     public static final String FormRowDescriptorTypeSelectorSpinnerInline = "selectorSpinnerInline";
-    public static final String FormRowDescriptorTypeTextPickerDialog = "textPickerDialog";
-    public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialog";
-    public static final String FormRowDescriptorTypeSelectorPickerDialogVertical = "selectorPickerDialogVertical";
+    public static final String FormRowDescriptorTypeSelectorTextPickerDialogInline = "textPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorPickerDialogInline = "selectorPickerDialog";
+    public static final String FormRowDescriptorTypeSelectorPickerDialog = "selectorPickerDialogVertical";
     public static final String FormRowDescriptorTypeMultipleSelector = "multipleSelector";
     public static final String FormRowDescriptorTypeSelectorLeftRight = "selectorLeftRight";
     public static final String FormRowDescriptorTypeSelectorSegmentedControlInline = "selectorSegmentedControlInline";
@@ -68,14 +68,13 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     public static final String FormRowDescriptorTypeExternal = "external";
     public static final String FormRowDescriptorTypeStepCounter = "stepCounter";
     public static final String FormRowDescriptorTypeSectionSeperator = "sectionSeperator";
-    public static final String FormRowDescriptorTypeHtmlVertical = "htmlVertical";
+    public static final String FormRowDescriptorTypeHtml = "html";
 
     private String mRowType;
     private Value<T> mValue;
     /**
      * A list of valid values to pick from (e.g. used for spinners)
      */
-    private DataSource<T> mDataSource;
     private Boolean mRequired = false;
     private Boolean mDisabled = false;
 
@@ -118,6 +117,21 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     }
 
+    public static RowDescriptor newInstance(String tag, String rowType, String title,
+                                            ArrayList<FormOptionsObject> selectorOptions, Value<?> value) {
+
+        RowDescriptor descriptor = new RowDescriptor();
+        descriptor.mTitle = title;
+        descriptor.mTag = tag;
+        descriptor.mRowType = rowType;
+        descriptor.mSelectorOptions = selectorOptions;
+        descriptor.setValue(value);
+        descriptor.mValidators = new ArrayList<FormValidator>();
+
+        return descriptor;
+
+    }
+
     public static RowDescriptor newInstanceFromAnnotatedField(Field field, Value value, Context context) {
         FormElement annotation = field.getAnnotation(FormElement.class);
         RowDescriptor rowDescriptor = RowDescriptor.newInstance(
@@ -150,7 +164,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     }
 
     public Object getValueData() {
-        return mValue.getValue();
+        return (mValue == null) ? null : mValue.getValue();
     }
 
     public Boolean getRequired() {
@@ -165,18 +179,6 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return mRowType;
     }
 
-    public boolean hasDataSource() {
-        return mDataSource != null;
-    }
-
-    public DataSource<T> getDataSource() {
-        return mDataSource;
-    }
-
-    public void setDataSource(DataSource<T> dataSource) {
-        mDataSource = dataSource;
-    }
-
     public Boolean getDisabled() {
         return mDisabled;
     }
@@ -185,12 +187,12 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         mDisabled = disabled;
     }
 
-    public void setHint(int hint) {
-        mHint = hint;
-    }
-
     public int getHint() {
         return mHint;
+    }
+
+    public void setHint(int hint) {
+        mHint = hint;
     }
 
     public String getHint(Context context) {
@@ -259,11 +261,11 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     }
 
     public static RowDescriptor newInstance(RowDescriptor rowDescriptor) {
-
         Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
         RowDescriptor newInstance = RowDescriptor.newInstance(rowDescriptor.getTag() + "_" + ts, rowDescriptor.getRowType());
-        newInstance.setDataSource(rowDescriptor.getDataSource());
+        newInstance.setSelectorOptions(rowDescriptor.getSelectorOptions());
+        newInstance.setValue(new Value(rowDescriptor.getValueData()));
         return newInstance;
     }
 

@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by pmaccamp on 9/4/2015.
  */
 public class FormDateInlineFieldCell extends FormDateFieldCell implements
-        DatePicker.OnDateChangedListener {
+    DatePicker.OnDateChangedListener {
 
     private DatePicker mDatePicker;
 

@@ -80,11 +80,15 @@ public abstract class Cell extends LinearLayout {
         return mDividerView;
     }
 
+    protected void setDividerView(View dividerView) {
+        mDividerView = dividerView;
+    }
+
     private void configDivider(View dividerView) {
 
         dividerView.setLayoutParams(new LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                1
+                                                        LayoutParams.MATCH_PARENT,
+                                                        1
         ));
 
         dividerView.setBackgroundColor(getThemeValue(android.R.attr.listDivider));
@@ -105,10 +109,6 @@ public abstract class Cell extends LinearLayout {
 
     public void lastInSection() {
 
-    }
-
-    protected void setDividerView(View dividerView) {
-        mDividerView = dividerView;
     }
 
 }

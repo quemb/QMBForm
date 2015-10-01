@@ -118,6 +118,9 @@ public class FormDescriptorAnnotationFactory {
 
                     if (section.multiValue) {
                         sectionDescriptor.setTag(field.getName());
+                        ArrayList<FormOptionsObject> selectorOptions = convertFormOptionsAnnotation(
+                                annotation.selectorOptions());
+
                         int index = 0;
                         if ((value != null ? value.getValue() : null) instanceof ArrayList) {
                             ArrayList<Object> list = (ArrayList<Object>) value.getValue();
@@ -126,6 +129,7 @@ public class FormDescriptorAnnotationFactory {
                                         annotation.rowDescriptorType());
                                 rowDescriptor.setValue(new Value<Object>(item));
                                 rowDescriptor.setHint(annotation.hint());
+                                rowDescriptor.setSelectorOptions(selectorOptions);
                                 sectionDescriptor.addRow(rowDescriptor);
                                 index++;
                             }
@@ -133,6 +137,7 @@ public class FormDescriptorAnnotationFactory {
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
                                 annotation.rowDescriptorType());
                         rowDescriptor.setHint(annotation.hint());
+                        rowDescriptor.setSelectorOptions(selectorOptions);
                         addValidators(rowDescriptor, annotation);
                         sectionDescriptor.addRow(rowDescriptor);
                     } else {

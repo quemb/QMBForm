@@ -21,7 +21,7 @@ import info.hoang8f.android.segmented.SegmentedGroup;
  */
 public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     private SegmentedGroup mSegmentedGroup;
-    private TextView mTextView;
+    private TextView mLabelTextView;
     private ArrayList<Object> mValues;
 
     public FormSelectorSegmentedControlFieldCell(Context context, RowDescriptor rowDescriptor) {
@@ -33,9 +33,9 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         super.init();
         mValues = new ArrayList<Object>();
         mSegmentedGroup = (SegmentedGroup) findViewById(R.id.segmentedGroup);
-        mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
+        mLabelTextView = (TextView) findViewById(R.id.labelTextView);
+        mLabelTextView.setTextColor(R.attr.editTextColor);
+        mLabelTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
     }
 
     @Override
@@ -47,13 +47,13 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     protected void update() {
         mSegmentedGroup.removeAllViews();
 
-        mTextView.setText(getFormItemDescriptor().getTitle());
+        mLabelTextView.setText(getFormItemDescriptor().getTitle());
         ArrayList<FormOptionsObject> selectorOptions = getRowDescriptor().getSelectorOptions();
         for (FormOptionsObject option : selectorOptions) {
             addButton(mSegmentedGroup,
-                    mValues.size(),
-                    option.getDisplayText(),
-                    option.getValue().equals(getRowDescriptor().getValueData()));
+                mValues.size(),
+                option.getDisplayText(),
+                option.getValue().equals(getRowDescriptor().getValueData()));
             mValues.add(option.getValue());
         }
 
@@ -70,8 +70,8 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     private void addButton(SegmentedGroup group, int id, String displayText, boolean checked) {
         RadioButton radioButton = new RadioButton(getContext(), null, R.style.RadioButton);
         radioButton.setLayoutParams(new SegmentedGroup.LayoutParams(0,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                1));
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            1));
         radioButton.setText(displayText);
         radioButton.setId(id);
         radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -81,5 +81,9 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         radioButton.setPadding(padding, padding, padding, padding);
         group.addView(radioButton);
         group.updateBackground();
+    }
+
+    public TextView getLabelTextView() {
+        return mLabelTextView;
     }
 }

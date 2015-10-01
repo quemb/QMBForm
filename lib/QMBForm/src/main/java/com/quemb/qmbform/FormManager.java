@@ -22,9 +22,9 @@ import com.quemb.qmbform.view.Cell;
  */
 public class FormManager implements OnFormRowChangeListener, OnFormRowValueChangedListener {
 
-    private FormDescriptor mFormDescriptor;
     protected ListView mListView;
     protected OnFormRowClickListener mOnFormRowClickListener;
+    private FormDescriptor mFormDescriptor;
     private OnFormRowChangeListener mOnFormRowChangeListener;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
 
@@ -129,7 +129,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
     public void setOnFormRowValueChangedListener(
-            OnFormRowValueChangedListener onFormRowValueChangedListener) {
+        OnFormRowValueChangedListener onFormRowValueChangedListener) {
         mOnFormRowValueChangedListener = onFormRowValueChangedListener;
     }
 }

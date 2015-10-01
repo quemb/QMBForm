@@ -1,20 +1,5 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.descriptor.DataSource;
-import com.quemb.qmbform.FormManager;
-import com.quemb.qmbform.OnFormRowClickListener;
-import com.quemb.qmbform.descriptor.DataSourceListener;
-import com.quemb.qmbform.descriptor.FormDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-import com.quemb.qmbform.sample.R;
-
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -25,6 +10,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.quemb.qmbform.FormManager;
+import com.quemb.qmbform.OnFormRowClickListener;
+import com.quemb.qmbform.descriptor.FormDescriptor;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.FormOptionsObject;
+import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.sample.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,8 +39,7 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
     public static String TAG = "SampleFormFragment";
     private FormManager mFormManager;
 
-    public static final SampleMultivalueSectionFormFragment newInstance()
-    {
+    public static final SampleMultivalueSectionFormFragment newInstance() {
         SampleMultivalueSectionFormFragment f = new SampleMultivalueSectionFormFragment();
 
         return f;
@@ -58,7 +54,7 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.form_sample, container, false);
 
@@ -80,48 +76,46 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
         values.add("blue");
         values.add("green");
 
-        SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("colors","Colors");
+        SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("colors", "Colors");
         sectionDescriptor.setMultivalueSection(true);
 
         descriptor.addSection(sectionDescriptor);
 
 
-
-        for (String item : values){
-            sectionDescriptor.addRow(RowDescriptor.newInstance("colors-"+item, RowDescriptor.FormRowDescriptorTypeText,null,new Value<String>(item)));
+        for (String item : values) {
+            sectionDescriptor.addRow(RowDescriptor.newInstance("colors-" + item, RowDescriptor.FormRowDescriptorTypeText, null, new Value<String>(item)));
         }
         sectionDescriptor.addRow(RowDescriptor.newInstance("new", RowDescriptor.FormRowDescriptorTypeText));
 
 
-        SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("multiPicker","Pick a color");
+        SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("multiPicker", "Pick a color");
         sectionDescriptor2.setMultivalueSection(true);
         descriptor.addSection(sectionDescriptor2);
-        RowDescriptor pickerDescriptor2 = RowDescriptor.newInstance("picker2",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog);
-        pickerDescriptor2.setDataSource(new DataSource() {
+        RowDescriptor pickerDescriptor2 = RowDescriptor.newInstance("picker2",
+                RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog);
 
-            @Override
-            public void loadData(final DataSourceListener listener) {
+        ArrayList<FormOptionsObject> selectorOptions = new ArrayList<>();
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("red", "Red"));
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("blue", "Blue"));
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("green", "Green"));
 
-                listener.onDataSourceLoaded(values);
+        pickerDescriptor2.setSelectorOptions(selectorOptions);
+        sectionDescriptor2.addRow(pickerDescriptor2);
 
-            }
-        });
-        sectionDescriptor2.addRow( pickerDescriptor2 );
-
-        SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("multiPicker","Pick a color");
+        SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("multiPicker", "Pick a color");
         sectionDescriptor3.setMultivalueSection(true);
         descriptor.addSection(sectionDescriptor3);
-        RowDescriptor pickerDescriptor3 = RowDescriptor.newInstance("picker3",RowDescriptor.FormRowDescriptorTypeTextPickerDialog);
-        pickerDescriptor3.setDataSource(new DataSource() {
+        RowDescriptor pickerDescriptor3 = RowDescriptor.newInstance("picker3",
+                RowDescriptor.FormRowDescriptorTypeSelectorTextPickerDialogInline);
 
-            @Override
-            public void loadData(final DataSourceListener listener) {
+        selectorOptions = new ArrayList<>();
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("red", "Red"));
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("blue", "Blue"));
+        selectorOptions.add(FormOptionsObject.createFormOptionsObject("green", "Green"));
 
-                listener.onDataSourceLoaded(values);
-
-            }
-        });
-        sectionDescriptor3.addRow( pickerDescriptor3 );
+        pickerDescriptor3.setSelectorOptions(selectorOptions);
+        pickerDescriptor3.setDisabled(false);
+        sectionDescriptor3.addRow(pickerDescriptor3);
 
 
         mFormManager = new FormManager();
@@ -129,7 +123,6 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
         mFormManager.setOnFormRowClickListener(this);
         mFormManager.setOnFormRowChangeListener(this);
         mFormManager.setOnFormRowValueChangedListener(this);
-
 
 
     }
@@ -143,7 +136,6 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
     }
 
 
-
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         updateSaveItem();
@@ -151,7 +143,7 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item == mSaveMenuItem){
+        if (item == mSaveMenuItem) {
             mChangesMap.clear();
             updateSaveItem();
         }
@@ -170,13 +162,12 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 //
         mChangesMap.put(rowDescriptor.getTag(), newValue);
         updateSaveItem();
-
-
+        mFormManager.updateRows();
     }
 
     private void updateSaveItem() {
-        if (mSaveMenuItem != null){
-            mSaveMenuItem.setVisible(mChangesMap.size()>0);
+        if (mSaveMenuItem != null) {
+            mSaveMenuItem.setVisible(mChangesMap.size() > 0);
         }
     }
 
@@ -195,44 +186,4 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
     }
 
-    private class CustomTask extends AsyncTask<DataSourceListener, Void, ArrayList<String>> {
-
-        private DataSourceListener mListener;
-        private ProgressDialog mProgressDialog;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mProgressDialog = ProgressDialog.show(getActivity(), "Loading",
-                    "Do some work", true);
-        }
-
-        protected ArrayList<String> doInBackground(DataSourceListener... listeners) {
-
-            mListener = (DataSourceListener)listeners[0];
-
-            ArrayList<String> items = new ArrayList<String>();
-            for (Integer i=0;i<10;i++){
-                doFakeWork();
-                items.add("Item "+String.valueOf(i));
-            }
-
-            return items;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> strings) {
-            super.onPostExecute(strings);
-            mProgressDialog.dismiss();
-            mListener.onDataSourceLoaded(strings);
-        }
-
-        private void doFakeWork() {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

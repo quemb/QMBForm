@@ -26,7 +26,7 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
     protected void update() {
         super.update();
 
-        getTextView().setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
+        getLabelTextView().setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
     }
 
     @Override

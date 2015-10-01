@@ -14,8 +14,8 @@ import java.util.HashMap;
  */
 public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
 
-    private SeekBar mSeekBar;
     public final static String CellConfigMaxKey = "CellConfigMaxKey";
+    private SeekBar mSeekBar;
 
     public FormIntegerSliderFieldCell(Context context, RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
@@ -61,7 +61,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
 
         Value<Integer> value = (Value<Integer>) getRowDescriptor().getValue();
 
-        HashMap<String, Object> config = getRowDescriptor().getCellConfig();
+        HashMap<String, Object> config = getRowDescriptor().getCustomCellConfig();
         Integer max = config != null && config.containsKey(CellConfigMaxKey) ? (Integer) config.get(CellConfigMaxKey) : 100;
 
         mSeekBar.setMax(max);

@@ -24,6 +24,12 @@ public class FormOptionsObjectAdapter extends ArrayAdapter {
         this.mResource = resource;
     }
 
+    public FormOptionsObjectAdapter(Context context, int resource, ArrayList<FormOptionsObject> options) {
+        super(context, resource);
+        this.mOptions = options;
+        this.mResource = resource;
+    }
+
     public FormOptionsObjectAdapter(Context context, int resource, int dropDownResource, ArrayList<FormOptionsObject> options) {
         super(context, resource);
         this.mOptions = options;
@@ -56,6 +62,7 @@ public class FormOptionsObjectAdapter extends ArrayAdapter {
             textView = (TextView) convertView;
         }
         textView.setText(mOptions.get(position).getDisplayText());
+        textView.setPadding(10, 10, 10, 10);
         return textView;
     }
 

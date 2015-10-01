@@ -21,7 +21,7 @@ public class RowValidationError {
 
     public String getMessage(Context context) {
         return getRowDescriptor().getTitle() + " " +
-                context.getString(getResourceMessage());
+            context.getString(getResourceMessage());
     }
 
     public RowDescriptor getRowDescriptor() {

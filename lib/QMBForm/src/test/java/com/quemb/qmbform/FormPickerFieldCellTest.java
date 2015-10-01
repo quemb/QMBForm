@@ -3,7 +3,7 @@ package com.quemb.qmbform;
 import android.app.Activity;
 
 import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.view.FormPickerDialogFieldCell;
+import com.quemb.qmbform.view.FormSelectorPickerDialogFieldCell;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,9 +37,9 @@ public class FormPickerFieldCellTest {
         RowDescriptor rowDescriptor = RowDescriptor.newInstance("picker",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me");
         rowDescriptor.setDisabled(true);
 
-        FormPickerDialogFieldCell testCell = new FormPickerDialogFieldCell(activity, rowDescriptor);
+        FormSelectorPickerDialogFieldCell testCell = new FormSelectorPickerDialogFieldCell(activity, rowDescriptor);
 
-        assertThat( testCell.getTextView().isClickable(), is(false));
+        assertThat( testCell.getLabelTextView().isClickable(), is(false));
 
     }
 

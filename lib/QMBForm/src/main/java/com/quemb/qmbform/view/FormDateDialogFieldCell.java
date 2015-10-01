@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormDateDialogFieldCell extends FormDateFieldCell implements
-        DatePickerDialog.OnDateSetListener {
+    DatePickerDialog.OnDateSetListener {
 
     private Calendar mCalendar;
 

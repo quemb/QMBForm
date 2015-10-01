@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+              android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:padding="@dimen/cell_padding">
@@ -10,19 +10,20 @@
     <TextView
         android:id="@+id/labelTextView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:paddingRight="10dp"/>
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="3"
+        android:inputType="text"/>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@null"
-        android:ellipsize="end"
-        android:ems="10"
-        android:gravity="right"/>
-
-
+        android:src="@drawable/ic_action_about"></ImageButton>
 </LinearLayout>
