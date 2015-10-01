@@ -16,7 +16,8 @@ public class CellConfigObject {
         MINIMUM_WIDTH, // Specified as an int
         BACKGROUND_COLOR, // Specified as color reference id
         TEXT_COLOR, // Specified as color reference id.  Only applicable to instances of TextView
-        GRAVITY // Specified as a Gravity enum such as Gravity.CENTER.  Only applicable to instances of TextView
+        GRAVITY, // Specified as a Gravity enum such as Gravity.CENTER.  Only applicable to instances of TextView
+        VISIBILITY // Specified as a View enum such as VIEW.GONE or View.INVISIBLE
     }
 
     public CONFIG_TYPE configType;

@@ -82,4 +82,8 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         group.addView(radioButton);
         group.updateBackground();
     }
+
+    public TextView getLabelTextView() {
+        return mLabelTextView;
+    }
 }

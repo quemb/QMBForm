@@ -175,7 +175,8 @@ The following preset cell configurations are available
         MINIMUM_WIDTH, // Specified as an int
         BACKGROUND_COLOR, // Specified as color reference id
         TEXT_COLOR, // Specified as color reference id.  Only applicable to instances of TextView
-        GRAVITY // Specified as a Gravity enum such as Gravity.CENTER.  Only applicable to instances of TextView
+        GRAVITY, // Specified as a Gravity enum such as Gravity.CENTER.  Only applicable to instances of TextView
+        VISIBILITY // Specified as a View enum such as VIEW.GONE or View.INVISIBLE
     }
 ```
 They can be used on any view in a cell that has a public accessor.  In this example I modify the styles for the labelTextView and detailTextView of the FormRowDescriptorTypeDetail type cell -
@@ -196,6 +197,16 @@ CellConfigObject[] config = {
 cellConfig.put("getLabelTextView", config); //getLabelTextView is the function name of the getter for this view
 cellConfig.put("getDetailTextView", config);
 rowDescriptor.setCellConfig(cellConfig);
+```
+
+another use case is to hide parts of an form cell such as the label
+```java
+HashMap<String, CellConfigObject[]> cellConfig = new HashMap<String, CellConfigObject[]>();
+CellConfigObject[] config = {
+    new CellConfigObject(CellConfigObject.CONFIG_TYPE.VISIBILITY, View.GONE)
+};
+cellConfig.put("getLabelTextView", config);
+row.setCellConfig(cellConfig);
 ```
 
 ## Installation

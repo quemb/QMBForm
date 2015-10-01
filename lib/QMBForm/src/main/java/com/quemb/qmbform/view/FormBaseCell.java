@@ -165,6 +165,10 @@ public abstract class FormBaseCell extends Cell {
                     ((TextView) view).setGravity(gravity);
                 }
                 break;
+            case VISIBILITY:
+                int visibility = (int) config.configValue;
+                view.setVisibility(visibility);
+                break;
         }
     }
 
