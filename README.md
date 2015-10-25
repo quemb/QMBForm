@@ -1,6 +1,9 @@
 QMBForm
 =======
 
+![Coverage](https://img.shields.io/badge/coverage-31%25-yellow.svg)
+![Technical Dept](https://img.shields.io/badge/tech%20dept-2%2C3%25-green.svg)
+
 Create simple Android forms
 
 ![Demo](resources/sample_cast.gif)
