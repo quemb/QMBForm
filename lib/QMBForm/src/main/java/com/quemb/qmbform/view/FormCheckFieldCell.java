@@ -1,12 +1,12 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+
+import android.content.Context;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 /**
  * Created by tonimoeckel on 15.07.14.

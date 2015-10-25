@@ -1,10 +1,10 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.descriptor.RowDescriptor;
+
 import android.content.Context;
 import android.text.InputType;
 import android.widget.EditText;
-
-import com.quemb.qmbform.descriptor.RowDescriptor;
 
 /**
  * Created by tonimoeckel on 15.07.14.

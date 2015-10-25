@@ -3,6 +3,7 @@ package com.quemb.qmbform.descriptor;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 01.12.14.
@@ -14,13 +15,13 @@ public class FormValidation {
         mContext = context;
     }
 
-    private ArrayList<RowValidationError> mRowValidationErrors = new ArrayList<RowValidationError>();
+    private List<RowValidationError> mRowValidationErrors = new ArrayList<RowValidationError>();
 
-    public ArrayList<RowValidationError> getRowValidationErrors() {
+    public List<RowValidationError> getRowValidationErrors() {
         return mRowValidationErrors;
     }
 
-    public ArrayList<String> getRowValidationErrorsAsStrings() {
+    public List<String> getRowValidationErrorsAsStrings() {
         ArrayList<String> errors = new ArrayList<String>();
         for (RowValidationError error : mRowValidationErrors) {
             errors.add(error.getMessage(mContext));

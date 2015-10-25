@@ -1,8 +1,5 @@
 package com.quemb.qmbform;
 
-import android.app.Activity;
-import android.widget.ListView;
-
 import com.quemb.qmbform.descriptor.FormDescriptor;
 
 import org.junit.After;
@@ -12,6 +9,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import android.app.Activity;
+import android.widget.ListView;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

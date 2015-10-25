@@ -1,16 +1,19 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-import android.text.InputType;
-import android.widget.EditText;
-
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+
+import android.content.Context;
+import android.text.InputType;
+import android.util.Log;
+import android.widget.EditText;
 
 /**
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormEditNumberFieldCell extends FormEditTextFieldCell {
+
+    private static final String TAG = "FormEditNumberFieldCell";
 
     public FormEditNumberFieldCell(Context context,
                                    RowDescriptor rowDescriptor) {
@@ -45,7 +48,7 @@ public class FormEditNumberFieldCell extends FormEditTextFieldCell {
             Float floatValue = Float.parseFloat(string);
             onValueChanged(new Value<Number>(floatValue));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         }
 
 

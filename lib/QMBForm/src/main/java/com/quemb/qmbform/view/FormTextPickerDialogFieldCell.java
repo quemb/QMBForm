@@ -1,5 +1,11 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.DataSourceListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.exceptions.NoDataSourceException;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,13 +13,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.DataSourceListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-import com.quemb.qmbform.exceptions.NoDataSourceException;
-
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -59,7 +60,7 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
         } else {
             getRowDescriptor().getDataSource().loadData(new DataSourceListener() {
                 @Override
-                public void onDataSourceLoaded(ArrayList list) {
+                public void onDataSourceLoaded(List list) {
 
                     if (list.size() > 0) {
                         final ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_selectable_list_item, list);

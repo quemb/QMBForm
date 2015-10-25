@@ -1,3 +1,8 @@
+
+plugins {
+    id "org.sonarqube" version "1.0"
+}
+
 apply plugin: 'com.android.library'
 
 android {
@@ -15,6 +20,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+            res.srcDirs = [ 'src/test/resources' ]
+        }
+
+        test {
+            setRoot('src/test')
+            res.srcDirs = [ 'src/test/resources' ]
+        }
+
+        test.java.srcDirs += 'build/generated/source/r/debug'
     }
 }
 
@@ -42,5 +61,68 @@ apply plugin: 'idea'
 idea {
     module {
         testOutputDir = file('build/test-classes/debug')
+    }
+}
+
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+
+        property "sonar.java.binaries", "$buildDir"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+
+        property 'sonar.junit.reportsPath', "$buildDir/test-results/release/"
+        property "sonar.jacoco.reportPath", "$buildDir/jacoco/testDebugUnitTest.exec"
+    }
+}
+
+
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+task jacocoTestReport(type: JacocoReport /*, dependsOn: ['test'] */ ) {
+    description = "Generates Jacoco coverage reports: XML and HTML"
+    group = "Reporting"
+//                outputs.upToDateWhen { false }
+
+    // use hidden configuration, for details look into JacocoPlugin.groovy
+    jacocoClasspath = project.configurations['androidJacocoAnt']
+
+    // exclude auto-generated classes and tests
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*',
+                      'android/**/*.*']
+
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+
+    reports {
+        xml {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+        }
+        csv.enabled false
+        html {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco"
+        }
     }
 }

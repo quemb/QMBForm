@@ -1,6 +1,7 @@
 package com.quemb.qmbform.descriptor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -61,7 +62,7 @@ public class SectionDescriptor extends FormItemDescriptor {
         return mRows.size();
     }
 
-    public ArrayList<RowDescriptor> getRows() {
+    public List<RowDescriptor> getRows() {
         return mRows;
     }
 
@@ -114,7 +115,7 @@ public class SectionDescriptor extends FormItemDescriptor {
         mMultivalueSection = multivalueSection;
     }
 
-    public ArrayList getRowValues() {
+    public List getRowValues() {
 
         ArrayList<Object> values = new ArrayList<>();
         for (RowDescriptor rowDescriptor : mRows) {

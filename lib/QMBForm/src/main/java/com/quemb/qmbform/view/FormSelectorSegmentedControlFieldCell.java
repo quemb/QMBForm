@@ -1,5 +1,10 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.FormOptionsObject;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+
 import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -7,12 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.FormOptionsObject;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
@@ -48,7 +49,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         mSegmentedGroup.removeAllViews();
 
         mTextView.setText(getFormItemDescriptor().getTitle());
-        ArrayList<FormOptionsObject> selectorOptions = getRowDescriptor().getSelectorOptions();
+        List<FormOptionsObject> selectorOptions = getRowDescriptor().getSelectorOptions();
         for (FormOptionsObject option : selectorOptions) {
             addButton(mSegmentedGroup,
                     mValues.size(),

@@ -1,18 +1,19 @@
 package com.quemb.qmbform.view;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.adapter.FormOptionsObjectAdapter;
 import com.quemb.qmbform.descriptor.FormOptionsObject;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -41,7 +42,7 @@ public class FormSpinnerFieldCell extends FormTitleFieldCell {
     protected void update() {
         super.update();
 
-        ArrayList<FormOptionsObject> selectorOptions = getRowDescriptor().getSelectorOptions();
+        List<FormOptionsObject> selectorOptions = getRowDescriptor().getSelectorOptions();
 
         if (selectorOptions.size() > 0) {
             FormOptionsObjectAdapter adapter = new FormOptionsObjectAdapter(getContext(),

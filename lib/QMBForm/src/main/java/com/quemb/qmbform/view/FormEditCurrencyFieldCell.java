@@ -1,9 +1,10 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+
+import android.content.Context;
+import android.util.Log;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -12,6 +13,8 @@ import java.text.ParseException;
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
+
+    private static final String TAG = "FormEditCurrencyFieldCell";
 
     public FormEditCurrencyFieldCell(Context context,
                                      RowDescriptor rowDescriptor) {
@@ -39,11 +42,11 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
             Number floatValue = (Number) format.parse(string);
             onValueChanged(new Value<Number>(floatValue));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         } catch (ClassCastException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
         }
 
 

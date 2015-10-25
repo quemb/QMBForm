@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,7 +54,7 @@ public class FormDescriptor {
         return null;
     }
 
-    public ArrayList<SectionDescriptor> getSections() {
+    public List<SectionDescriptor> getSections() {
         return mSections;
     }
 

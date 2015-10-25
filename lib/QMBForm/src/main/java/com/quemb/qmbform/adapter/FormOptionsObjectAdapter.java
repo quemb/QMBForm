@@ -1,5 +1,7 @@
 package com.quemb.qmbform.adapter;
 
+import com.quemb.qmbform.descriptor.FormOptionsObject;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,15 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.quemb.qmbform.descriptor.FormOptionsObject;
-
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pmaccamp on 9/9/2015.
  */
 public class FormOptionsObjectAdapter extends ArrayAdapter {
-    private ArrayList<FormOptionsObject> mOptions;
+    private List<FormOptionsObject> mOptions;
     private int mResource;
     private int mDropDownResource;
 
@@ -24,7 +24,7 @@ public class FormOptionsObjectAdapter extends ArrayAdapter {
         this.mResource = resource;
     }
 
-    public FormOptionsObjectAdapter(Context context, int resource, int dropDownResource, ArrayList<FormOptionsObject> options) {
+    public FormOptionsObjectAdapter(Context context, int resource, int dropDownResource, List<FormOptionsObject> options) {
         super(context, resource);
         this.mOptions = options;
         this.mResource = resource;

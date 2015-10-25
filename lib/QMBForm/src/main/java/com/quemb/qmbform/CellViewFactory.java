@@ -1,8 +1,5 @@
 package com.quemb.qmbform;
 
-import android.content.Context;
-import android.os.Build;
-
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
@@ -47,6 +44,10 @@ import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
 import com.quemb.qmbform.view.SeperatorSectionCell;
 
+import android.content.Context;
+import android.os.Build;
+import android.util.Log;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
@@ -54,6 +55,8 @@ import java.util.HashMap;
  * Created by tonimoeckel on 14.07.14.
  */
 public class CellViewFactory {
+
+    private static final String TAG = "CellViewFactory";
 
     private static CellViewFactory instance = null;
     private HashMap<String, Class<? extends FormBaseCell>> mViewRowTypeMap;
@@ -132,13 +135,13 @@ public class CellViewFactory {
                         context, row);
                 rowView = formBaseCell;
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(),e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (InvocationTargetException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             }
 
         }

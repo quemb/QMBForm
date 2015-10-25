@@ -1,13 +1,14 @@
 package com.quemb.qmbform.descriptor;
 
-import android.content.Context;
-
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormValidator;
 
+import android.content.Context;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory.convertFormOptionsAnnotation;
 
@@ -79,9 +80,9 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     private Boolean mRequired = false;
     private Boolean mDisabled = false;
 
-    private ArrayList<FormValidator> mValidators;
+    private List<FormValidator> mValidators;
 
-    private ArrayList<FormOptionsObject> mSelectorOptions;
+    private List<FormOptionsObject> mSelectorOptions;
 
     private SectionDescriptor mSectionDescriptor;
 
@@ -225,16 +226,16 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return valid;
     }
 
-    public ArrayList<FormOptionsObject> getSelectorOptions() {
+    public List<FormOptionsObject> getSelectorOptions() {
         return mSelectorOptions;
     }
 
-    public void setSelectorOptions(ArrayList<FormOptionsObject> selectorOptions) {
+    public void setSelectorOptions(List<FormOptionsObject> selectorOptions) {
         mSelectorOptions = selectorOptions;
     }
 
-    public ArrayList<RowValidationError> getValidationErrors() {
-        ArrayList<RowValidationError> rowValidationErrors = new ArrayList<RowValidationError>();
+    public List<RowValidationError> getValidationErrors() {
+        List<RowValidationError> rowValidationErrors = new ArrayList<RowValidationError>();
 
         if (getRequired()) {
             if (!(getValue() != null && getValue().getValue() != null)) {
@@ -267,7 +268,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return newInstance;
     }
 
-    public ArrayList<FormValidator> getValidators() {
+    public List<FormValidator> getValidators() {
         return mValidators;
     }
 

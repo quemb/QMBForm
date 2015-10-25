@@ -1,8 +1,5 @@
 package com.quemb.qmbform;
 
-import android.app.Activity;
-import android.widget.ListView;
-
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormOptionsObjectElement;
@@ -16,6 +13,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import android.app.Activity;
+import android.widget.ListView;
 
 import java.util.Map;
 

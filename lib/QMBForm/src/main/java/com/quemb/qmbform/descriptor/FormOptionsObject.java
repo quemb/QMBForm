@@ -1,6 +1,6 @@
 package com.quemb.qmbform.descriptor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pmaccamp on 9/8/2015.
@@ -18,7 +18,7 @@ public class FormOptionsObject {
         return new FormOptionsObject(value, displayText);
     }
 
-    public static FormOptionsObject formOptionsObjectFromArrayWithValue(Object searchValue, ArrayList<FormOptionsObject> options) {
+    public static FormOptionsObject formOptionsObjectFromArrayWithValue(Object searchValue, List<FormOptionsObject> options) {
         for (FormOptionsObject option : options) {
             if (option.mValue.equals(searchValue)) {
                 return option;
@@ -27,7 +27,7 @@ public class FormOptionsObject {
         return null;
     }
 
-    public static int indexOfFormOptionsObjectFromArrayWithValue(Object searchValue, ArrayList<FormOptionsObject> options) {
+    public static int indexOfFormOptionsObjectFromArrayWithValue(Object searchValue, List<FormOptionsObject> options) {
         int counter = 0;
         for (FormOptionsObject option : options) {
             if (option.mValue.equals(searchValue)) {
@@ -38,7 +38,7 @@ public class FormOptionsObject {
         return -1;
     }
 
-    public static FormOptionsObject formOptionsObjectFromArrayWithDisplayText(String searchText, ArrayList<FormOptionsObject> options) {
+    public static FormOptionsObject formOptionsObjectFromArrayWithDisplayText(String searchText, List<FormOptionsObject> options) {
         for (FormOptionsObject option : options) {
             if (option.mFormDisplayText.equals(searchText)) {
                 return option;
@@ -47,7 +47,7 @@ public class FormOptionsObject {
         return null;
     }
 
-    public static int indexOfFormOptionsObjectFromArrayWithDisplayText(String searchText, ArrayList<FormOptionsObject> options) {
+    public static int indexOfFormOptionsObjectFromArrayWithDisplayText(String searchText, List<FormOptionsObject> options) {
         int counter = 0;
         for (FormOptionsObject option : options) {
             if (option.mFormDisplayText.equals(searchText)) {

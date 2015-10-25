@@ -1,5 +1,12 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.OnValueChangeListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -8,13 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
-import com.quemb.qmbform.descriptor.OnValueChangeListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -60,7 +60,7 @@ public abstract class FormBaseCell extends Cell {
         return super.getSuperViewForLayoutInflation();
     }
 
-    private LinearLayout createMultiValueWrapper() {
+    protected LinearLayout createMultiValueWrapper() {
 
         LinearLayout linearLayout = new LinearLayout(getContext());
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);

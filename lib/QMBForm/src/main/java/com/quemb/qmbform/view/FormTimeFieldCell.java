@@ -1,8 +1,8 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-
 import com.quemb.qmbform.descriptor.RowDescriptor;
+
+import android.content.Context;
 
 import java.text.DateFormat;
 import java.util.Date;

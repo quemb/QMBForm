@@ -1,10 +1,10 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-import android.text.Html;
-
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+
+import android.content.Context;
+import android.text.Html;
 
 /**
  * Created by tonimoeckel on 15.07.14.

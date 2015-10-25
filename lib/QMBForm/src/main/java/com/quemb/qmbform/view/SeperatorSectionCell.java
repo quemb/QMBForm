@@ -1,10 +1,10 @@
 package com.quemb.qmbform.view;
 
-import android.content.Context;
-import android.widget.LinearLayout;
-
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
+
+import android.content.Context;
+import android.widget.LinearLayout;
 
 /**
  * Created by tonimoeckel on 18.02.15.

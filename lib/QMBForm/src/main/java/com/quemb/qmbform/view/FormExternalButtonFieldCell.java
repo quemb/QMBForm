@@ -1,11 +1,11 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 18.09.14.

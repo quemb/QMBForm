@@ -1,14 +1,14 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 15.07.14.

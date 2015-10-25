@@ -1,5 +1,7 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
@@ -7,8 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 /**
  * Created by tonimoeckel on 14.07.14.

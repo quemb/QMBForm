@@ -9,9 +9,6 @@ import com.quemb.qmbform.descriptor.Value;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
-import org.robolectric.annotation.Config;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -20,8 +17,8 @@ import static org.hamcrest.core.Is.is;
  * Created by pmaccamp on 9/14/2015.
  */
 
-@Config(constants = BuildConfig.class)
-@RunWith(RobolectricGradleTestRunner.class)
+// @Config(constants = BuildConfig.class)
+// @RunWith(RobolectricGradleTestRunner.class)
 public class ValidationTest {
     @Before
     public void setUp() {

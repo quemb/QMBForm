@@ -1,24 +1,28 @@
 package com.quemb.qmbform.annotation;
 
-import android.content.Context;
-
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormOptionsObject;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
+import android.content.Context;
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 14.07.14.
  */
 public class FormDescriptorAnnotationFactory {
 
+
+    private static final String TAG = "AnnotationFactory";
 
     private Context mContext;
 
@@ -35,16 +39,16 @@ public class FormDescriptorAnnotationFactory {
     public FormDescriptor createFormDescriptorFromAnnotatedClass(Object object) {
         Class objClass = object.getClass();
 
-        ArrayList<Field> declaredFields = getAllFields(new ArrayList<Field>(), objClass);
+        List<Field> declaredFields = getAllFields(new ArrayList<Field>(), objClass);
 
         return createFormDescriptorFromFields(declaredFields, object);
     }
 
-    public FormDescriptor createFormDescriptorFromFields(ArrayList<Field> fields, Object object) {
+    public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object) {
         FormDescriptor formDescriptor = FormDescriptor.newInstance();
 
-        ArrayList<Field> formFields = new ArrayList<Field>();
-        ArrayList<Section> sections = new ArrayList<Section>();
+        List<Field> formFields = new ArrayList<Field>();
+        List<Section> sections = new ArrayList<Section>();
 
         /**
          * Get all annotated class fields
@@ -100,7 +104,7 @@ public class FormDescriptorAnnotationFactory {
          * Sort fields by sortId - annotation property
          */
         for (Section section : sections) {
-            ArrayList<Field> sectionFields = section.fields;
+            List<Field> sectionFields = section.fields;
 
             SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance(section.tag, section.title);
             sectionDescriptor.setMultivalueSection(section.multiValue);
@@ -113,7 +117,7 @@ public class FormDescriptorAnnotationFactory {
                     try {
                         value = new Value<Object>(field.get(object));
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        Log.e(TAG, e.getMessage(), e);
                     }
 
                     if (section.multiValue) {
@@ -171,15 +175,15 @@ public class FormDescriptorAnnotationFactory {
             try {
                 rowDescriptor.addValidator((FormValidator) validator.getConstructor().newInstance());
             } catch (InstantiationException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (InvocationTargetException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             } catch (ClassCastException e) {
-                e.printStackTrace();
+                Log.e(TAG, e.getMessage(), e);
             }
         }
     }
@@ -198,7 +202,7 @@ public class FormDescriptorAnnotationFactory {
         return optionsArrayList;
     }
 
-    public ArrayList<Field> getAllFields(ArrayList<Field> fields, Class<?> type) {
+    public List<Field> getAllFields(List<Field> fields, Class<?> type) {
         for (Field field : type.getDeclaredFields()) {
             fields.add(field);
         }
@@ -227,13 +231,24 @@ public class FormDescriptorAnnotationFactory {
 
     private class Section {
 
-        public String title = "";
-        public String tag = "";
-        public Boolean multiValue = false;
-        public ArrayList<Field> fields = new ArrayList<Field>();
+        private static final String DEFAULT_TITLE = "";
+
+        private static final String DEFAULT_TAG = "";
+
+        public String title;
+        public String tag;
+        public Boolean multiValue;
+        public List<Field> fields;
         ;
 
+
         public Section(String sectionTitle) {
+
+            title = DEFAULT_TITLE;
+            tag = DEFAULT_TAG;
+            multiValue = false;
+            fields = new ArrayList<>();
+
             if (sectionTitle != null && sectionTitle.length() > 0) {
                 title = sectionTitle;
                 tag = toCamelCase(sectionTitle);
