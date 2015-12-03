@@ -83,8 +83,11 @@ public abstract class FormBaseCell extends Cell {
             @Override
             public void onClick(View v) {
 
-                SectionDescriptor sectionDescriptor = getRowDescriptor().getSectionDescriptor();
-                sectionDescriptor.removeRow(getRowDescriptor());
+                RowDescriptor rowDescriptor = getRowDescriptor();
+
+                SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
+                sectionDescriptor.removeRow(rowDescriptor);
+                sectionDescriptor.getFormDescriptor().getOnFormRowValueChangedListener().onValueChanged(rowDescriptor, rowDescriptor.getValue(), null);
 
             }
         });

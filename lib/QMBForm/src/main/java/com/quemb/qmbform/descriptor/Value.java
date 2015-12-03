@@ -27,4 +27,8 @@ public class Value<T> {
     public void setOnValueChangeListener(OnValueChangeListener listener) {
         this.mOnValueChangeListener = listener;
     }
+	
+    public OnValueChangeListener getOnValueChangeListener() {
+        return this.mOnValueChangeListener;
+    }	
 }
