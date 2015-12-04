@@ -16,5 +16,8 @@ android:
     # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-21
 
+before_install:
+    - chmod +x gradlew
+
 script:
     - TERM=dumb ./gradlew -i QMBForm:lib:QMBForm test
