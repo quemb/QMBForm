@@ -8,7 +8,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
-
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 21
@@ -21,7 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets {
         androidTest {
             setRoot('src/test')
@@ -42,19 +40,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'info.hoang8f:android-segmented:1.0.5'
 
+    testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.2.1'
     testCompile 'org.robolectric:robolectric:3.0'
 }
-
-apply plugin: 'idea'
-
-idea {
-    module {
-        testOutputDir = file('build/test-classes/debug')
-    }
-}
-
-
 
 apply plugin: 'idea'
 
@@ -91,15 +80,12 @@ jacoco {
     reportsDir = file("$buildDir/reports/jacoco")
 }
 
-task jacocoTestReport(type: JacocoReport /*, dependsOn: ['test'] */ ) {
+task jacocoTestReport(type: JacocoReport ) {
     description = "Generates Jacoco coverage reports: XML and HTML"
     group = "Reporting"
-//                outputs.upToDateWhen { false }
 
-    // use hidden configuration, for details look into JacocoPlugin.groovy
     jacocoClasspath = project.configurations['androidJacocoAnt']
 
-    // exclude auto-generated classes and tests
     def fileFilter = ['**/R.class',
                       '**/R$*.class',
                       '**/BuildConfig.*',

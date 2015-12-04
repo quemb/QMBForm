@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import java.util.Map;
 
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
