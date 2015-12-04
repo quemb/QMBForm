@@ -1,6 +1,6 @@
 QMBForm
 =======
-
+![Travis-CI](https://travis-ci.org/quemb/QMBForm.svg?branch=master)
 ![Coverage](https://img.shields.io/badge/coverage-31%25-yellow.svg)
 ![Technical Dept](https://img.shields.io/badge/tech%20dept-2%2C3%25-green.svg)
 
