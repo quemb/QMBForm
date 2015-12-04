@@ -20,4 +20,4 @@ before_install:
     - chmod +x gradlew
 
 script:
-    - TERM=dumb ./gradlew -i QMBForm:lib:QMBForm test
+    - TERM=dumb ./gradlew -i test
