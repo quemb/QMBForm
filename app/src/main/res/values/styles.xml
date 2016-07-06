@@ -2,7 +2,28 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme.Light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimary">@color/black25PercentColor</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:windowBackground">@color/black75PercentColor</item>
+
+        <item name="android:textColor">@color/black25PercentColor</item><!-- TextView color -->
+        <item name="android:textColorPrimary">@color/black</item><!-- pre-Lollipop EditText color -->
+        <item name="android:editTextColor">@color/black</item><!-- Lollipop+ EditText color -->
+
+        <item name="android:listDivider">@color/black25PercentColor</item>
+    </style>
+
+    <style name="AppTheme" parent="@style/Theme.AppCompat">
+        <item name="colorPrimaryDark">@color/black75PercentColor</item>
+        <item name="colorPrimary">@color/black75PercentColor</item>
+        <item name="actionMenuTextColor">@color/black</item>
+        <item name="android:windowBackground">@color/black50PercentColor</item>
+
+        <item name="android:textColor">@color/black75PercentColor</item><!-- TextView color -->
+        <item name="android:textColorPrimary">@color/white</item><!-- pre-Lollipop EditText color -->
+        <item name="android:editTextColor">@color/white</item><!-- Lollipop+ EditText color -->
+
         <item name="android:listDivider">@color/black75PercentColor</item>
     </style>
 
