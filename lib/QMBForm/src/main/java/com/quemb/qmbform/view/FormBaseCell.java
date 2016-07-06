@@ -132,6 +132,16 @@ public abstract class FormBaseCell extends Cell {
     }
 
     @Override
+    public boolean shouldAddDivider() {
+
+        RowDescriptor rowDescriptor = (RowDescriptor) getFormItemDescriptor();
+        if (rowDescriptor.isLastRowInSection())
+            return false;
+
+        return super.shouldAddDivider();
+    }
+
+    @Override
     public void lastInSection() {
 
 
