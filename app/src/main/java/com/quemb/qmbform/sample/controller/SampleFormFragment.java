@@ -76,94 +76,79 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         mChangesMap = new HashMap<String, Value<?>>();
 
         // More styles and colors for cells
-        HashMap<String, Object> cellDesc = new HashMap<>(4);
+        HashMap<String, Object> cellConfig = new HashMap<>(4);
 
         // Disabled color for label and value
-        cellDesc.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0xA0FF00FF));
-        cellDesc.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0x80FF0000));
+        cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
+        cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
 
         FormDescriptor descriptor = FormDescriptor.newInstance();
+        descriptor.setCellConfig(cellConfig);
 
         SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("section","Text Inputs");
         descriptor.addSection(sectionDescriptor);
 
         final RowDescriptor rd1 =
                 RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeTextInline, "Title", new Value<String>("Detail"));
-        rd1.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd1);
 
         final RowDescriptor rd2 =
                 RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeText, "Title", new Value<String>("Detail"));
-        rd2.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd2);
 
         final RowDescriptor rd3 =
                 RowDescriptor.newInstance("text", RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test"));
-        rd3.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd3);
 
         RowDescriptor textDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeText, "Text Disabled", new Value<String>("test"));
         textDisabled.setDisabled(true);
-        textDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(textDisabled);
 
         final RowDescriptor rd4 =
                 RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeURL, "URL", new Value<String>("http://www.github.com/"));
-        rd4.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd4);
 
         RowDescriptor textUrlDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeURL, "URL Disabled", new Value<String>("http://www.github.com/"));
         textUrlDisabled.setDisabled(true);
-        textUrlDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(textUrlDisabled);
 
         final RowDescriptor rd5 =
                 RowDescriptor.newInstance("text", RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com"));
-        rd5.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd5);
 
         RowDescriptor textEmailDisabled = RowDescriptor.newInstance("textDisabled",RowDescriptor.FormRowDescriptorTypeEmail, "Email Disabled", new Value<String>("support@github.com"));
         textEmailDisabled.setDisabled(true);
-        textEmailDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(textEmailDisabled);
 
         final RowDescriptor rd6 =
                 RowDescriptor.newInstance("textView", RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ..."));
         sectionDescriptor.addRow(rd6);
-        rd6.setCellConfig(cellDesc);
 
         RowDescriptor textViewDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeTextView, "Text View Disabled", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ..."));
         textViewDisabled.setDisabled(true);
-        textViewDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(textViewDisabled);
 
         final RowDescriptor rd7 =
                 RowDescriptor.newInstance("number", RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456));
-        rd7.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd7);
 
         RowDescriptor numberRowDisabled = RowDescriptor.newInstance("numberDisabled",RowDescriptor.FormRowDescriptorTypeNumber, "Number Disabled", new Value<Number>(555.456));
         numberRowDisabled.setDisabled(true);
-        numberRowDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(numberRowDisabled);
 
         final RowDescriptor integerRow = RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55));
-        integerRow.setCellConfig(cellDesc);
         sectionDescriptor.addRow(integerRow);
 
         final RowDescriptor integerRowDisabled = RowDescriptor.newInstance("integerDisabled",RowDescriptor.FormRowDescriptorTypeInteger, "Integer Disabled", new Value<Number>(55));
         integerRowDisabled.setDisabled(true);
-        integerRowDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(integerRowDisabled);
 
         final RowDescriptor rd8 =
                 RowDescriptor.newInstance("integerSlider", RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50));
-        rd8.setCellConfig(cellDesc);
         sectionDescriptor.addRow(rd8);
 
         RowDescriptor integerSliderDisabled = RowDescriptor.newInstance("integerSliderDisabled",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider Disabled", new Value<Number>(50));
         integerSliderDisabled.setDisabled(true);
-        integerSliderDisabled.setCellConfig(cellDesc);
         sectionDescriptor.addRow(integerSliderDisabled);
 
         // --- Picker ---
@@ -183,12 +168,10 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
                 task.execute(listener);
             }
         });
-        pickerDescriptor.setCellConfig(cellDesc);
         sectionDescriptor1.addRow(pickerDescriptor);
 
         RowDescriptor pickerDisabledDescriptor = RowDescriptor.newInstance("pickerDisabled",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, "Picker Disabled", new Value<String>("Value"));
         pickerDisabledDescriptor.setDisabled(true);
-        pickerDisabledDescriptor.setCellConfig(cellDesc);
         sectionDescriptor1.addRow(pickerDisabledDescriptor);
 
         // --- Boolean ---
@@ -198,22 +181,18 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
         final RowDescriptor rd9 =
                 RowDescriptor.newInstance("boolean", RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch", new Value<Boolean>(true));
-        rd9.setCellConfig(cellDesc);
         sectionDescriptor2.addRow(rd9);
 
         RowDescriptor booleanDisabled = RowDescriptor.newInstance("booleanDisabled",RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch Disabled", new Value<Boolean>(true));
         booleanDisabled.setDisabled(true);
-        booleanDisabled.setCellConfig(cellDesc);
         sectionDescriptor2.addRow(booleanDisabled);
 
         final RowDescriptor rd10 =
                 RowDescriptor.newInstance("check", RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check", new Value<Boolean>(true));
-        rd10.setCellConfig(cellDesc);
         sectionDescriptor2.addRow(rd10);
 
         RowDescriptor checkDisabled = RowDescriptor.newInstance("checkDisabled",RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check Disabled", new Value<Boolean>(true)) ;
         checkDisabled.setDisabled(true);
-        checkDisabled.setCellConfig(cellDesc);
         sectionDescriptor2.addRow(checkDisabled);
 
         SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("sectionThree","Button");
@@ -237,7 +216,6 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
                 builder.show();
             }
         });
-        button.setCellConfig(cellDesc);
         sectionDescriptor3.addRow(button);
 
         RowDescriptor buttonDisabled = RowDescriptor.newInstance("buttonDisabled",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me Disabled");
@@ -252,12 +230,10 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
             }
         });
         buttonDisabled.setDisabled(true);
-        buttonDisabled.setCellConfig(cellDesc);
         sectionDescriptor3.addRow(buttonDisabled);
 
         final RowDescriptor rd11 =
                 RowDescriptor.newInstance("external", RowDescriptor.FormRowDescriptorTypeExternal, "github.com", new Value<String>("http://github.com"));
-        rd11.setCellConfig(cellDesc);
         sectionDescriptor3.addRow(rd11);
 
         SectionDescriptor sectionDescriptor4 = SectionDescriptor.newInstance("sectionFour","Dates");
@@ -265,42 +241,34 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
         final RowDescriptor rd12 =
                 RowDescriptor.newInstance("dateInline", RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline", new Value<Date>(new Date()));
-        rd12.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(rd12);
 
         RowDescriptor dateInlineDisabled = RowDescriptor.newInstance("dateInlineDisabled",RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline Disabled", new Value<Date>(new Date()) );
         dateInlineDisabled.setDisabled(true);
-        dateInlineDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(dateInlineDisabled);
 
         final RowDescriptor rd13 =
                 RowDescriptor.newInstance("dateDialog", RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog", null);
-        rd13.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(rd13);
 
         RowDescriptor dateDialogDisabled = RowDescriptor.newInstance("dateDialogDisabled",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog Disabled", null );
         dateDialogDisabled.setDisabled(true);
-        dateDialogDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(dateDialogDisabled);
 
         final RowDescriptor rd14 =
                 RowDescriptor.newInstance("timeInline", RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline", new Value<Date>(new Date()));
-        rd14.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(rd14);
 
         RowDescriptor timeInlineDisabled = RowDescriptor.newInstance("timeInlineDisabled",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline Disabled", new Value<Date>(new Date()) );
         timeInlineDisabled.setDisabled(true);
-        timeInlineDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(timeInlineDisabled);
 
         final RowDescriptor rd15 =
                 RowDescriptor.newInstance("timeDialog", RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date()));
-        rd15.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(rd15);
 
         RowDescriptor timeDialogDisabled = RowDescriptor.newInstance("timeDialogDisabled", RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog Disabled", new Value<Date>(new Date()) );
         timeDialogDisabled.setDisabled(true);
-        timeDialogDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(timeDialogDisabled);
 
         mFormManager = new FormManager();
