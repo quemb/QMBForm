@@ -11,7 +11,7 @@ import android.widget.TextView;
  */
 public class SectionCell extends Cell {
 
-    private SectionDescriptor mSectionDescriptor;
+    //private SectionDescriptor mSectionDescriptor;
 
     private TextView mTextView;
 
