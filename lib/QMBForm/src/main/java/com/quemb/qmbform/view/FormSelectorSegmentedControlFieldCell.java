@@ -35,8 +35,8 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         mValues = new ArrayList<Object>();
         mSegmentedGroup = (SegmentedGroup) findViewById(R.id.segmentedGroup);
         mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
+
+        setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
     }
 
     @Override
