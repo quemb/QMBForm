@@ -28,6 +28,8 @@ public class FormBooleanFieldCell extends FormBaseCell {
         super.init();
 
         mSwitch = (Switch) findViewById(R.id.switchControl);
+        setStyleId(mSwitch, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_VALUE);
+
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
