@@ -144,7 +144,6 @@ public abstract class Cell extends LinearLayout {
                         textView.setTextAppearance(styleId);
                     else
                         textView.setTextAppearance(textView.getContext(), styleId);
-                    return;
                 }
             }
         }
