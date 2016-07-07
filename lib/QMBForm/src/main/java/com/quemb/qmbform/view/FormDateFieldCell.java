@@ -56,7 +56,11 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
         initDatePicker(calendar);
 
-        mTextView.setEnabled(!getRowDescriptor().getDisabled());
+        if (getRowDescriptor().getDisabled())
+        {
+            setClickable(false);
+            setEnabled(false);
+        }
 
     }
 
