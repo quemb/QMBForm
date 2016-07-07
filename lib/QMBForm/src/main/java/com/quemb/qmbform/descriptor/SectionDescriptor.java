@@ -60,6 +60,13 @@ public class SectionDescriptor extends FormItemDescriptor {
             row.setCellConfig(cellConfig);
     }
 
+    public void addRow(RowDescriptor row, HashMap<String, Object> cellConfig) {
+        addRow(row, mRows.size());
+
+        if (cellConfig != null)
+            row.setCellConfig(cellConfig);
+    }
+
     public void removeRow(RowDescriptor row) {
         int index = mRows.indexOf(row);
         removeRowAtIndex(index);
