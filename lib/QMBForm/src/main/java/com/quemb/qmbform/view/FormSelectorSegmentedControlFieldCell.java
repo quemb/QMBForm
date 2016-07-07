@@ -79,7 +79,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
         radioButton.setClickable(true);
         radioButton.setChecked(checked);
-        int padding = getResources().getDimensionPixelOffset(R.dimen.cell_padding);
+        int padding = getResources().getDimensionPixelOffset(R.dimen.qmb_padding);
         radioButton.setPadding(padding, padding, padding, padding);
         group.addView(radioButton);
         group.updateBackground();
