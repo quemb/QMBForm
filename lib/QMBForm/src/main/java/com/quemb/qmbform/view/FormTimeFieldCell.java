@@ -4,6 +4,7 @@ import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Date;
