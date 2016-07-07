@@ -1,6 +1,6 @@
 package com.quemb.qmbform.sample.controller;
 
-import android.app.AlertDialog;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.DataSource;
 import com.quemb.qmbform.descriptor.DataSourceListener;
 import com.quemb.qmbform.descriptor.FormDescriptor;
@@ -74,85 +75,156 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
         mChangesMap = new HashMap<String, Value<?>>();
 
-        FormDescriptor descriptor = FormDescriptor.newInstance();
+        // More styles and colors for cells
+        HashMap<String, Object> cellDesc = new HashMap<>(4);
 
+        // Disabled color for label and value
+        cellDesc.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0xA0FF00FF));
+        cellDesc.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0x80FF0000));
+
+        FormDescriptor descriptor = FormDescriptor.newInstance();
 
         SectionDescriptor sectionDescriptor = SectionDescriptor.newInstance("section","Text Inputs");
         descriptor.addSection(sectionDescriptor);
 
-        sectionDescriptor.addRow( RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeTextInline, "Title",new Value<String>("Detail")) );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeText, "Title",new Value<String>("Detail")) );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test")) );
+        final RowDescriptor rd1 =
+                RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeTextInline, "Title", new Value<String>("Detail"));
+        rd1.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd1);
+
+        final RowDescriptor rd2 =
+                RowDescriptor.newInstance("detail", RowDescriptor.FormRowDescriptorTypeText, "Title", new Value<String>("Detail"));
+        rd2.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd2);
+
+        final RowDescriptor rd3 =
+                RowDescriptor.newInstance("text", RowDescriptor.FormRowDescriptorTypeText, "Text", new Value<String>("test"));
+        rd3.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd3);
+
         RowDescriptor textDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeText, "Text Disabled", new Value<String>("test"));
         textDisabled.setDisabled(true);
-        sectionDescriptor.addRow( textDisabled );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeURL, "URL", new Value<String>("http://www.github.com/")) );
+        textDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(textDisabled);
+
+        final RowDescriptor rd4 =
+                RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeURL, "URL", new Value<String>("http://www.github.com/"));
+        rd4.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd4);
+
         RowDescriptor textUrlDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeURL, "URL Disabled", new Value<String>("http://www.github.com/"));
         textUrlDisabled.setDisabled(true);
-        sectionDescriptor.addRow( textUrlDisabled );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("text",RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com")) );
+        textUrlDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(textUrlDisabled);
+
+        final RowDescriptor rd5 =
+                RowDescriptor.newInstance("text", RowDescriptor.FormRowDescriptorTypeEmail, "Email", new Value<String>("support@github.com"));
+        rd5.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd5);
+
         RowDescriptor textEmailDisabled = RowDescriptor.newInstance("textDisabled",RowDescriptor.FormRowDescriptorTypeEmail, "Email Disabled", new Value<String>("support@github.com"));
         textEmailDisabled.setDisabled(true);
-        sectionDescriptor.addRow( textEmailDisabled );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("textView",RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ...")) );
+        textEmailDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(textEmailDisabled);
+
+        final RowDescriptor rd6 =
+                RowDescriptor.newInstance("textView", RowDescriptor.FormRowDescriptorTypeTextView, "Text View", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ..."));
+        sectionDescriptor.addRow(rd6);
+        rd6.setCellConfig(cellDesc);
+
         RowDescriptor textViewDisabled = RowDescriptor.newInstance("textViewDisabled",RowDescriptor.FormRowDescriptorTypeTextView, "Text View Disabled", new Value<String>("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et ..."));
         textViewDisabled.setDisabled(true);
-        sectionDescriptor.addRow( textViewDisabled );
-        sectionDescriptor.addRow( RowDescriptor.newInstance("number",RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456)) );
+        textViewDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(textViewDisabled);
+
+        final RowDescriptor rd7 =
+                RowDescriptor.newInstance("number", RowDescriptor.FormRowDescriptorTypeNumber, "Number", new Value<Number>(555.456));
+        rd7.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd7);
+
         RowDescriptor numberRowDisabled = RowDescriptor.newInstance("numberDisabled",RowDescriptor.FormRowDescriptorTypeNumber, "Number Disabled", new Value<Number>(555.456));
         numberRowDisabled.setDisabled(true);
-        sectionDescriptor.addRow( numberRowDisabled );
+        numberRowDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(numberRowDisabled);
 
         final RowDescriptor integerRow = RowDescriptor.newInstance("integer",RowDescriptor.FormRowDescriptorTypeInteger, "Integer", new Value<Number>(55));
-        sectionDescriptor.addRow( integerRow );
+        integerRow.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(integerRow);
+
         final RowDescriptor integerRowDisabled = RowDescriptor.newInstance("integerDisabled",RowDescriptor.FormRowDescriptorTypeInteger, "Integer Disabled", new Value<Number>(55));
         integerRowDisabled.setDisabled(true);
-        sectionDescriptor.addRow( integerRowDisabled );
+        integerRowDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(integerRowDisabled);
 
-        sectionDescriptor.addRow( RowDescriptor.newInstance("integerSlider",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50)) );
+        final RowDescriptor rd8 =
+                RowDescriptor.newInstance("integerSlider", RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50));
+        rd8.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(rd8);
+
         RowDescriptor integerSliderDisabled = RowDescriptor.newInstance("integerSliderDisabled",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider Disabled", new Value<Number>(50));
         integerSliderDisabled.setDisabled(true);
-        sectionDescriptor.addRow( integerSliderDisabled );
-        SectionDescriptor sectionDescriptor1 = SectionDescriptor.newInstance("sectionOne","Picker");
+        integerSliderDisabled.setCellConfig(cellDesc);
+        sectionDescriptor.addRow(integerSliderDisabled);
+
+        // --- Picker ---
+
+        SectionDescriptor sectionDescriptor1 = SectionDescriptor.newInstance("sectionOne", "Picker");
         descriptor.addSection(sectionDescriptor1);
+
+        final Activity activity = getActivity();
         RowDescriptor pickerDescriptor = RowDescriptor.newInstance("picker",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, "Picker", new Value<String>("Item 5"));
-        pickerDescriptor.setDataSource(new DataSource() {
-
+        pickerDescriptor.setDataSource(new DataSource()
+        {
             @Override
-            public void loadData(final DataSourceListener listener) {
+            public void loadData(final DataSourceListener listener)
+            {
                 // Can be async
-                CustomTask task = new CustomTask();
+                CustomTask task = new CustomTask(activity);
                 task.execute(listener);
-
             }
         });
-        sectionDescriptor1.addRow( pickerDescriptor );
+        pickerDescriptor.setCellConfig(cellDesc);
+        sectionDescriptor1.addRow(pickerDescriptor);
 
         RowDescriptor pickerDisabledDescriptor = RowDescriptor.newInstance("pickerDisabled",RowDescriptor.FormRowDescriptorTypeSelectorPickerDialog, "Picker Disabled", new Value<String>("Value"));
         pickerDisabledDescriptor.setDisabled(true);
+        pickerDisabledDescriptor.setCellConfig(cellDesc);
         sectionDescriptor1.addRow(pickerDisabledDescriptor);
+
+        // --- Boolean ---
 
         SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("sectionTwo","Boolean Inputs");
         descriptor.addSection(sectionDescriptor2);
 
-        sectionDescriptor2.addRow( RowDescriptor.newInstance("boolean",RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch", new Value<Boolean>(true)) );
+        final RowDescriptor rd9 =
+                RowDescriptor.newInstance("boolean", RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch", new Value<Boolean>(true));
+        rd9.setCellConfig(cellDesc);
+        sectionDescriptor2.addRow(rd9);
+
         RowDescriptor booleanDisabled = RowDescriptor.newInstance("booleanDisabled",RowDescriptor.FormRowDescriptorTypeBooleanSwitch, "Boolean Switch Disabled", new Value<Boolean>(true));
         booleanDisabled.setDisabled(true);
-        sectionDescriptor2.addRow( booleanDisabled );
+        booleanDisabled.setCellConfig(cellDesc);
+        sectionDescriptor2.addRow(booleanDisabled);
 
-        sectionDescriptor2.addRow( RowDescriptor.newInstance("check",RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check", new Value<Boolean>(true)) );
+        final RowDescriptor rd10 =
+                RowDescriptor.newInstance("check", RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check", new Value<Boolean>(true));
+        rd10.setCellConfig(cellDesc);
+        sectionDescriptor2.addRow(rd10);
+
         RowDescriptor checkDisabled = RowDescriptor.newInstance("checkDisabled",RowDescriptor.FormRowDescriptorTypeBooleanCheck, "Check Disabled", new Value<Boolean>(true)) ;
         checkDisabled.setDisabled(true);
+        checkDisabled.setCellConfig(cellDesc);
         sectionDescriptor2.addRow(checkDisabled);
 
         SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("sectionThree","Button");
         descriptor.addSection(sectionDescriptor3);
 
         final RowDescriptor button = RowDescriptor.newInstance("button",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me");
-        button.setOnFormRowClickListener(new OnFormRowClickListener() {
+        button.setOnFormRowClickListener(new OnFormRowClickListener()
+        {
             @Override
-            public void onFormRowClick(FormItemDescriptor itemDescriptor) {
-
+            public void onFormRowClick(FormItemDescriptor itemDescriptor)
+            {
 //                You need to call updateRows in order to update titles
 //                itemDescriptor.setTitle("New Title");
 //                mFormManager.updateRows();
@@ -160,45 +232,75 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
                 integerRow.getValue().setValue(100);
                 integerRow.setDisabled(true);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(activity);
                 builder.setTitle("Tapped");
                 builder.show();
             }
         });
-        sectionDescriptor3.addRow( button );
-        RowDescriptor buttonDisabled = RowDescriptor.newInstance("buttonDisabled",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me Disabled");
-        buttonDisabled.setOnFormRowClickListener(new OnFormRowClickListener() {
-            @Override
-            public void onFormRowClick(FormItemDescriptor itemDescriptor) {
+        button.setCellConfig(cellDesc);
+        sectionDescriptor3.addRow(button);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        RowDescriptor buttonDisabled = RowDescriptor.newInstance("buttonDisabled",RowDescriptor.FormRowDescriptorTypeButton, "Tap Me Disabled");
+        buttonDisabled.setOnFormRowClickListener(new OnFormRowClickListener()
+        {
+            @Override
+            public void onFormRowClick(FormItemDescriptor itemDescriptor)
+            {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(activity);
                 builder.setTitle("Tapped");
                 builder.show();
-
             }
         });
         buttonDisabled.setDisabled(true);
+        buttonDisabled.setCellConfig(cellDesc);
         sectionDescriptor3.addRow(buttonDisabled);
-        sectionDescriptor3.addRow(RowDescriptor.newInstance("external",RowDescriptor.FormRowDescriptorTypeExternal, "github.com", new Value<String>("http://github.com")));
+
+        final RowDescriptor rd11 =
+                RowDescriptor.newInstance("external", RowDescriptor.FormRowDescriptorTypeExternal, "github.com", new Value<String>("http://github.com"));
+        rd11.setCellConfig(cellDesc);
+        sectionDescriptor3.addRow(rd11);
 
         SectionDescriptor sectionDescriptor4 = SectionDescriptor.newInstance("sectionFour","Dates");
         descriptor.addSection(sectionDescriptor4);
 
-        sectionDescriptor4.addRow( RowDescriptor.newInstance("dateInline",RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline", new Value<Date>(new Date()) ));
+        final RowDescriptor rd12 =
+                RowDescriptor.newInstance("dateInline", RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline", new Value<Date>(new Date()));
+        rd12.setCellConfig(cellDesc);
+        sectionDescriptor4.addRow(rd12);
+
         RowDescriptor dateInlineDisabled = RowDescriptor.newInstance("dateInlineDisabled",RowDescriptor.FormRowDescriptorTypeDateInline, "Date Inline Disabled", new Value<Date>(new Date()) );
         dateInlineDisabled.setDisabled(true);
+        dateInlineDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(dateInlineDisabled);
-        sectionDescriptor4.addRow( RowDescriptor.newInstance("dateDialog",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog") );
-        RowDescriptor dateDialogDisabled = RowDescriptor.newInstance("dateDialogDisabled",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog Disabled" );
+
+        final RowDescriptor rd13 =
+                RowDescriptor.newInstance("dateDialog", RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog", null);
+        rd13.setCellConfig(cellDesc);
+        sectionDescriptor4.addRow(rd13);
+
+        RowDescriptor dateDialogDisabled = RowDescriptor.newInstance("dateDialogDisabled",RowDescriptor.FormRowDescriptorTypeDate, "Date Dialog Disabled", null );
         dateDialogDisabled.setDisabled(true);
+        dateDialogDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(dateDialogDisabled);
-        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeInline",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline" , new Value<Date>(new Date())) );
+
+        final RowDescriptor rd14 =
+                RowDescriptor.newInstance("timeInline", RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline", new Value<Date>(new Date()));
+        rd14.setCellConfig(cellDesc);
+        sectionDescriptor4.addRow(rd14);
+
         RowDescriptor timeInlineDisabled = RowDescriptor.newInstance("timeInlineDisabled",RowDescriptor.FormRowDescriptorTypeTimeInline, "Time Inline Disabled", new Value<Date>(new Date()) );
         timeInlineDisabled.setDisabled(true);
+        timeInlineDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(timeInlineDisabled);
-        sectionDescriptor4.addRow( RowDescriptor.newInstance("timeDialog",RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date())) );
-        RowDescriptor timeDialogDisabled = RowDescriptor.newInstance("timeDialogDisabled",RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog Disabled", new Value<Date>(new Date()) );
+
+        final RowDescriptor rd15 =
+                RowDescriptor.newInstance("timeDialog", RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog", new Value<Date>(new Date()));
+        rd15.setCellConfig(cellDesc);
+        sectionDescriptor4.addRow(rd15);
+
+        RowDescriptor timeDialogDisabled = RowDescriptor.newInstance("timeDialogDisabled", RowDescriptor.FormRowDescriptorTypeTime, "Time Dialog Disabled", new Value<Date>(new Date()) );
         timeDialogDisabled.setDisabled(true);
+        timeDialogDisabled.setCellConfig(cellDesc);
         sectionDescriptor4.addRow(timeDialogDisabled);
 
         mFormManager = new FormManager();
@@ -258,13 +360,21 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
 
     private class CustomTask extends AsyncTask<DataSourceListener, Void, ArrayList<String>> {
 
+        private Activity mActivity;
+
         private DataSourceListener mListener;
         private ProgressDialog mProgressDialog;
+
+        public CustomTask(Activity activity)
+        {
+            super();
+            mActivity = activity;
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mProgressDialog = ProgressDialog.show(getActivity(), "Loading",
+            mProgressDialog = ProgressDialog.show(mActivity, "Loading",
                     "Do some work", true);
         }
 
