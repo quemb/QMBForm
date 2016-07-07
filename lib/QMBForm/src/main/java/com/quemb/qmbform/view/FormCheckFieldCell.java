@@ -26,6 +26,8 @@ public class FormCheckFieldCell extends FormBaseCell {
         super.init();
 
         mCheckBox = (CheckBox) findViewById(R.id.checkBox);
+        setStyleId(mCheckBox, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_VALUE);
+
         mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -44,8 +46,15 @@ public class FormCheckFieldCell extends FormBaseCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
+
         mCheckBox.setText(title);
-        mCheckBox.setEnabled(!getRowDescriptor().getDisabled());
+        if (getRowDescriptor().getDisabled())
+        {
+            mCheckBox.setEnabled(false);
+            setTextColor(mCheckBox, CellDescriptor.COLOR_VALUE_DISABLED);
+        }
+        else
+            mCheckBox.setEnabled(true);
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null) {
