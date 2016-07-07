@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 
 import android.content.Context;
@@ -30,6 +31,8 @@ public class SectionCell extends Cell {
         setEnabled(false);
 
         mTextView = (TextView) findViewById(R.id.textView);
+
+        setStyleId(mTextView, CellDescriptor.APPEARANCE_SECTION, CellDescriptor.COLOR_LABEL);
         mTextView.setTextColor(getThemeValue(R.attr.colorAccent));
 
     }
