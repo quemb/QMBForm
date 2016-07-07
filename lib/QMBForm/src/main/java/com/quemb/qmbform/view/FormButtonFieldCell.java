@@ -30,7 +30,10 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
         setStyleId(getTextView(), CellDescriptor.APPEARANCE_BUTTON, CellDescriptor.COLOR_VALUE);
 
         if (getRowDescriptor().getDisabled())
+        {
             setTextColor(textView, CellDescriptor.COLOR_VALUE_DISABLED);
+            setEnabled(false);
+        }
     }
 
     @Override
