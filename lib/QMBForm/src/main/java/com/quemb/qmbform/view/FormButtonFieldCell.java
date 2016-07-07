@@ -32,6 +32,10 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
         if (getRowDescriptor().getDisabled())
         {
             setTextColor(textView, CellDescriptor.COLOR_VALUE_DISABLED);
+            textView.setClickable(false);
+            textView.setEnabled(false);
+
+            setClickable(false);
             setEnabled(false);
         }
     }
