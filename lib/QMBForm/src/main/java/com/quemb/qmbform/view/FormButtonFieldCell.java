@@ -26,7 +26,11 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
     protected void update() {
         super.update();
 
-        getTextView().setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body2);
+        TextView textView = getTextView();
+        setStyleId(getTextView(), CellDescriptor.APPEARANCE_BUTTON, CellDescriptor.COLOR_VALUE);
+
+        if (getRowDescriptor().getDisabled())
+            setTextColor(textView, CellDescriptor.COLOR_VALUE_DISABLED);
     }
 
     @Override
