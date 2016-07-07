@@ -21,8 +21,8 @@ public class FormTitleFieldCell extends FormBaseCell {
     protected void init() {
         super.init();
         mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
+
+        setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
     }
 
     @Override
@@ -39,7 +39,8 @@ public class FormTitleFieldCell extends FormBaseCell {
 
         if (getRowDescriptor().getDisabled()) {
             getRowDescriptor().setOnFormRowClickListener(null);
-            mTextView.setTextColor(getResources().getColor(R.color.form_cell_disabled));
+
+            setTextColor(mTextView, CellDescriptor.COLOR_LABEL_DISABLED);
         }
     }
 
