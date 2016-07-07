@@ -11,6 +11,8 @@ public class CellDescriptor
     public static final String APPEARANCE_TEXT_LABEL = "FORM_APPEARANCE_TEXT_LABEL";  // value is an attribute ID as Integer.valueOf(R.attr.xxx)
     public static final String APPEARANCE_TEXT_VALUE = "FORM_APPEARANCE_TEXT_VALUE";  // value is an attribute ID as Integer.valueOf(R.attr.xxx)
 
+    public static final String APPEARANCE_BUTTON = "FORM_APPEARANCE_BUTTON";          // value is an attribute ID as Integer.valueOf(R.attr.xxx)
+
     // Text colors (if TextAppearance styles are not defined)
 
     // Note: default TextView color is style android:textColor,
