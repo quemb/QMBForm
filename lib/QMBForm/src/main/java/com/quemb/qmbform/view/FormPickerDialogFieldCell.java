@@ -25,6 +25,13 @@ public class FormPickerDialogFieldCell extends FormDetailTextInlineFieldCell {
         super(context, rowDescriptor);
     }
 
+    @Override
+    protected void update() {
+
+        super.update();
+        setEnabled(!getRowDescriptor().getDisabled());
+
+    }
 
     @Override
     public void onCellSelected() {
