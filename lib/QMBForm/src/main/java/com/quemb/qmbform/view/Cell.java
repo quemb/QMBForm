@@ -1,5 +1,6 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 import android.content.Context;
