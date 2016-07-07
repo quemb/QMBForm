@@ -5,11 +5,16 @@ import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Build;
+import android.support.annotation.StyleRes;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.HashMap;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -154,23 +159,10 @@ public abstract class Cell extends LinearLayout {
             if (configId instanceof Integer)
                 defaultColor =  ((Integer) configId).intValue();
             else
-                defaultColor = getDefaultColor(textView);
+                defaultColor = getDefaultColor(colorConfig);
         }
         else
-            defaultColor = getDefaultColor(textView);
-
-        // Save the default android:textColor, apply default style, then re-apply the default color.
-
-//        if (defaultStyleId != 0)
-//        {
-//            //ColorStateList colorList = textView.getTextColors();
-//
-//            @StyleRes int styleId = defaultStyleId;
-//            if (Build.VERSION.SDK_INT >= 23)
-//                textView.setTextAppearance(styleId);
-//            else
-//                textView.setTextAppearance(textView.getContext(), styleId);
-//        }
+            defaultColor = getDefaultColor(colorConfig);
 
         textView.setTextColor(defaultColor);
     }
@@ -180,13 +172,13 @@ public abstract class Cell extends LinearLayout {
      * Note that default EditText color is android:editTextColor in theme.
      * Force to default TextView color for CheckBox and Switch views.
      */
-    private int getDefaultColor(final TextView textView)
+    private int getDefaultColor(final String colorConfig)
     {
-        if (textView instanceof CheckBox || textView instanceof Switch)
+        if (colorConfig != null && colorConfig.equals(CellDescriptor.COLOR_VALUE))
         {
-            return getThemeValue(android.R.attr.textColor);
+            return getThemeValue(android.R.attr.editTextColor);
         }
-        return textView.getTextColors().getDefaultColor();
+        return getThemeValue(android.R.attr.textColor);
     }
 
     /**
