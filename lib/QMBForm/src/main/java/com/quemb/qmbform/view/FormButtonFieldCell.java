@@ -5,6 +5,7 @@ import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
+import android.widget.TextView;
 
 /**
  * Created by tonimoeckel on 15.07.14.
