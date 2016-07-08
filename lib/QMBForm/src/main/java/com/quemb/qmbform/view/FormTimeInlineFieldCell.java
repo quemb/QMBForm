@@ -4,6 +4,7 @@ import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -41,8 +42,16 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     @Override
     protected void initDatePicker(Calendar calendar) {
 
-        getTimePicker().setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-        getTimePicker().setCurrentMinute(calendar.get(Calendar.MINUTE));
+        if (Build.VERSION.SDK_INT >= 23)
+        {
+            getTimePicker().setHour(calendar.get(Calendar.HOUR_OF_DAY));
+            getTimePicker().setMinute(calendar.get(Calendar.MINUTE));
+        }
+        else
+        {
+            getTimePicker().setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+            getTimePicker().setCurrentMinute(calendar.get(Calendar.MINUTE));
+        }
         getTimePicker().setOnTimeChangedListener(this);
         getTimePicker().setIs24HourView(true);
 
