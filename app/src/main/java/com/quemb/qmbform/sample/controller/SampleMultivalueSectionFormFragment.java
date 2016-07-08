@@ -74,7 +74,22 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
         mChangesMap = new HashMap<String, Value<?>>();
 
+        // TextAppearance for section, label, value and button
+        //cellConfig.put(CellDescriptor.APPEARANCE_SECTION, Integer.valueOf(R.style.TextAppearance_Form_Section));
+        //cellConfig.put(CellDescriptor.APPEARANCE_TEXT_LABEL, Integer.valueOf(R.style.TextAppearance_Form_Label));
+        //cellConfig.put(CellDescriptor.APPEARANCE_TEXT_VALUE, Integer.valueOf(R.style.TextAppearance_Form_Value));
+        //cellConfig.put(CellDescriptor.APPEARANCE_BUTTON, Integer.valueOf(R.style.TextAppearance_Form_Button));
+
+        // color for label and value
+        cellConfig.put(CellDescriptor.COLOR_LABEL, Integer.valueOf(0x80C0FFC0));
+        cellConfig.put(CellDescriptor.COLOR_VALUE, Integer.valueOf(0xC0C0FFC0));
+
+        // Disabled color for label and value
+        cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
+        cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
+
         FormDescriptor descriptor = FormDescriptor.newInstance();
+        descriptor.setCellConfig(cellConfig);
 
         final ArrayList<String> values = new ArrayList<>();
         values.add("red");
@@ -87,11 +102,11 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
         descriptor.addSection(sectionDescriptor);
 
 
-
         for (String item : values){
-            sectionDescriptor.addRow(RowDescriptor.newInstance("colors-"+item, RowDescriptor.FormRowDescriptorTypeText,null,new Value<String>(item)));
+            sectionDescriptor.addRow(RowDescriptor.newInstance("colors-"+item, RowDescriptor.FormRowDescriptorTypeText,null,new Value<String>(item)),
+                    cellConfig);
         }
-        sectionDescriptor.addRow(RowDescriptor.newInstance("new", RowDescriptor.FormRowDescriptorTypeText));
+        sectionDescriptor.addRow(RowDescriptor.newInstance("new", RowDescriptor.FormRowDescriptorTypeText), cellConfig);
 
 
         SectionDescriptor sectionDescriptor2 = SectionDescriptor.newInstance("multiPicker","Pick a color");
@@ -107,7 +122,8 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
             }
         });
-        sectionDescriptor2.addRow( pickerDescriptor2 );
+        sectionDescriptor2.addRow( pickerDescriptor2, cellConfig);
+
 
         SectionDescriptor sectionDescriptor3 = SectionDescriptor.newInstance("multiPicker","Pick a color");
         sectionDescriptor3.setMultivalueSection(true);
@@ -122,7 +138,7 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
             }
         });
-        sectionDescriptor3.addRow( pickerDescriptor3 );
+        sectionDescriptor3.addRow( pickerDescriptor3, cellConfig);
 
 
         mFormManager = new FormManager();
