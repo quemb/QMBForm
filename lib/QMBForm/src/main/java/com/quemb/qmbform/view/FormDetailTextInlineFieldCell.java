@@ -24,7 +24,8 @@ public class FormDetailTextInlineFieldCell extends FormTitleFieldCell {
 
         super.init();
         mDetailTextView = (TextView) findViewById(R.id.detailTextView);
-        mDetailTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+
+        setStyleId(mDetailTextView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
     }
 
     @Override
