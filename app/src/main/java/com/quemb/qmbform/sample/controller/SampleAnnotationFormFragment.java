@@ -79,7 +79,7 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         entry.multiValue.add("allowed");
 
         // More styles and colors for cells
-        HashMap<String, Object> cellConfig = new HashMap<>(8);
+        //HashMap<String, Object> cellConfig = new HashMap<>(8);
 
         // TextAppearance for section, label, value and button
         //cellConfig.put(CellDescriptor.APPEARANCE_SECTION, Integer.valueOf(R.style.TextAppearance_Form_Section));
@@ -88,15 +88,16 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         //cellConfig.put(CellDescriptor.APPEARANCE_BUTTON, Integer.valueOf(R.style.TextAppearance_Form_Button));
 
         // color for label and value
-        cellConfig.put(CellDescriptor.COLOR_LABEL, Integer.valueOf(0x80C0FFC0));
-        cellConfig.put(CellDescriptor.COLOR_VALUE, Integer.valueOf(0xC0C0FFC0));
+        //cellConfig.put(CellDescriptor.COLOR_LABEL, Integer.valueOf(0x80C0FFC0));
+        //cellConfig.put(CellDescriptor.COLOR_VALUE, Integer.valueOf(0xC0C0FFC0));
 
         // Disabled color for label and value
-        cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
-        cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
+        //cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
+        //cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
 
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
-        FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry, cellConfig);
+        FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry);
+        //FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry, cellConfig);
 
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, getActivity());
