@@ -29,7 +29,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
         super.init();
 
         mSwitch = (Switch) findViewById(R.id.switchControl);
-        setStyleId(mSwitch, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_VALUE);
+        setStyleId(mSwitch, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
 
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -52,13 +52,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
         String title = getFormItemDescriptor().getTitle();
 
         mSwitch.setText(title);
-        if (getRowDescriptor().getDisabled())
-        {
-            mSwitch.setEnabled(false);
-            setTextColor(mSwitch, CellDescriptor.COLOR_VALUE_DISABLED);
-        }
-        else
-            mSwitch.setEnabled(true);
+        mSwitch.setEnabled(!getRowDescriptor().getDisabled());
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null && value.getValue() != null) {
