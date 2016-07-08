@@ -52,7 +52,13 @@ public class FormBooleanFieldCell extends FormBaseCell {
         String title = getFormItemDescriptor().getTitle();
 
         mSwitch.setText(title);
-        mSwitch.setEnabled(!getRowDescriptor().getDisabled());
+        if (getRowDescriptor().getDisabled())
+        {
+            mCheckBox.setEnabled(false);
+            setTextColor(mCheckBox, CellDescriptor.COLOR_VALUE_DISABLED);
+        }
+        else
+            mCheckBox.setEnabled(true);
 
         Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null && value.getValue() != null) {
