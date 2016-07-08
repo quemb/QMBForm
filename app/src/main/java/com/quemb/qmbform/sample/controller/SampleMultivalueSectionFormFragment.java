@@ -1,5 +1,6 @@
 package com.quemb.qmbform.sample.controller;
 
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.DataSource;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
