@@ -134,7 +134,7 @@ public class FormDescriptorAnnotationFactory {
                         sectionDescriptor.setTag(field.getName());
                         int index = 0;
                         if ((value != null ? value.getValue() : null) instanceof ArrayList) {
-                            ArrayList<Object> list = (ArrayList<Object>) value.getValue();
+                            @SuppressWarnings("unchecked") ArrayList<Object> list = (ArrayList<Object>) value.getValue();
                             for (Object item : list) {
                                 RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
                                         annotation.rowDescriptorType());
