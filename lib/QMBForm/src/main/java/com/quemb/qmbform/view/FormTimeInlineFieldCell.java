@@ -39,10 +39,11 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
         return R.layout.time_inline_field_cell;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void initDatePicker(Calendar calendar) {
 
-        if (Build.VERSION.SDK_INT >= 23)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
             getTimePicker().setHour(calendar.get(Calendar.HOUR_OF_DAY));
             getTimePicker().setMinute(calendar.get(Calendar.MINUTE));
