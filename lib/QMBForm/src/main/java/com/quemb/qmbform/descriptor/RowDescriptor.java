@@ -148,7 +148,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return mValue;
     }
 
-    public void setValue(Value<T> value) {
+    public void setValue(@SuppressWarnings("unchecked") Value<T> value) {
         mValue = value;
     }
 
