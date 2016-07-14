@@ -15,7 +15,7 @@ public class Value<T> {
         return mValue;
     }
 
-
+    @SuppressWarnings("unchecked")
     public void setValue(T value) {
         mValue = value;
         if (mOnValueChangeListener != null) {
