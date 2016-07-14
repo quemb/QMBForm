@@ -57,7 +57,7 @@ public class FormCheckFieldCell extends FormBaseCell {
         else
             mCheckBox.setEnabled(true);
 
-        Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
+        @SuppressWarnings("unchecked") Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null) {
             mCheckBox.setChecked(value.getValue());
         }
