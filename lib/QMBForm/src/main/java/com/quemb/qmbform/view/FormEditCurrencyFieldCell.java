@@ -25,7 +25,7 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
     @Override
     protected void updateEditView() {
 
-        Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
+        @SuppressWarnings("unchecked") Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
         if (value != null && value.getValue() != null) {
             NumberFormat format = NumberFormat.getCurrencyInstance();
             String valueString = format.format(value.getValue());//String.valueOf(value.getValue());
