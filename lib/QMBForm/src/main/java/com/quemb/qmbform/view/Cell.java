@@ -123,8 +123,10 @@ public abstract class Cell extends LinearLayout {
      * Set the style ID for the specified 'styleConfig' parameter if defined in CellDescriptor,
      * or apply the default Style Id and the default android:textColor.
      */
-    protected void setStyleId(final TextView textView, final String styleConfig, final String colorConfig) //, final @StyleRes int defaultStyleId
+    protected boolean setStyleId(final TextView textView, final String styleConfig, final String colorConfig) //, final @StyleRes int defaultStyleId
     {
+        boolean styleFound = false;
+
         // Get textAppearance from the cellConfig (APPEARANCE_XXX) in FormItemDescriptor
 
         HashMap<String,Object> cellConfig = null;
@@ -141,6 +143,8 @@ public abstract class Cell extends LinearLayout {
 
                     @StyleRes int styleId = ((Integer) configId).intValue();
                     setTextAppearance(textView, styleId);
+
+                    styleFound = true;
                 }
             }
         }
@@ -161,6 +165,8 @@ public abstract class Cell extends LinearLayout {
             defaultColor = getDefaultColor(colorConfig);
 
         textView.setTextColor(defaultColor);
+
+        return styleFound;
     }
 
     @SuppressWarnings("deprecation")
