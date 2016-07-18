@@ -94,7 +94,6 @@ public class FormDetailTextInlineFieldCell extends FormTitleFieldCell {
         return styleItem;
     }
 
-
     /**
      * Get a item defined as dimension from an android style
      */
