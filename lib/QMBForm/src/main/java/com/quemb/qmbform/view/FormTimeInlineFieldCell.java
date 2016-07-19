@@ -5,6 +5,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
 import android.os.Build;
+import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -45,16 +46,18 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         {
-            getTimePicker().setHour(calendar.get(Calendar.HOUR_OF_DAY));
-            getTimePicker().setMinute(calendar.get(Calendar.MINUTE));
+            mTimePicker.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+            mTimePicker.setMinute(calendar.get(Calendar.MINUTE));
         }
         else
         {
-            getTimePicker().setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-            getTimePicker().setCurrentMinute(calendar.get(Calendar.MINUTE));
+            mTimePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
+            mTimePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
         }
-        getTimePicker().setOnTimeChangedListener(this);
-        getTimePicker().setIs24HourView(true);
+        mTimePicker.setOnTimeChangedListener(this);
+
+        if (DateFormat.is24HourFormat(getContext()))
+                mTimePicker.setIs24HourView(true);
 
     }
 
@@ -62,7 +65,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     public void onCellSelected() {
         super.onCellSelected();
 
-        getTimePicker().setVisibility(getTimePicker().getVisibility() == VISIBLE ? GONE : VISIBLE);
+        mTimePicker.setVisibility(mTimePicker.getVisibility() == VISIBLE ? GONE : VISIBLE);
 
     }
 
