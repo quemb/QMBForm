@@ -32,8 +32,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:id="@+id/datePicker"
-        android:layout_gravity="center_horizontal"
-        android:calendarViewShown="false"/>
+        android:layout_gravity="center_horizontal"/>
 
 
 </LinearLayout>
