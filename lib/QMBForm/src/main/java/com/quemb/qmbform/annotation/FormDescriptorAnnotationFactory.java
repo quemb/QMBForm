@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,15 +38,24 @@ public class FormDescriptorAnnotationFactory {
     }
 
     public FormDescriptor createFormDescriptorFromAnnotatedClass(Object object) {
+        return createFormDescriptorFromAnnotatedClass(object, null);
+    }
+
+    /**
+     * Added cellConfig parameter
+     */
+    public FormDescriptor createFormDescriptorFromAnnotatedClass(Object object, HashMap<String, Object> cellConfig) {
         Class objClass = object.getClass();
 
         List<Field> declaredFields = getAllFields(new ArrayList<Field>(), objClass);
 
-        return createFormDescriptorFromFields(declaredFields, object);
+        return createFormDescriptorFromFields(declaredFields, object, cellConfig);
     }
 
-    public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object) {
+    public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object, HashMap<String, Object> cellConfig) {
         FormDescriptor formDescriptor = FormDescriptor.newInstance();
+        if (cellConfig != null)
+            formDescriptor.setCellConfig(cellConfig);
 
         List<Field> formFields = new ArrayList<Field>();
         List<Section> sections = new ArrayList<Section>();
@@ -124,13 +134,13 @@ public class FormDescriptorAnnotationFactory {
                         sectionDescriptor.setTag(field.getName());
                         int index = 0;
                         if ((value != null ? value.getValue() : null) instanceof ArrayList) {
-                            ArrayList<Object> list = (ArrayList<Object>) value.getValue();
+                            @SuppressWarnings("unchecked") ArrayList<Object> list = (ArrayList<Object>) value.getValue();
                             for (Object item : list) {
                                 RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
                                         annotation.rowDescriptorType());
                                 rowDescriptor.setValue(new Value<Object>(item));
                                 rowDescriptor.setHint(annotation.hint());
-                                sectionDescriptor.addRow(rowDescriptor);
+                                sectionDescriptor.addRow(rowDescriptor, cellConfig);
                                 index++;
                             }
                         }
@@ -138,7 +148,7 @@ public class FormDescriptorAnnotationFactory {
                                 annotation.rowDescriptorType());
                         rowDescriptor.setHint(annotation.hint());
                         addValidators(rowDescriptor, annotation);
-                        sectionDescriptor.addRow(rowDescriptor);
+                        sectionDescriptor.addRow(rowDescriptor, cellConfig);
                     } else {
                         RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
                                 annotation.rowDescriptorType(),
@@ -157,7 +167,7 @@ public class FormDescriptorAnnotationFactory {
                         }
 
                         if (shouldAdd) {
-                            sectionDescriptor.addRow(rowDescriptor);
+                            sectionDescriptor.addRow(rowDescriptor, cellConfig);
                         }
                     }
                 }

@@ -2,7 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:padding="@dimen/cell_padding"
+              android:padding="@dimen/qmb_padding"
               android:descendantFocusability="blocksDescendants"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -33,7 +33,8 @@
         android:visibility="gone"
         android:id="@+id/datePicker"
         android:layout_gravity="center_horizontal"
-        android:calendarViewShown="false"/>
+        android:datePickerMode="calendar"
+        android:spinnersShown="false"/>
 
 
 </LinearLayout>

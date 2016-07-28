@@ -12,6 +12,7 @@ import java.util.Map;
  */
 public class FormDescriptor {
     private String mTitle;
+    private HashMap<String, Object> mCellConfig;
     private ArrayList<SectionDescriptor> mSections;
     private OnFormRowValueChangedListener mOnFormRowValueChangedListener;
     private OnFormRowChangeListener mOnFormRowChangeListener;
@@ -32,8 +33,15 @@ public class FormDescriptor {
         mSections = new ArrayList<SectionDescriptor>();
     }
 
-    public void addSection(SectionDescriptor sectionDescriptor) {
-        insertSectionAtIndex(sectionDescriptor, mSections.size());
+    /**
+     * Set CellConfig member
+     */
+    public void setCellConfig(HashMap<String, Object> cellConfig) {
+        mCellConfig = cellConfig;
+    }
+
+    public void addSection(SectionDescriptor section) {
+        insertSectionAtIndex(section, mSections.size());
     }
 
     public void removeSection(SectionDescriptor sectionDescriptor) {
@@ -70,6 +78,11 @@ public class FormDescriptor {
     public void insertSectionAtIndex(SectionDescriptor section, int index) {
         section.setFormDescriptor(this);
         mSections.add(index, section);
+
+        // Propagate the CellConfig from Form to Section
+
+        if (mCellConfig != null)
+            section.setCellConfig(mCellConfig);
     }
 
     private void removeSectionAtIndex(int index) {

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -73,7 +74,7 @@ public abstract class FormBaseCell extends Cell {
         deleteButton.setFocusableInTouchMode(false);
         deleteButton.setFocusable(false);
 
-        Drawable removeIcon = getContext().getResources().getDrawable(R.drawable.ic_action_remove);
+        Drawable removeIcon = AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.ic_action_remove);
         removeIcon.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
 
         deleteButton.setImageDrawable(removeIcon);
@@ -98,7 +99,7 @@ public abstract class FormBaseCell extends Cell {
         addButton.setFocusableInTouchMode(false);
         addButton.setFocusable(false);
 
-        Drawable addIcon = getContext().getResources().getDrawable(R.drawable.ic_action_new);
+        Drawable addIcon = AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.ic_action_new);
         addIcon.setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
 
 
@@ -129,6 +130,16 @@ public abstract class FormBaseCell extends Cell {
         mMultiValueWrapper = linearLayout;
 
         return mMultiValueWrapper;
+    }
+
+    @Override
+    public boolean shouldAddDivider() {
+
+        RowDescriptor rowDescriptor = (RowDescriptor) getFormItemDescriptor();
+        if (rowDescriptor.isLastRowInSection())
+            return false;
+
+        return super.shouldAddDivider();
     }
 
     @Override

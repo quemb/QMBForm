@@ -1,6 +1,7 @@
 package com.quemb.qmbform.descriptor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -46,11 +47,24 @@ public class SectionDescriptor extends FormItemDescriptor {
     }
 
     public void addRow(RowDescriptor row) {
-        insertRowAtIndex(row, mRows.size());
+        addRow(row, mRows.size());
     }
 
     public void addRow(RowDescriptor row, int index) {
         insertRowAtIndex(row, index);
+
+        // Propagate the CellConfig from Section to Row
+
+        HashMap<String, Object> cellConfig = getCellConfig();
+        if (cellConfig != null)
+            row.setCellConfig(cellConfig);
+    }
+
+    public void addRow(RowDescriptor row, HashMap<String, Object> cellConfig) {
+        addRow(row, mRows.size());
+
+        if (cellConfig != null)
+            row.setCellConfig(cellConfig);
     }
 
     public void removeRow(RowDescriptor row) {

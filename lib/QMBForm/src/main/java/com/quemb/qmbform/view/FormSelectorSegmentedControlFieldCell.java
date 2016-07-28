@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormOptionsObject;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
@@ -35,8 +36,8 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         mValues = new ArrayList<Object>();
         mSegmentedGroup = (SegmentedGroup) findViewById(R.id.segmentedGroup);
         mTextView = (TextView) findViewById(R.id.textView);
-        mTextView.setTextColor(R.attr.editTextColor);
-        mTextView.setTextAppearance(getContext(), R.style.Base_TextAppearance_AppCompat_Body2);
+
+        setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
         radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
         radioButton.setClickable(true);
         radioButton.setChecked(checked);
-        int padding = getResources().getDimensionPixelOffset(R.dimen.cell_padding);
+        int padding = getResources().getDimensionPixelOffset(R.dimen.qmb_padding);
         radioButton.setPadding(padding, padding, padding, padding);
         group.addView(radioButton);
         group.updateBackground();

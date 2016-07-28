@@ -88,6 +88,8 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     private int mHint = android.R.string.untitled;
 
+    private boolean mLastRowInSection = false;
+
     public static RowDescriptor newInstance(String tag) {
 
         return RowDescriptor.newInstance(tag, FormRowDescriptorTypeDetailInline);
@@ -146,7 +148,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return mValue;
     }
 
-    public void setValue(Value<T> value) {
+    public void setValue(@SuppressWarnings("unchecked") Value<T> value) {
         mValue = value;
     }
 
@@ -274,6 +276,14 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     public void addValidator(FormValidator validator) {
         mValidators.add(validator);
+    }
+
+    public void setLastRowInSection(boolean lastRow) {
+        mLastRowInSection = lastRow;
+    }
+
+    public boolean isLastRowInSection() {
+        return mLastRowInSection;
     }
 }
 

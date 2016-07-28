@@ -22,7 +22,7 @@ public class FormExternalButtonFieldCell extends FormButtonFieldCell {
     public void onCellSelected() {
         super.onCellSelected();
 
-        Value<String> value = getRowDescriptor().getValue();
+        @SuppressWarnings("unchecked") Value<String> value = getRowDescriptor().getValue();
         if (value != null && value.getValue() != null) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(value.getValue()));
             getContext().startActivity(i);

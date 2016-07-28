@@ -3,6 +3,7 @@ package com.quemb.qmbform.sample.controller;
 import com.quemb.qmbform.FormManager;
 import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
@@ -77,8 +78,26 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         entry.multiValue.add("tags");
         entry.multiValue.add("allowed");
 
+        // More styles and colors for cells
+        //HashMap<String, Object> cellConfig = new HashMap<>(8);
+
+        // TextAppearance for section, label, value and button
+        //cellConfig.put(CellDescriptor.APPEARANCE_SECTION, Integer.valueOf(R.style.TextAppearance_Form_Section));
+        //cellConfig.put(CellDescriptor.APPEARANCE_TEXT_LABEL, Integer.valueOf(R.style.TextAppearance_Form_Label));
+        //cellConfig.put(CellDescriptor.APPEARANCE_TEXT_VALUE, Integer.valueOf(R.style.TextAppearance_Form_Value));
+        //cellConfig.put(CellDescriptor.APPEARANCE_BUTTON, Integer.valueOf(R.style.TextAppearance_Form_Button));
+
+        // color for label and value
+        //cellConfig.put(CellDescriptor.COLOR_LABEL, Integer.valueOf(0x80C0FFC0));
+        //cellConfig.put(CellDescriptor.COLOR_VALUE, Integer.valueOf(0xC0C0FFC0));
+
+        // Disabled color for label and value
+        //cellConfig.put(CellDescriptor.COLOR_LABEL_DISABLED, Integer.valueOf(0x80FFC0C0));
+        //cellConfig.put(CellDescriptor.COLOR_VALUE_DISABLED, Integer.valueOf(0xC0FFC0C0));
+
         FormDescriptorAnnotationFactory factory = new FormDescriptorAnnotationFactory(getActivity());
         FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry);
+        //FormDescriptor descriptor = factory.createFormDescriptorFromAnnotatedClass(entry, cellConfig);
 
         FormManager formManager = new FormManager();
         formManager.setup(descriptor, mListView, getActivity());

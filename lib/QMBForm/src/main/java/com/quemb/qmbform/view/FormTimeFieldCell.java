@@ -1,8 +1,10 @@
 package com.quemb.qmbform.view;
 
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -19,11 +21,19 @@ public class FormTimeFieldCell extends FormDateFieldCell {
 
 
     @Override
-    protected void updateDateLabel(Date date) {
+    protected void updateDateLabel(Date date, boolean disabled) {
 
         DateFormat dateFormat = android.text.format.DateFormat.getTimeFormat(getContext());
         String s = dateFormat.format(date);
-        getDetailTextView().setText(s);
+
+        TextView editView = getDetailTextView();
+        editView.setText(s);
+
+        if (disabled)
+        {
+            editView.setEnabled(false);
+            setTextColor(editView, CellDescriptor.COLOR_VALUE_DISABLED);
+        }
 
     }
 

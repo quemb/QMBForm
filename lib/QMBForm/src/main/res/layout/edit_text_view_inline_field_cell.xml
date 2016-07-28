@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:padding="@dimen/cell_padding">
+              android:padding="@dimen/qmb_padding">
 
 
     <TextView
