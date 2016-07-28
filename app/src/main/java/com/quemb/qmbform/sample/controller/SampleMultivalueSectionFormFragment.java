@@ -74,6 +74,9 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
 
         mChangesMap = new HashMap<String, Value<?>>();
 
+        // More styles and colors for cells
+        HashMap<String, Object> cellConfig = new HashMap<>(8);
+
         // TextAppearance for section, label, value and button
         //cellConfig.put(CellDescriptor.APPEARANCE_SECTION, Integer.valueOf(R.style.TextAppearance_Form_Section));
         //cellConfig.put(CellDescriptor.APPEARANCE_TEXT_LABEL, Integer.valueOf(R.style.TextAppearance_Form_Label));

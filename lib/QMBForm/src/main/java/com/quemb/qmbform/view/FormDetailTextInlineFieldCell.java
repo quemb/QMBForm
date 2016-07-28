@@ -1,10 +1,14 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 /**
