@@ -7,10 +7,13 @@ android:
     # - tools
 
     # The BuildTools version used by your project
-    - build-tools-23.0.3
+    - build-tools-23.0.2
 
     # The SDK version used to compile your project
     - android-23
+
+    # Design Support Library
+    - extra-android-m2repository
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
@@ -20,4 +23,5 @@ before_install:
     - chmod +x gradlew
 
 script:
-    - TERM=dumb ./gradlew -i test
+    # - TERM=dumb ./gradlew -i test
+    - ./gradlew build connectedCheck
