@@ -29,6 +29,7 @@ public class FormSelectorSegmentedControlFieldCellTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void hasCorrectSegmentSelected() {
         RowDescriptor rowDescriptor = RowDescriptor.newInstance("segmented",
                 RowDescriptor.FormRowDescriptorTypeSelectorSegmentedControl,
@@ -46,6 +47,7 @@ public class FormSelectorSegmentedControlFieldCellTest {
         // Check that value exists in selector options
         FormOptionsObject selected = FormOptionsObject.formOptionsObjectFromArrayWithValue(
                 rowDescriptor.getValueData(), selectorOptions);
+
         assertThat(selected.getDisplayText(),
                 is("Test 1"));
 

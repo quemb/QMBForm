@@ -15,6 +15,9 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertNotNull;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.nullValue;
 
 /**
  * Created by Toni on 25.10.15.
@@ -50,7 +53,8 @@ public class FormBaseCellTest {
     public void testShouldCreateMultiValueWrapper() {
 
 
-        assertNotNull(cell.createMultiValueWrapper());
+        //assertNotNull(cell.createMultiValueWrapper());
+        assertThat(cell.createMultiValueWrapper(), not(nullValue()));
 
 
     }

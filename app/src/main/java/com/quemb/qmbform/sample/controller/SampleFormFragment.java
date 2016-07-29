@@ -70,6 +70,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -370,6 +371,7 @@ public class SampleFormFragment extends Fragment implements OnFormRowValueChange
         }
 
         @Override
+        @SuppressWarnings("unchecked")
         protected void onPostExecute(ArrayList<String> strings) {
             super.onPostExecute(strings);
             mProgressDialog.dismiss();
