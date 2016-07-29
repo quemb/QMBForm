@@ -251,7 +251,6 @@ public class FormDescriptorAnnotationFactory {
         public String tag;
         public Boolean multiValue;
         public List<Field> fields;
-        ;
 
 
         public Section(String sectionTitle) {

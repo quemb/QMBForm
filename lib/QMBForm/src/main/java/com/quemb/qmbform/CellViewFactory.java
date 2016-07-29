@@ -124,8 +124,7 @@ public class CellViewFactory {
 
         if (descriptor instanceof SectionDescriptor) {
 
-            SectionCell sectionCell = new SectionCell(context, (SectionDescriptor) descriptor);
-            rowView = sectionCell;
+            rowView = new SectionCell(context, (SectionDescriptor) descriptor);
 
         } else if (descriptor instanceof RowDescriptor) {
             RowDescriptor row = (RowDescriptor) descriptor;
