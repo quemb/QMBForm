@@ -1,4 +1,3 @@
-
 plugins {
     id "org.sonarqube" version "1.0"
 }
@@ -46,16 +45,6 @@ android {
     }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'info.hoang8f:android-segmented:1.0.5'
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.hamcrest:hamcrest-core:1.2.1'
-    testCompile 'org.robolectric:robolectric:3.0'
-}
-
 apply plugin: 'idea'
 
 idea {
@@ -82,7 +71,6 @@ sonarqube {
         property "sonar.jacoco.reportPath", "$buildDir/jacoco/testDebugUnitTest.exec"
     }
 }
-
 
 apply plugin: "jacoco"
 
@@ -122,4 +110,14 @@ task jacocoTestReport(type: JacocoReport ) {
             destination = "${project.buildDir}/reports/jacoco"
         }
     }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'info.hoang8f:android-segmented:1.0.5'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:hamcrest-core:1.2.1'
+    testCompile 'org.robolectric:robolectric:3.0'
 }

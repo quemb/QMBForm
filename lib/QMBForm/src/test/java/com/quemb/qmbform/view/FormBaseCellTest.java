@@ -1,5 +1,8 @@
 package com.quemb.qmbform.view;
 
+import android.app.Activity;
+import android.os.Build;
+
 import com.quemb.qmbform.BuildConfig;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
@@ -11,15 +14,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
-import android.app.Activity;
-import android.inputmethodservice.Keyboard;
-
-import static org.junit.Assert.*;
+import static junit.framework.Assert.assertNotNull;
 
 /**
  * Created by Toni on 25.10.15.
  */
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 public class FormBaseCellTest {
 

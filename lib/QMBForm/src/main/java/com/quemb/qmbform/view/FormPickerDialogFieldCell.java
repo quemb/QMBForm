@@ -34,6 +34,7 @@ public class FormPickerDialogFieldCell extends FormDetailTextInlineFieldCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCellSelected() {
         super.onCellSelected();
         if (getRowDescriptor().getDataSource() == null) {

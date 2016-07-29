@@ -53,6 +53,7 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCellSelected() {
         super.onCellSelected();
         if (getRowDescriptor().getDataSource() == null) {

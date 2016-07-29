@@ -80,7 +80,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     private Boolean mRequired = false;
     private Boolean mDisabled = false;
 
-    private List<FormValidator> mValidators;
+    @SuppressWarnings("unchecked") private List<FormValidator> mValidators;
 
     private List<FormOptionsObject> mSelectorOptions;
 
@@ -108,6 +108,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     }
 
+    @SuppressWarnings("unchecked")
     public static RowDescriptor newInstance(String tag, String rowType, String title, Value<?> value) {
 
         RowDescriptor descriptor = new RowDescriptor();
@@ -121,6 +122,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     }
 
+    @SuppressWarnings("unchecked")
     public static RowDescriptor newInstanceFromAnnotatedField(Field field, Value value, Context context) {
         FormElement annotation = field.getAnnotation(FormElement.class);
         RowDescriptor rowDescriptor = RowDescriptor.newInstance(
@@ -261,6 +263,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return (rowValidationErrors.isEmpty()) ? null : rowValidationErrors;
     }
 
+    @SuppressWarnings("unchecked")
     public static RowDescriptor newInstance(RowDescriptor rowDescriptor) {
 
         Long tsLong = System.currentTimeMillis() / 1000;

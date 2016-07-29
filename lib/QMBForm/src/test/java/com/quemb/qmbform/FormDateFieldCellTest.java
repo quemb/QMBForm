@@ -2,6 +2,7 @@ package com.quemb.qmbform;
 
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormTimeDialogFieldCell;
 
 import org.junit.After;

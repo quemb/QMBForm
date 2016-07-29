@@ -152,6 +152,7 @@ public abstract class FormBaseCell extends Cell {
         return (RowDescriptor) getFormItemDescriptor();
     }
 
+    @SuppressWarnings("unchecked")
     public void onValueChanged(Value<?> newValue) {
         RowDescriptor row = getRowDescriptor();
         Value<?> oldValue = row.getValue();

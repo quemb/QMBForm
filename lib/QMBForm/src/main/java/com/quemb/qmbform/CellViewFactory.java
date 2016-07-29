@@ -68,6 +68,7 @@ public class CellViewFactory {
         return instance;
     }
 
+    @SuppressWarnings("unchecked")
     public static void addFormRowDescriptor(String descriptorName, Class descriptorClass) {
         getInstance().mViewRowTypeMap.put(descriptorName, descriptorClass);
     }

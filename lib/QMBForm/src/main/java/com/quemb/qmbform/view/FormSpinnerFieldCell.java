@@ -39,6 +39,7 @@ public class FormSpinnerFieldCell extends FormTitleFieldCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void update() {
         super.update();
 

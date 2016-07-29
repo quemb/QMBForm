@@ -123,6 +123,7 @@ public class FormDescriptor {
         return formValidation.getRowValidationErrors().isEmpty();
     }
 
+    @SuppressWarnings("unchecked")
     public FormValidation getFormValidation(Context context) {
         FormValidation formValidation = new FormValidation(context);
         for (SectionDescriptor sectionDescriptor : getSections()) {

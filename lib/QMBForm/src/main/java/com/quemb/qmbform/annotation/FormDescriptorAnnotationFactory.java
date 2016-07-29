@@ -52,6 +52,7 @@ public class FormDescriptorAnnotationFactory {
         return createFormDescriptorFromFields(declaredFields, object, cellConfig);
     }
 
+    @SuppressWarnings("unchecked")
     public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object, HashMap<String, Object> cellConfig) {
         FormDescriptor formDescriptor = FormDescriptor.newInstance();
         if (cellConfig != null)
@@ -180,6 +181,7 @@ public class FormDescriptorAnnotationFactory {
 
     }
 
+    @SuppressWarnings("unchecked")
     public void addValidators(RowDescriptor rowDescriptor, FormElement annotation) {
         for (Class validator : annotation.validatorClasses()) {
             try {

@@ -46,6 +46,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void update() {
         mSegmentedGroup.removeAllViews();
 
