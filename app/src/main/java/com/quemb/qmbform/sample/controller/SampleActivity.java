@@ -4,17 +4,14 @@ import com.quemb.qmbform.sample.R;
 import com.quemb.qmbform.sample.model.TabItem;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.view.WindowManager;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SampleActivity extends ActionBarActivity {
+public class SampleActivity extends AppCompatActivity {
 
     public static String TAG = "SampleActivity";
 
