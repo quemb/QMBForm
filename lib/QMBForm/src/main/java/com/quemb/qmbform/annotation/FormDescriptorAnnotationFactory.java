@@ -1,13 +1,13 @@
 package com.quemb.qmbform.annotation;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormOptionsObject;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -52,7 +52,6 @@ public class FormDescriptorAnnotationFactory {
         return createFormDescriptorFromFields(declaredFields, object, cellConfig);
     }
 
-    @SuppressWarnings("unchecked")
     public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object, HashMap<String, Object> cellConfig) {
         FormDescriptor formDescriptor = FormDescriptor.newInstance();
         if (cellConfig != null)
@@ -134,24 +133,31 @@ public class FormDescriptorAnnotationFactory {
                     if (section.multiValue) {
                         sectionDescriptor.setTag(field.getName());
                         int index = 0;
-                        if ((value != null ? value.getValue() : null) instanceof ArrayList) {
-                            @SuppressWarnings("unchecked") ArrayList<Object> list = (ArrayList<Object>) value.getValue();
-                            for (Object item : list) {
-                                RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
-                                        annotation.rowDescriptorType());
-                                rowDescriptor.setValue(new Value<Object>(item));
-                                rowDescriptor.setHint(annotation.hint());
-                                sectionDescriptor.addRow(rowDescriptor, cellConfig);
-                                index++;
-                            }
+
+//                        if ((value != null ? value.getValue() : null) instanceof ArrayList) {
+//                            ArrayList<Object> list = (ArrayList<Object>) value.getValue();
+//                            for (Object item : list) {
+//                                RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
+//                                        annotation.rowDescriptorType());
+//                                rowDescriptor.setValue(new Value<Object>(item));
+//                                rowDescriptor.setHint(annotation.hint());
+//                                sectionDescriptor.addRow(rowDescriptor, cellConfig);
+//                                index++;
+//                            }
+//                        }
+
+                        if (value != null && value.getValue() instanceof ArrayList)
+                        {
+                            index += setDescriptorValues((ArrayList<?>) value.getValue(), index, annotation, field, sectionDescriptor);
                         }
-                        RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
+
+                        RowDescriptor<?> rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
                                 annotation.rowDescriptorType());
                         rowDescriptor.setHint(annotation.hint());
                         addValidators(rowDescriptor, annotation);
                         sectionDescriptor.addRow(rowDescriptor, cellConfig);
                     } else {
-                        RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
+                        RowDescriptor<?> rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
                                 annotation.rowDescriptorType(),
                                 getContext().getString(annotation.label()),
                                 value);
@@ -181,11 +187,32 @@ public class FormDescriptorAnnotationFactory {
 
     }
 
-    @SuppressWarnings("unchecked")
-    public void addValidators(RowDescriptor rowDescriptor, FormElement annotation) {
+
+    /**
+     * Generics: capture the wildcard of ArrayList
+     */
+    private <T> int setDescriptorValues(ArrayList<T> list, int index, FormElement annotation, Field field, SectionDescriptor sectionDescriptor)
+    {
+        if (list == null)
+            return 0;
+
+        int n = 0;
+        for (T item : list) {
+            RowDescriptor<T> rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index + n,
+                    annotation.rowDescriptorType());
+            rowDescriptor.setValue(new Value<T>(item));
+            rowDescriptor.setHint(annotation.hint());
+            sectionDescriptor.addRow(rowDescriptor);
+            n++;
+        }
+        return n;
+    }
+
+    public <T> void addValidators(RowDescriptor<T> rowDescriptor, FormElement annotation) {
         for (Class validator : annotation.validatorClasses()) {
             try {
-                rowDescriptor.addValidator((FormValidator) validator.getConstructor().newInstance());
+                @SuppressWarnings("unchecked") FormValidator<T> validatorInstance = (FormValidator<T>) validator.getConstructor().newInstance();
+                rowDescriptor.addValidator(validatorInstance);
             } catch (InstantiationException e) {
                 Log.e(TAG, e.getMessage(), e);
             } catch (IllegalAccessException e) {

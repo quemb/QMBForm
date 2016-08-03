@@ -29,9 +29,8 @@ public class FormSelectorSegmentedControlFieldCellTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void hasCorrectSegmentSelected() {
-        RowDescriptor rowDescriptor = RowDescriptor.newInstance("segmented",
+        RowDescriptor<String> rowDescriptor = RowDescriptor.newInstance("segmented",
                 RowDescriptor.FormRowDescriptorTypeSelectorSegmentedControl,
                 "Segmented Control Test",
                 new Value<String>("1"));

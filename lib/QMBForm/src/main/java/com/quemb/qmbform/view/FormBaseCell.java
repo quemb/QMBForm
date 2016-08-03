@@ -1,12 +1,5 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
-import com.quemb.qmbform.descriptor.OnValueChangeListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -16,6 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.OnValueChangeListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -37,18 +37,32 @@ public abstract class FormBaseCell extends Cell {
 
     @Override
     protected void init() {
-        super.init();
 
-        if (getRowDescriptor() != null && getRowDescriptor().getValue() != null) {
-            getRowDescriptor().getValue().setOnValueChangeListener(new OnValueChangeListener() {
+        super.init();
+        initOnChange(getRowDescriptor());
+
+    }
+
+    /**
+     * Generics: capture the wildcard of RowDescriptor
+     */
+    private <T> void initOnChange(RowDescriptor<T> rowDescriptor)
+    {
+        if (rowDescriptor == null)
+            return;
+
+        Value<T> value = rowDescriptor.getValue();
+        if (value != null)
+        {
+            value.setOnValueChangeListener(new OnValueChangeListener<T>()
+            {
                 @Override
-                public void onChange(Object value) {
+                public void onChange(T value)
+                {
                     update();
                 }
             });
         }
-
-
     }
 
     protected ViewGroup getSuperViewForLayoutInflation() {
@@ -148,8 +162,8 @@ public abstract class FormBaseCell extends Cell {
 
     }
 
-    public RowDescriptor getRowDescriptor() {
-        return (RowDescriptor) getFormItemDescriptor();
+    public RowDescriptor<?> getRowDescriptor() {
+        return (RowDescriptor<?>) getFormItemDescriptor();
     }
 
     @SuppressWarnings("unchecked")

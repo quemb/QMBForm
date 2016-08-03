@@ -1,5 +1,9 @@
 package com.quemb.qmbform;
 
+import android.content.Context;
+import android.os.Build;
+import android.util.Log;
+
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
@@ -44,10 +48,6 @@ import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
 import com.quemb.qmbform.view.SeperatorSectionCell;
 
-import android.content.Context;
-import android.os.Build;
-import android.util.Log;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
@@ -68,8 +68,7 @@ public class CellViewFactory {
         return instance;
     }
 
-    @SuppressWarnings("unchecked")
-    public static void addFormRowDescriptor(String descriptorName, Class descriptorClass) {
+    public static void addFormRowDescriptor(String descriptorName, Class<? extends FormBaseCell> descriptorClass) {
         getInstance().mViewRowTypeMap.put(descriptorName, descriptorClass);
     }
 

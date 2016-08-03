@@ -10,6 +10,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"/>
+        android:id="@+id/textView"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/><!-- to prevent keyboard to appear on startup -->
 
 </LinearLayout>

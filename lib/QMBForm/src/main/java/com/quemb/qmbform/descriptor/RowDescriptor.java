@@ -1,10 +1,10 @@
 package com.quemb.qmbform.descriptor;
 
+import android.content.Context;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.annotation.FormElement;
 import com.quemb.qmbform.annotation.FormValidator;
-
-import android.content.Context;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
     private Boolean mRequired = false;
     private Boolean mDisabled = false;
 
-    @SuppressWarnings("unchecked") private List<FormValidator> mValidators;
+    private List<FormValidator<T>> mValidators;
 
     private List<FormOptionsObject> mSelectorOptions;
 
@@ -90,42 +90,40 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     private boolean mLastRowInSection = false;
 
-    public static RowDescriptor newInstance(String tag) {
+    public static <T> RowDescriptor<T> newInstance(String tag) {
 
         return RowDescriptor.newInstance(tag, FormRowDescriptorTypeDetailInline);
 
     }
 
-    public static RowDescriptor newInstance(String tag, String rowType) {
+    public static <T> RowDescriptor<T> newInstance(String tag, String rowType) {
 
         return RowDescriptor.newInstance(tag, rowType, null);
 
     }
 
-    public static RowDescriptor newInstance(String tag, String rowType, String title) {
+    public static <T> RowDescriptor<T> newInstance(String tag, String rowType, String title) {
 
         return RowDescriptor.newInstance(tag, rowType, title, null);
 
     }
 
-    @SuppressWarnings("unchecked")
-    public static RowDescriptor newInstance(String tag, String rowType, String title, Value<?> value) {
+    public static <T> RowDescriptor<T> newInstance(String tag, String rowType, String title, Value<T> value) {
 
-        RowDescriptor descriptor = new RowDescriptor();
+        RowDescriptor<T> descriptor = new RowDescriptor<T>();
         descriptor.mTitle = title;
         descriptor.mTag = tag;
         descriptor.mRowType = rowType;
         descriptor.setValue(value);
-        descriptor.mValidators = new ArrayList<FormValidator>();
+        descriptor.mValidators = new ArrayList<FormValidator<T>>();
 
         return descriptor;
 
     }
 
-    @SuppressWarnings("unchecked")
-    public static RowDescriptor newInstanceFromAnnotatedField(Field field, Value value, Context context) {
+    public static <T> RowDescriptor<T> newInstanceFromAnnotatedField(Field field, Value<T> value, Context context) {
         FormElement annotation = field.getAnnotation(FormElement.class);
-        RowDescriptor rowDescriptor = RowDescriptor.newInstance(
+        RowDescriptor<T> rowDescriptor = RowDescriptor.newInstance(
                 annotation.tag().length() > 0 ? annotation.tag() : field.getName(),
                 annotation.rowDescriptorType(),
                 context.getString(annotation.label()),
@@ -150,7 +148,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return mValue;
     }
 
-    public void setValue(@SuppressWarnings("unchecked") Value<T> value) {
+    public void setValue(Value<T> value) {
         mValue = value;
     }
 
@@ -219,7 +217,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
             }
         }
         if (getValidators() != null && valid) {
-            for (FormValidator validator : getValidators()) {
+            for (FormValidator<T> validator : getValidators()) {
                 if (validator.validate(this) != null) {
                     valid = false;
                     break;
@@ -252,7 +250,7 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         }
 
         if (getValidators() != null) {
-            for (FormValidator validator : getValidators()) {
+            for (FormValidator<T> validator : getValidators()) {
                 RowValidationError error = validator.validate(this);
                 if (error != null) {
                     rowValidationErrors.add(error);
@@ -263,21 +261,20 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return (rowValidationErrors.isEmpty()) ? null : rowValidationErrors;
     }
 
-    @SuppressWarnings("unchecked")
-    public static RowDescriptor newInstance(RowDescriptor rowDescriptor) {
+    public static <T> RowDescriptor<T> newInstance(RowDescriptor<T> rowDescriptor) {
 
         Long tsLong = System.currentTimeMillis() / 1000;
         String ts = tsLong.toString();
-        RowDescriptor newInstance = RowDescriptor.newInstance(rowDescriptor.getTag() + "_" + ts, rowDescriptor.getRowType());
+        RowDescriptor<T> newInstance = RowDescriptor.newInstance(rowDescriptor.getTag() + "_" + ts, rowDescriptor.getRowType());
         newInstance.setDataSource(rowDescriptor.getDataSource());
         return newInstance;
     }
 
-    public List<FormValidator> getValidators() {
+    public List<FormValidator<T>> getValidators() {
         return mValidators;
     }
 
-    public void addValidator(FormValidator validator) {
+    public void addValidator(FormValidator<T> validator) {
         mValidators.add(validator);
     }
 

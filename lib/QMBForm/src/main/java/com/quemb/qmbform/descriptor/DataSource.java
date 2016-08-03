@@ -7,5 +7,5 @@ public abstract class DataSource<T> {
     /**
      * Call the listener for callback actions
      */
-    public abstract void loadData(DataSourceListener listener);
+    public abstract void loadData(DataSourceListener<T> listener);
 }
