@@ -10,7 +10,7 @@ import java.util.List;
 public class SectionDescriptor extends FormItemDescriptor {
 
     private FormDescriptor mFormDescriptor;
-    private ArrayList<RowDescriptor> mRows;
+    private ArrayList<RowDescriptor<?>> mRows;
     private Boolean mMultivalueSection = false;
 
     public static SectionDescriptor newInstance(String tag) {
@@ -30,7 +30,7 @@ public class SectionDescriptor extends FormItemDescriptor {
 
     public SectionDescriptor() {
 
-        mRows = new ArrayList<RowDescriptor>();
+        mRows = new ArrayList<RowDescriptor<?>>();
 
     }
 
@@ -46,11 +46,11 @@ public class SectionDescriptor extends FormItemDescriptor {
         return mTitle;
     }
 
-    public void addRow(RowDescriptor row) {
+    public void addRow(RowDescriptor<?> row) {
         addRow(row, mRows.size());
     }
 
-    public void addRow(RowDescriptor row, int index) {
+    public void addRow(RowDescriptor<?> row, int index) {
         insertRowAtIndex(row, index);
 
         // Propagate the CellConfig from Section to Row
@@ -60,14 +60,14 @@ public class SectionDescriptor extends FormItemDescriptor {
             row.setCellConfig(cellConfig);
     }
 
-    public void addRow(RowDescriptor row, HashMap<String, Object> cellConfig) {
+    public void addRow(RowDescriptor<?> row, HashMap<String, Object> cellConfig) {
         addRow(row, mRows.size());
 
         if (cellConfig != null)
             row.setCellConfig(cellConfig);
     }
 
-    public void removeRow(RowDescriptor row) {
+    public void removeRow(RowDescriptor<?> row) {
         int index = mRows.indexOf(row);
         removeRowAtIndex(index);
     }
@@ -76,11 +76,11 @@ public class SectionDescriptor extends FormItemDescriptor {
         return mRows.size();
     }
 
-    public List<RowDescriptor> getRows() {
+    public List<RowDescriptor<?>> getRows() {
         return mRows;
     }
 
-    private void insertRowAtIndex(RowDescriptor row, int index) {
+    private void insertRowAtIndex(RowDescriptor<?> row, int index) {
         if (mRows.size() >= index) {
             row.setSectionDescriptor(this);
             mRows.add(index, row);
@@ -92,7 +92,7 @@ public class SectionDescriptor extends FormItemDescriptor {
     }
 
     private void removeRowAtIndex(int index) {
-        RowDescriptor rowDescriptor = mRows.get(index);
+        RowDescriptor<?> rowDescriptor = mRows.get(index);
         mRows.remove(index);
         if (getFormDescriptor() != null) {
             getFormDescriptor().didRemoveRow(rowDescriptor, this);
@@ -104,10 +104,10 @@ public class SectionDescriptor extends FormItemDescriptor {
         return getTitle() != null && getTitle().length() > 0;
     }
 
-    public RowDescriptor findRowDescriptor(String tag) {
-        RowDescriptor rowDescriptor = null;
+    public RowDescriptor<?> findRowDescriptor(String tag) {
+        RowDescriptor<?> rowDescriptor = null;
 
-        for (RowDescriptor iRowDescriptor : getRows()) {
+        for (RowDescriptor<?> iRowDescriptor : getRows()) {
             if (tag.equals(iRowDescriptor.getTag())) {
                 rowDescriptor = iRowDescriptor;
                 break;
@@ -117,7 +117,7 @@ public class SectionDescriptor extends FormItemDescriptor {
         return rowDescriptor;
     }
 
-    public int getIndexOfRowDescriptor(RowDescriptor rowDescriptor) {
+    public int getIndexOfRowDescriptor(RowDescriptor<?> rowDescriptor) {
         return mRows.indexOf(rowDescriptor);
     }
 
@@ -132,9 +132,9 @@ public class SectionDescriptor extends FormItemDescriptor {
     public List getRowValues() {
 
         ArrayList<Object> values = new ArrayList<>();
-        for (RowDescriptor rowDescriptor : mRows) {
-            if (rowDescriptor.getValue() != null && rowDescriptor.getValue().getValue() != null) {
-                values.add(rowDescriptor.getValue().getValue());
+        for (RowDescriptor<?> rowDescriptor : mRows) {
+            if (rowDescriptor.getValue() != null && rowDescriptor.getValueData() != null) {
+                values.add(rowDescriptor.getValueData());
             }
         }
         return values;

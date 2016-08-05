@@ -29,7 +29,7 @@ public abstract class FormBaseCell extends Cell {
 
     private LinearLayout mMultiValueWrapper;
 
-    public FormBaseCell(Context context, RowDescriptor rowDescriptor) {
+    public FormBaseCell(Context context, RowDescriptor<?> rowDescriptor) {
 
         super(context, rowDescriptor);
 
@@ -43,9 +43,7 @@ public abstract class FormBaseCell extends Cell {
 
     }
 
-    /**
-     * Generics: capture the wildcard of RowDescriptor
-     */
+    // Capture the wildcard of RowDescriptor
     private <T> void initOnChange(RowDescriptor<T> rowDescriptor)
     {
         if (rowDescriptor == null)
@@ -98,7 +96,7 @@ public abstract class FormBaseCell extends Cell {
             @Override
             public void onClick(View v) {
 
-                RowDescriptor rowDescriptor = getRowDescriptor();
+                RowDescriptor<?> rowDescriptor = getRowDescriptor();
 
                 SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
                 sectionDescriptor.removeRow(rowDescriptor);
@@ -149,7 +147,7 @@ public abstract class FormBaseCell extends Cell {
     @Override
     public boolean shouldAddDivider() {
 
-        RowDescriptor rowDescriptor = (RowDescriptor) getFormItemDescriptor();
+        RowDescriptor<?> rowDescriptor = (RowDescriptor<?>) getFormItemDescriptor();
         if (rowDescriptor.isLastRowInSection())
             return false;
 
@@ -166,11 +164,10 @@ public abstract class FormBaseCell extends Cell {
         return (RowDescriptor<?>) getFormItemDescriptor();
     }
 
-    @SuppressWarnings("unchecked")
-    public void onValueChanged(Value<?> newValue) {
-        RowDescriptor row = getRowDescriptor();
-        Value<?> oldValue = row.getValue();
-        if (oldValue == null || newValue == null || !newValue.getValue().equals(oldValue.getValue())) {
+    public <T> void onValueChanged(Value<T> newValue) {
+        @SuppressWarnings("unchecked") RowDescriptor<T> row = (RowDescriptor<T>) getRowDescriptor();
+        Value<T> oldValue = row.getValue();
+        if (oldValue == null || newValue == null || !newValue.getData().equals(oldValue.getData())) {
             OnFormRowValueChangedListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFormRowValueChangedListener();
             row.setValue(newValue);
             if (listener != null) {

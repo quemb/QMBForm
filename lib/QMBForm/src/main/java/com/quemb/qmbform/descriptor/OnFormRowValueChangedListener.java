@@ -5,6 +5,6 @@ package com.quemb.qmbform.descriptor;
  */
 public interface OnFormRowValueChangedListener {
 
-    public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue);
+    public void onValueChanged(RowDescriptor<?> rowDescriptor, Value<?> oldValue, Value<?> newValue);
 
 }

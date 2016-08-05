@@ -23,7 +23,7 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
     private ImageButton mImageButton;
 
     public FormTextPickerDialogFieldCell(Context context,
-                                         RowDescriptor rowDescriptor) {
+                                         RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -71,10 +71,10 @@ public class FormTextPickerDialogFieldCell extends FormEditTextFieldCell {
      */
     private <T> void loadData(RowDescriptor<T> rowDescriptor)
     {
-        rowDescriptor.getDataSource().loadData(new DataSourceListener<T>()
+        rowDescriptor.getDataSource().loadData(new DataSourceListener()
         {
             @Override
-            public void onDataSourceLoaded(List<T> list)
+            public <T> void onDataSourceLoaded(List<T> list)
             {
 
                 if (list.size() > 0)

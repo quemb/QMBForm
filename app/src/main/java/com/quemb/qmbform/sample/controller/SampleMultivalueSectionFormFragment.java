@@ -1,19 +1,5 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.DataSource;
-import com.quemb.qmbform.FormManager;
-import com.quemb.qmbform.OnFormRowClickListener;
-import com.quemb.qmbform.descriptor.DataSourceListener;
-import com.quemb.qmbform.descriptor.FormDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.SectionDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-import com.quemb.qmbform.sample.R;
-
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.quemb.qmbform.FormManager;
+import com.quemb.qmbform.OnFormRowClickListener;
+import com.quemb.qmbform.descriptor.CellDescriptor;
+import com.quemb.qmbform.descriptor.DataSource;
+import com.quemb.qmbform.descriptor.DataSourceListener;
+import com.quemb.qmbform.descriptor.FormDescriptor;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.OnFormRowChangeListener;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.SectionDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.sample.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -185,7 +185,7 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
     }
 
     @Override
-    public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
+    public void onValueChanged(RowDescriptor<?> rowDescriptor, Value<?> oldValue, Value<?> newValue) {
 
         Log.d(TAG, "Value Changed: " + rowDescriptor.getTitle());
 //
@@ -202,17 +202,17 @@ public class SampleMultivalueSectionFormFragment extends Fragment implements OnF
     }
 
     @Override
-    public void onRowAdded(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowAdded(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
 
     }
 
     @Override
-    public void onRowRemoved(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowRemoved(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
 
     }
 
     @Override
-    public void onRowChanged(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowChanged(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
 
     }
 

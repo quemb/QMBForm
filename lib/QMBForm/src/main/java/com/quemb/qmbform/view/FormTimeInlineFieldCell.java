@@ -1,12 +1,13 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.content.Context;
 import android.os.Build;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.TimePickerInline;
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
         TimePicker.OnTimeChangedListener {
 
-    private TimePicker mTimePicker;
+    private TimePickerInline mTimePicker;
 
     public FormTimeInlineFieldCell(Context context,
-                                   RowDescriptor rowDescriptor) {
+                                   RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -30,7 +31,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     protected void init() {
 
         super.init();
-        mTimePicker = (TimePicker) findViewById(R.id.timePicker);
+        mTimePicker = (TimePickerInline) findViewById(R.id.timePicker);
 
 
     }
@@ -57,7 +58,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
         mTimePicker.setOnTimeChangedListener(this);
 
         if (DateFormat.is24HourFormat(getContext()))
-                mTimePicker.setIs24HourView(true);
+            mTimePicker.setIs24HourView(true);
 
     }
 

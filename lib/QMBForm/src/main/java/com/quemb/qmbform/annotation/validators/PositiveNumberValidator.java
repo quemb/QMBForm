@@ -9,10 +9,10 @@ import com.quemb.qmbform.descriptor.RowValidationError;
 /**
  * Created by pmaccamp on 8/26/2015.
  */
-public class PositiveNumberValidator implements FormValidator {
+public class PositiveNumberValidator<T> implements FormValidator<T> {
     @Override
-    public RowValidationError validate(RowDescriptor descriptor) {
-        Object valueData = descriptor.getValue().getValue();
+    public RowValidationError validate(RowDescriptor<T> descriptor) {
+        T valueData = descriptor.getValueData();
         if (valueData != null) {
             if (valueData instanceof Number && ((Number) valueData).doubleValue() > 0) {
                 return null;

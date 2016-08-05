@@ -1,11 +1,12 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.TextView;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.content.Context;
-import android.widget.TextView;
+import com.quemb.qmbform.utils.Styling;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -14,7 +15,7 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
 
 
     public FormButtonFieldCell(Context context,
-                               RowDescriptor rowDescriptor) {
+                               RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -33,7 +34,9 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
 
         if (getRowDescriptor().getDisabled())
         {
-            setTextColor(textView, CellDescriptor.COLOR_VALUE_DISABLED);
+            if (setTextColor(textView, CellDescriptor.COLOR_VALUE_DISABLED) == false)
+                textView.setTextColor(Styling.getColorFromAttr(textView.getContext(), android.R.attr.textColor));
+
             textView.setClickable(false);
             textView.setEnabled(false);
 

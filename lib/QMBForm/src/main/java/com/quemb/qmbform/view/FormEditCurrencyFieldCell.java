@@ -1,10 +1,10 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
 import android.util.Log;
+
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -17,7 +17,7 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
     private static final String TAG = "FormEditCurrencyFieldCell";
 
     public FormEditCurrencyFieldCell(Context context,
-                                     RowDescriptor rowDescriptor) {
+                                     RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -26,9 +26,9 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
     protected void updateEditView() {
 
         @SuppressWarnings("unchecked") Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null) {
+        if (value != null && value.getData() != null) {
             NumberFormat format = NumberFormat.getCurrencyInstance();
-            String valueString = format.format(value.getValue());//String.valueOf(value.getValue());
+            String valueString = format.format(value.getData());//String.valueOf(value.getValue());
             getEditView().setText(valueString);
         }
 

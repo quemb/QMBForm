@@ -73,10 +73,11 @@ public class RowDescriptor<T> extends FormItemDescriptor {
 
     private String mRowType;
     private Value<T> mValue;
+
     /**
      * A list of valid values to pick from (e.g. used for spinners)
      */
-    private DataSource<T> mDataSource;
+    private DataSource mDataSource;
     private Boolean mRequired = false;
     private Boolean mDisabled = false;
 
@@ -152,8 +153,12 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         mValue = value;
     }
 
-    public Object getValueData() {
-        return mValue.getValue();
+    public T getValueData() {
+
+        if (mValue == null)
+            return null;
+        return mValue.getData();
+
     }
 
     public Boolean getRequired() {
@@ -172,11 +177,11 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         return mDataSource != null;
     }
 
-    public DataSource<T> getDataSource() {
+    public DataSource getDataSource() {
         return mDataSource;
     }
 
-    public void setDataSource(DataSource<T> dataSource) {
+    public void setDataSource(DataSource dataSource) {
         mDataSource = dataSource;
     }
 
@@ -209,11 +214,11 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         boolean valid = true;
 
         if (getRequired()) {
-            valid = getValue() != null && getValue().getValue() != null;
+            valid = (getValue() != null && getValueData() != null);
 
             if (getSelectorOptions() != null && getSelectorOptions().size() > 0) {
                 valid = valid &&
-                        FormOptionsObject.formOptionsObjectFromArrayWithValue(getValue().getValue(), getSelectorOptions()) != null;
+                        (FormOptionsObject.formOptionsObjectFromArrayWithValue(getValueData(), getSelectorOptions()) != null);
             }
         }
         if (getValidators() != null && valid) {
@@ -240,10 +245,10 @@ public class RowDescriptor<T> extends FormItemDescriptor {
         List<RowValidationError> rowValidationErrors = new ArrayList<RowValidationError>();
 
         if (getRequired()) {
-            if (!(getValue() != null && getValue().getValue() != null)) {
+            if (!(getValue() != null && getValueData() != null)) {
                 rowValidationErrors.add(new RowValidationError(this, R.string.validation_is_required));
             } else if (getSelectorOptions() != null && getSelectorOptions().size() > 0) {
-                if (FormOptionsObject.formOptionsObjectFromArrayWithValue(getValue().getValue(), getSelectorOptions()) == null) {
+                if (FormOptionsObject.formOptionsObjectFromArrayWithValue(getValueData(), getSelectorOptions()) == null) {
                     rowValidationErrors.add(new RowValidationError(this, R.string.validation_is_required));
                 }
             }

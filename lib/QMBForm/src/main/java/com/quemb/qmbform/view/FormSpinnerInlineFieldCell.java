@@ -1,15 +1,15 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.content.Context;
 
 /**
  * Created by pmaccamp on 9/4/2015.
  */
 public class FormSpinnerInlineFieldCell extends FormSpinnerFieldCell {
-    public FormSpinnerInlineFieldCell(Context context, RowDescriptor rowDescriptor) {
+    public FormSpinnerInlineFieldCell(Context context, RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 

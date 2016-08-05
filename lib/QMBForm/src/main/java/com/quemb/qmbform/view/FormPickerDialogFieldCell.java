@@ -20,7 +20,7 @@ public class FormPickerDialogFieldCell extends FormDetailTextInlineFieldCell {
 
 
     public FormPickerDialogFieldCell(Context context,
-                                     RowDescriptor rowDescriptor) {
+                                     RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -34,6 +34,7 @@ public class FormPickerDialogFieldCell extends FormDetailTextInlineFieldCell {
 
     @Override
     public void onCellSelected() {
+
         super.onCellSelected();
         if (getRowDescriptor().getDataSource() == null) {
             throw new NoDataSourceException();
@@ -43,15 +44,13 @@ public class FormPickerDialogFieldCell extends FormDetailTextInlineFieldCell {
 
     }
 
-    /**
-     * Generics: capture the wildcard of RowDescriptor
-     */
+    // Capture the wildcard of RowDescriptor
     private <T> void loadData(RowDescriptor<T> rowDescriptor)
     {
-        rowDescriptor.getDataSource().loadData(new DataSourceListener<T>()
+        rowDescriptor.getDataSource().loadData(new DataSourceListener()
         {
             @Override
-            public void onDataSourceLoaded(List<T> list)
+            public <T> void onDataSourceLoaded(List<T> list)
             {
                 if (list.size() > 0)
                 {

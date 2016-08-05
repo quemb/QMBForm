@@ -1,9 +1,9 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.content.Context;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -12,7 +12,7 @@ public class FormPickerDialogVerticalFieldCell extends FormPickerDialogFieldCell
 
 
     public FormPickerDialogVerticalFieldCell(Context context,
-                                             RowDescriptor rowDescriptor) {
+                                             RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 

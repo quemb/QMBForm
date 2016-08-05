@@ -1,10 +1,11 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.content.Context;
 import android.widget.TextView;
+
+import com.quemb.qmbform.descriptor.CellDescriptor;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.utils.Styling;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.Date;
 public class FormTimeFieldCell extends FormDateFieldCell {
 
     public FormTimeFieldCell(Context context,
-                             RowDescriptor rowDescriptor) {
+                             RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -32,7 +33,8 @@ public class FormTimeFieldCell extends FormDateFieldCell {
         if (disabled)
         {
             editView.setEnabled(false);
-            setTextColor(editView, CellDescriptor.COLOR_VALUE_DISABLED);
+            if (setTextColor(editView, CellDescriptor.COLOR_VALUE_DISABLED) == false)
+                editView.setTextColor(Styling.getColorFromAttr(editView.getContext(), android.R.attr.textColor));
         }
 
     }

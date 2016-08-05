@@ -14,7 +14,7 @@ public class FormExternalButtonFieldCell extends FormButtonFieldCell {
 
 
     public FormExternalButtonFieldCell(Context context,
-                                       RowDescriptor rowDescriptor) {
+                                       RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -23,8 +23,8 @@ public class FormExternalButtonFieldCell extends FormButtonFieldCell {
         super.onCellSelected();
 
         Value<?> value = getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null) {
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(value.getValue().toString()));
+        if (value != null && value.getData() != null) {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(value.getData().toString()));
             getContext().startActivity(i);
         }
 

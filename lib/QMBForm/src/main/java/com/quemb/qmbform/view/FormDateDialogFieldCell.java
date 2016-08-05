@@ -1,11 +1,11 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.widget.DatePicker;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +19,7 @@ public class FormDateDialogFieldCell extends FormDateFieldCell implements
     private Calendar mCalendar;
 
     public FormDateDialogFieldCell(Context context,
-                                   RowDescriptor rowDescriptor) {
+                                   RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 

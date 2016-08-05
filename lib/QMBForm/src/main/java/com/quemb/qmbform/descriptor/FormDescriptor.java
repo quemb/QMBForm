@@ -137,13 +137,13 @@ public class FormDescriptor {
 
     }
 
-    protected void didInsertRow(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    protected void didInsertRow(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
         if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowAdded(rowDescriptor, sectionDescriptor);
         }
     }
 
-    protected void didRemoveRow(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    protected void didRemoveRow(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
         if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowRemoved(rowDescriptor, sectionDescriptor);
         }

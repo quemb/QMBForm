@@ -54,6 +54,7 @@ public class FormDescriptorAnnotationFactory {
 
     public FormDescriptor createFormDescriptorFromFields(List<Field> fields, Object object, HashMap<String, Object> cellConfig) {
         FormDescriptor formDescriptor = FormDescriptor.newInstance();
+
         if (cellConfig != null)
             formDescriptor.setCellConfig(cellConfig);
 
@@ -134,21 +135,10 @@ public class FormDescriptorAnnotationFactory {
                         sectionDescriptor.setTag(field.getName());
                         int index = 0;
 
-//                        if ((value != null ? value.getValue() : null) instanceof ArrayList) {
-//                            ArrayList<Object> list = (ArrayList<Object>) value.getValue();
-//                            for (Object item : list) {
-//                                RowDescriptor rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + index,
-//                                        annotation.rowDescriptorType());
-//                                rowDescriptor.setValue(new Value<Object>(item));
-//                                rowDescriptor.setHint(annotation.hint());
-//                                sectionDescriptor.addRow(rowDescriptor, cellConfig);
-//                                index++;
-//                            }
-//                        }
-
-                        if (value != null && value.getValue() instanceof ArrayList)
+                        if (value != null && value.getData() instanceof ArrayList)
                         {
-                            index += setDescriptorValues((ArrayList<?>) value.getValue(), index, annotation, field, sectionDescriptor);
+                            // Wildcard capture and helper method
+                            index += setDescriptorValues((ArrayList<?>) value.getData(), index, annotation, field, sectionDescriptor);
                         }
 
                         RowDescriptor<?> rowDescriptor = RowDescriptor.newInstance(annotation.tag().length() > 0 ? annotation.tag() : field.getName() + ++index,
@@ -189,7 +179,7 @@ public class FormDescriptorAnnotationFactory {
 
 
     /**
-     * Generics: capture the wildcard of ArrayList
+     * Capture the wildcard of ArrayList
      */
     private <T> int setDescriptorValues(ArrayList<T> list, int index, FormElement annotation, Field field, SectionDescriptor sectionDescriptor)
     {

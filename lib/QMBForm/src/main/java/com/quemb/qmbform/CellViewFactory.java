@@ -15,6 +15,7 @@ import com.quemb.qmbform.view.FormButtonInlineFieldCell;
 import com.quemb.qmbform.view.FormCheckFieldCell;
 import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormDateInlineFieldCell;
+import com.quemb.qmbform.view.FormDateTimeInlineFieldCell;
 import com.quemb.qmbform.view.FormDetailHtmlTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormDetailTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextInlineFieldCell;
@@ -92,6 +93,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDateInline, FormDateInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTime, FormTimeDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTimeInline, FormTimeInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDateTimeInline, FormDateTimeInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNumber, FormEditNumberFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNumberInline, FormEditNumberInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeCurrency, FormEditCurrencyFieldCell.class);

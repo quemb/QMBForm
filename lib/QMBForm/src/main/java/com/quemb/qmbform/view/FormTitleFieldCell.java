@@ -1,11 +1,11 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.TextView;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.content.Context;
-import android.widget.TextView;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -14,15 +14,16 @@ public class FormTitleFieldCell extends FormBaseCell {
     private TextView mTextView;
 
     public FormTitleFieldCell(Context context,
-                              RowDescriptor rowDescriptor) {
+                              RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
     @Override
     protected void init() {
-        super.init();
-        mTextView = (TextView) findViewById(R.id.textView);
 
+        super.init();
+
+        mTextView = (TextView) findViewById(R.id.textView);
         setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
     }
 

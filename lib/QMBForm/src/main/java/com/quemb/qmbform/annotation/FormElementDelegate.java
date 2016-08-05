@@ -9,6 +9,6 @@ import java.lang.reflect.Field;
  */
 public interface FormElementDelegate {
 
-    public boolean shouldAddRowDescriptorForField(RowDescriptor rowDescriptor, Field field);
+    public boolean shouldAddRowDescriptorForField(RowDescriptor<?> rowDescriptor, Field field);
 
 }

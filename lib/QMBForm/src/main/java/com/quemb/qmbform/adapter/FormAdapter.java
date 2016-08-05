@@ -1,15 +1,15 @@
 package com.quemb.qmbform.adapter;
 
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
 import com.quemb.qmbform.CellViewFactory;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
-
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
@@ -28,11 +28,13 @@ public class FormAdapter extends BaseAdapter {
         formAdapter.mFormDescriptor = formDescriptor;
         formAdapter.mContext = context;
         formAdapter.setEnableSectionSeperator(true);
+        formAdapter.setup();
+
         return formAdapter;
     }
 
-    @Override
-    public int getCount() {
+    public void setup() {
+
         mItems = new ArrayList<FormItemDescriptor>();
         int sectionCount = 1;
         for (SectionDescriptor sectionDescriptor : mFormDescriptor.getSections()) {
@@ -53,13 +55,15 @@ public class FormAdapter extends BaseAdapter {
             }
             sectionCount++;
         }
+    }
 
+    @Override
+    public int getCount() {
         return mItems.size();
     }
 
     @Override
     public FormItemDescriptor getItem(int position) {
-
         return mItems.get(position);
     }
 
@@ -70,11 +74,8 @@ public class FormAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         return CellViewFactory.getInstance().createViewForFormItemDescriptor(mContext, getItem(position));
     }
-
 
     public Boolean getEnableSectionSeperator() {
         return mEnableSectionSeperator;

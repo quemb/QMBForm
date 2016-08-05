@@ -10,13 +10,13 @@ import com.quemb.qmbform.descriptor.Value;
 /**
  * Created by pmaccamp on 8/26/2015.
  */
-public class BlankStringValidator implements FormValidator {
+public class BlankStringValidator<T> implements FormValidator<T> {
     @Override
-    public RowValidationError validate(RowDescriptor descriptor) {
-        Value value = descriptor.getValue();
-        if (value.getValue() != null &&
-                value.getValue() instanceof String) {
-            String str = (String) value.getValue();
+    public RowValidationError validate(RowDescriptor<T> descriptor) {
+        Value<T> value = descriptor.getValue();
+        if (value.getData() != null &&
+                value.getData() instanceof String) {
+            String str = (String) value.getData();
 
             // if a valid string return null
             if (str.replace(" ", "").length() > 0) {
