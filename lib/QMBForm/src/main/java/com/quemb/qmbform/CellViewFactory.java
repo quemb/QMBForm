@@ -1,5 +1,9 @@
 package com.quemb.qmbform;
 
+import android.content.Context;
+import android.os.Build;
+import android.util.Log;
+
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
@@ -11,6 +15,7 @@ import com.quemb.qmbform.view.FormButtonInlineFieldCell;
 import com.quemb.qmbform.view.FormCheckFieldCell;
 import com.quemb.qmbform.view.FormDateDialogFieldCell;
 import com.quemb.qmbform.view.FormDateInlineFieldCell;
+import com.quemb.qmbform.view.FormDateTimeInlineFieldCell;
 import com.quemb.qmbform.view.FormDetailHtmlTextVerticalFieldCell;
 import com.quemb.qmbform.view.FormDetailTextFieldCell;
 import com.quemb.qmbform.view.FormDetailTextInlineFieldCell;
@@ -44,10 +49,6 @@ import com.quemb.qmbform.view.FormTimeInlineFieldCell;
 import com.quemb.qmbform.view.SectionCell;
 import com.quemb.qmbform.view.SeperatorSectionCell;
 
-import android.content.Context;
-import android.os.Build;
-import android.util.Log;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 
@@ -68,7 +69,7 @@ public class CellViewFactory {
         return instance;
     }
 
-    public static void addFormRowDescriptor(String descriptorName, Class descriptorClass) {
+    public static void addFormRowDescriptor(String descriptorName, Class<? extends FormBaseCell> descriptorClass) {
         getInstance().mViewRowTypeMap.put(descriptorName, descriptorClass);
     }
 
@@ -92,6 +93,7 @@ public class CellViewFactory {
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDateInline, FormDateInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTime, FormTimeDialogFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeTimeInline, FormTimeInlineFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDateTimeInline, FormDateTimeInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNumber, FormEditNumberFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNumberInline, FormEditNumberInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeCurrency, FormEditCurrencyFieldCell.class);
@@ -123,8 +125,7 @@ public class CellViewFactory {
 
         if (descriptor instanceof SectionDescriptor) {
 
-            SectionCell sectionCell = new SectionCell(context, (SectionDescriptor) descriptor);
-            rowView = sectionCell;
+            rowView = new SectionCell(context, (SectionDescriptor) descriptor);
 
         } else if (descriptor instanceof RowDescriptor) {
             RowDescriptor row = (RowDescriptor) descriptor;

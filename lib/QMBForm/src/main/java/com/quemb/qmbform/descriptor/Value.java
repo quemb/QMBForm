@@ -1,30 +1,50 @@
 package com.quemb.qmbform.descriptor;
 
+import android.util.Pair;
+
 /**
  * Created by tonimoeckel on 14.07.14.
  */
 public class Value<T> {
-    private T mValue;
-    private OnValueChangeListener mOnValueChangeListener;
+    private T mData;
+    private OnValueChangeListener<T> mOnValueChangeListener;
 
-    public Value(T value) {
-        mValue = value;
+    public Value(T data) {
+        mData = data;
     }
 
-    public T getValue() {
-        return mValue;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setValue(T value) {
-        mValue = value;
+    public void setData(T data) {
+        mData = data;
         if (mOnValueChangeListener != null) {
-            mOnValueChangeListener.onChange(value);
+            mOnValueChangeListener.onChange(data);
         }
     }
 
+    /**
+     * Return the embedded data. In case of a Pair{T:key, String:label}, return the key part.
+     */
+    public T getData()
+    {
+        if (mData != null && mData instanceof Pair)
+        {
+            @SuppressWarnings("unchecked") T key = (T) ((Pair)mData).first;
+            return key;
+        }
+        return mData;
+    }
 
-    public void setOnValueChangeListener(OnValueChangeListener listener) {
+    /**
+     * In case of a Pair{T:key, String:label}, return the label part.
+     */
+    public String getPairLabel()
+    {
+        if (mData != null && mData instanceof Pair)
+            return (String) ((Pair)mData).second;
+        return null;
+    }
+
+
+    public void setOnValueChangeListener(OnValueChangeListener<T> listener) {
         this.mOnValueChangeListener = listener;
     }
 	

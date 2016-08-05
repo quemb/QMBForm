@@ -1,11 +1,11 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.SeekBar;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.widget.SeekBar;
 
 import java.util.HashMap;
 
@@ -17,7 +17,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
     private SeekBar mSeekBar;
     public final static String CellConfigMaxKey = "CellConfigMaxKey";
 
-    public FormIntegerSliderFieldCell(Context context, RowDescriptor rowDescriptor) {
+    public FormIntegerSliderFieldCell(Context context, RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -25,6 +25,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
     protected void init() {
 
         super.init();
+
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -65,7 +66,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
         Integer max = config != null && config.containsKey(CellConfigMaxKey) ? (Integer) config.get(CellConfigMaxKey) : 100;
 
         mSeekBar.setMax(max);
-        mSeekBar.setProgress(value.getValue());
+        mSeekBar.setProgress(value.getData());
         mSeekBar.setEnabled(!getRowDescriptor().getDisabled());
 
     }

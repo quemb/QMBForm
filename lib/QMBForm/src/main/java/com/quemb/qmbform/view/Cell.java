@@ -1,11 +1,7 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.Build;
 import android.support.annotation.StyleRes;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.quemb.qmbform.descriptor.CellDescriptor;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.utils.Styling;
 
 import java.util.HashMap;
 
@@ -123,7 +123,7 @@ public abstract class Cell extends LinearLayout {
      * Set the style ID for the specified 'styleConfig' parameter if defined in CellDescriptor,
      * or apply the default Style Id and the default android:textColor.
      */
-    protected boolean setStyleId(final TextView textView, final String styleConfig, final String colorConfig) //, final @StyleRes int defaultStyleId
+    protected boolean setStyleId(TextView textView, String styleConfig, String colorConfig)
     {
         boolean styleFound = false;
 
@@ -134,15 +134,15 @@ public abstract class Cell extends LinearLayout {
         if (itemDescriptor != null)
         {
             cellConfig = itemDescriptor.getCellConfig();
-            if (cellConfig != null && cellConfig.containsKey(styleConfig))
+            if (cellConfig != null)
             {
                 Object configId = cellConfig.get(styleConfig);
-                if (configId instanceof Integer)
+                if (configId != null && configId instanceof Integer)
                 {
-                    // Apply style if exists
+                    // If exists, apply style and return true
 
-                    @StyleRes int styleId = ((Integer) configId).intValue();
-                    setTextAppearance(textView, styleId);
+                    @StyleRes int styleId = (Integer) configId;
+                    Styling.setTextAppearance(textView, styleId);
 
                     styleFound = true;
                 }
@@ -153,11 +153,11 @@ public abstract class Cell extends LinearLayout {
         // Otherwise, save the default android color (before applying style).
 
         int defaultColor;
-        if (cellConfig != null && colorConfig != null && cellConfig.containsKey(colorConfig))
+        if (cellConfig != null && colorConfig != null)
         {
             Object configId = cellConfig.get(colorConfig);
-            if (configId instanceof Integer)
-                defaultColor =  ((Integer) configId).intValue();
+            if (configId != null && configId instanceof Integer)
+                defaultColor =  (Integer) configId;
             else
                 defaultColor = getDefaultColor(colorConfig);
         }
@@ -169,21 +169,12 @@ public abstract class Cell extends LinearLayout {
         return styleFound;
     }
 
-    @SuppressWarnings("deprecation")
-    private void setTextAppearance(final TextView textView, final int styleId)
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            textView.setTextAppearance(styleId);
-        else
-            textView.setTextAppearance(textView.getContext(), styleId);
-    }
-
     /**
      * Get the default color for TextView (android:textColor in theme).
      * Note that default EditText color is android:editTextColor in theme.
      * Force to default TextView color for CheckBox and Switch views.
      */
-    private int getDefaultColor(final String colorConfig)
+    private int getDefaultColor(String colorConfig)
     {
         if (colorConfig != null && colorConfig.equals(CellDescriptor.COLOR_VALUE))
         {
@@ -196,7 +187,7 @@ public abstract class Cell extends LinearLayout {
      * Set the TextView color from the cellConfig using 'colorConfig' parameter, if defined in CellDescriptor.
      * Only used for COLOR_XXX_DISABLED colors.
      */
-    protected void setTextColor(final TextView textView, final String colorConfig)
+    protected boolean setTextColor(TextView textView, String colorConfig)
     {
         // Get color from the cellConfig in FormItemDescriptor
 
@@ -210,8 +201,10 @@ public abstract class Cell extends LinearLayout {
                 if (configColor instanceof Integer)
                 {
                     textView.setTextColor(((Integer) configColor).intValue());
+                    return true;
                 }
             }
         }
+        return false;
     }
 }

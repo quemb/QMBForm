@@ -1,12 +1,13 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.TextView;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.widget.TextView;
+import com.quemb.qmbform.utils.Styling;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -20,7 +21,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
     private TextView mTextView;
 
     public FormDateFieldCell(Context context,
-                             RowDescriptor rowDescriptor) {
+                             RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -31,6 +32,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         mTextView = (TextView) findViewById(R.id.textView);
 
         setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
+        mTextView.setEnabled(false);
 
     }
 
@@ -47,14 +49,14 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         mTextView.setVisibility(title == null ? GONE : VISIBLE);
 
         @SuppressWarnings("unchecked") Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
-        if (value == null || value.getValue() == null) {
+        if (value == null || value.getData() == null) {
             value = new Value<Date>(new Date());
         } else {
-            updateDateLabel(value.getValue(), getRowDescriptor().getDisabled());
+            updateDateLabel(value.getData(), getRowDescriptor().getDisabled());
         }
 
         final Calendar calendar = Calendar.getInstance();
-        Date date = value.getValue();
+        Date date = value.getData();
         calendar.setTime(date);
 
         initDatePicker(calendar);
@@ -96,7 +98,8 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         if (disabled)
         {
             editView.setEnabled(false);
-            setTextColor(editView, CellDescriptor.COLOR_VALUE_DISABLED);
+            if (setTextColor(editView, CellDescriptor.COLOR_VALUE_DISABLED) == false)
+                editView.setTextColor(Styling.getColorFromAttr(editView.getContext(), android.R.attr.textColor));
         }
 
     }

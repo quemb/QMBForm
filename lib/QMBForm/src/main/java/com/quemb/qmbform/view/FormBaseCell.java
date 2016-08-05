@@ -1,21 +1,21 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.OnValueChangeListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatDrawableManager;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -29,7 +29,7 @@ public abstract class FormBaseCell extends Cell {
 
     private LinearLayout mMultiValueWrapper;
 
-    public FormBaseCell(Context context, RowDescriptor rowDescriptor) {
+    public FormBaseCell(Context context, RowDescriptor<?> rowDescriptor) {
 
         super(context, rowDescriptor);
 
@@ -37,18 +37,30 @@ public abstract class FormBaseCell extends Cell {
 
     @Override
     protected void init() {
-        super.init();
 
-        if (getRowDescriptor() != null && getRowDescriptor().getValue() != null) {
-            getRowDescriptor().getValue().setOnValueChangeListener(new OnValueChangeListener() {
+        super.init();
+        initOnChange(getRowDescriptor());
+
+    }
+
+    // Capture the wildcard of RowDescriptor
+    private <T> void initOnChange(RowDescriptor<T> rowDescriptor)
+    {
+        if (rowDescriptor == null)
+            return;
+
+        Value<T> value = rowDescriptor.getValue();
+        if (value != null)
+        {
+            value.setOnValueChangeListener(new OnValueChangeListener<T>()
+            {
                 @Override
-                public void onChange(Object value) {
+                public void onChange(T value)
+                {
                     update();
                 }
             });
         }
-
-
     }
 
     protected ViewGroup getSuperViewForLayoutInflation() {
@@ -74,7 +86,7 @@ public abstract class FormBaseCell extends Cell {
         deleteButton.setFocusableInTouchMode(false);
         deleteButton.setFocusable(false);
 
-        Drawable removeIcon = AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.ic_action_remove);
+        Drawable removeIcon = ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove);
         removeIcon.setColorFilter(0xffff0000, PorterDuff.Mode.MULTIPLY);
 
         deleteButton.setImageDrawable(removeIcon);
@@ -84,7 +96,7 @@ public abstract class FormBaseCell extends Cell {
             @Override
             public void onClick(View v) {
 
-                RowDescriptor rowDescriptor = getRowDescriptor();
+                RowDescriptor<?> rowDescriptor = getRowDescriptor();
 
                 SectionDescriptor sectionDescriptor = rowDescriptor.getSectionDescriptor();
                 sectionDescriptor.removeRow(rowDescriptor);
@@ -99,7 +111,7 @@ public abstract class FormBaseCell extends Cell {
         addButton.setFocusableInTouchMode(false);
         addButton.setFocusable(false);
 
-        Drawable addIcon = AppCompatDrawableManager.get().getDrawable(getContext(), R.drawable.ic_action_new);
+        Drawable addIcon = ContextCompat.getDrawable(getContext(), R.drawable.ic_action_new);
         addIcon.setColorFilter(0xff00ff00, PorterDuff.Mode.MULTIPLY);
 
 
@@ -135,7 +147,7 @@ public abstract class FormBaseCell extends Cell {
     @Override
     public boolean shouldAddDivider() {
 
-        RowDescriptor rowDescriptor = (RowDescriptor) getFormItemDescriptor();
+        RowDescriptor<?> rowDescriptor = (RowDescriptor<?>) getFormItemDescriptor();
         if (rowDescriptor.isLastRowInSection())
             return false;
 
@@ -148,14 +160,14 @@ public abstract class FormBaseCell extends Cell {
 
     }
 
-    public RowDescriptor getRowDescriptor() {
-        return (RowDescriptor) getFormItemDescriptor();
+    public RowDescriptor<?> getRowDescriptor() {
+        return (RowDescriptor<?>) getFormItemDescriptor();
     }
 
-    public void onValueChanged(Value<?> newValue) {
-        RowDescriptor row = getRowDescriptor();
-        Value<?> oldValue = row.getValue();
-        if (oldValue == null || newValue == null || !newValue.getValue().equals(oldValue.getValue())) {
+    public <T> void onValueChanged(Value<T> newValue) {
+        @SuppressWarnings("unchecked") RowDescriptor<T> row = (RowDescriptor<T>) getRowDescriptor();
+        Value<T> oldValue = row.getValue();
+        if (oldValue == null || newValue == null || !newValue.getData().equals(oldValue.getData())) {
             OnFormRowValueChangedListener listener = getRowDescriptor().getSectionDescriptor().getFormDescriptor().getOnFormRowValueChangedListener();
             row.setValue(newValue);
             if (listener != null) {

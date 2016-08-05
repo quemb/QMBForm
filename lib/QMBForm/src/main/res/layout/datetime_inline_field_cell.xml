@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:padding="@dimen/qmb_padding"
-              android:descendantFocusability="blocksDescendants"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/qmb_padding"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,13 +25,22 @@
 
     </LinearLayout>
 
+    <com.quemb.qmbform.DatePickerInline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/qmb_padding"
+        android:visibility="gone"
+        android:id="@+id/datePicker"
+        android:layout_gravity="center_horizontal"
+        android:datePickerMode="calendar"
+        android:spinnersShown="false"/>
 
     <com.quemb.qmbform.TimePickerInline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/qmb_padding"
         android:visibility="gone"
         android:id="@+id/timePicker"
         android:layout_gravity="center_horizontal"/>
-
 
 </LinearLayout>

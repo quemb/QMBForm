@@ -1,10 +1,9 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.content.Context;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -12,7 +11,7 @@ import android.content.Context;
 public class FormDetailTextFieldCell extends FormDetailTextInlineFieldCell {
 
     public FormDetailTextFieldCell(Context context,
-                                   RowDescriptor rowDescriptor) {
+                                   RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 

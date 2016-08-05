@@ -1,17 +1,5 @@
 package com.quemb.qmbform.sample.controller;
 
-import com.quemb.qmbform.FormManager;
-import com.quemb.qmbform.OnFormRowClickListener;
-import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.FormDescriptor;
-import com.quemb.qmbform.descriptor.FormItemDescriptor;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-import com.quemb.qmbform.sample.R;
-import com.quemb.qmbform.sample.model.Entry;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -22,6 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.quemb.qmbform.FormManager;
+import com.quemb.qmbform.OnFormRowClickListener;
+import com.quemb.qmbform.annotation.FormDescriptorAnnotationFactory;
+import com.quemb.qmbform.descriptor.FormDescriptor;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
+import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
+import com.quemb.qmbform.sample.R;
+import com.quemb.qmbform.sample.model.Entry;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -135,7 +134,7 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
     }
 
     @Override
-    public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
+    public void onValueChanged(RowDescriptor<?> rowDescriptor, Value<?> oldValue, Value<?> newValue) {
         Log.d(TAG, "Value Changed: " + rowDescriptor.getTitle());
 //        Log.d(TAG, "Old Value: "+oldValue);
 //        Log.d(TAG, "New Value: "+newValue);

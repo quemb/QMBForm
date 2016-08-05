@@ -1,10 +1,11 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-
 import android.content.Context;
 import android.widget.DatePicker;
+
+import com.quemb.qmbform.DatePickerInline;
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -15,10 +16,10 @@ import java.util.Date;
 public class FormDateInlineFieldCell extends FormDateFieldCell implements
         DatePicker.OnDateChangedListener {
 
-    private DatePicker mDatePicker;
+    private DatePickerInline mDatePicker;
 
     public FormDateInlineFieldCell(Context context,
-                                   RowDescriptor rowDescriptor) {
+                                   RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -26,7 +27,7 @@ public class FormDateInlineFieldCell extends FormDateFieldCell implements
     protected void init() {
 
         super.init();
-        mDatePicker = (DatePicker) findViewById(R.id.datePicker);
+        mDatePicker = (DatePickerInline) findViewById(R.id.datePicker);
 
 
     }

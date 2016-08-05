@@ -6,9 +6,9 @@ import com.quemb.qmbform.descriptor.RowValidationError;
 /**
  * Created by pmaccamp on 8/26/2015.
  */
-public interface FormValidator {
+public interface FormValidator<T> {
     /**
      * @return {@link RowValidationError} if there is an error else null
      */
-    public RowValidationError validate(RowDescriptor descriptor);
+    public RowValidationError validate(RowDescriptor<T> descriptor);
 }

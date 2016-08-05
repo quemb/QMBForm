@@ -1,5 +1,7 @@
 package com.quemb.qmbform;
 
+import android.app.Activity;
+
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.view.FormIntegerSliderFieldCell;
@@ -11,8 +13,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-
-import android.app.Activity;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -35,7 +35,7 @@ public class FormIntegerSliderCellTest {
     @Test
     public void shouldBeDisabled(){
 
-        RowDescriptor rowDescriptor = RowDescriptor.newInstance("integerSlider",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50));
+        RowDescriptor<Integer> rowDescriptor = RowDescriptor.newInstance("integerSlider",RowDescriptor.FormRowDescriptorTypeIntegerSlider, "Integer Slider", new Value<Integer>(50));
         rowDescriptor.setDisabled(true);
 
         FormIntegerSliderFieldCell testCell = new FormIntegerSliderFieldCell(activity, rowDescriptor);

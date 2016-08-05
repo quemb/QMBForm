@@ -1,16 +1,16 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.adapter.FormOptionsObjectAdapter;
-import com.quemb.qmbform.descriptor.FormOptionsObject;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.adapter.FormOptionsObjectAdapter;
+import com.quemb.qmbform.descriptor.FormOptionsObject;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class FormSpinnerFieldCell extends FormTitleFieldCell {
     private ArrayList<Object> mValues;
 
     public FormSpinnerFieldCell(Context context,
-                                RowDescriptor rowDescriptor) {
+                                RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -39,6 +39,7 @@ public class FormSpinnerFieldCell extends FormTitleFieldCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void update() {
         super.update();
 

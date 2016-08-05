@@ -1,17 +1,17 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
-import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.FormOptionsObject;
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
+import com.quemb.qmbform.descriptor.FormOptionsObject;
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     private TextView mTextView;
     private ArrayList<Object> mValues;
 
-    public FormSelectorSegmentedControlFieldCell(Context context, RowDescriptor rowDescriptor) {
+    public FormSelectorSegmentedControlFieldCell(Context context, RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -46,6 +46,7 @@ public class FormSelectorSegmentedControlFieldCell extends FormBaseCell {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void update() {
         mSegmentedGroup.removeAllViews();
 

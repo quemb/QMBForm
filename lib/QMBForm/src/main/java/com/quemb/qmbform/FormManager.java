@@ -1,5 +1,12 @@
 package com.quemb.qmbform;
 
+import android.app.Activity;
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
@@ -9,13 +16,6 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 import com.quemb.qmbform.view.Cell;
-
-import android.app.Activity;
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -53,7 +53,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
 
                 Cell cell = itemDescriptor.getCell();
                 if (cell != null && itemDescriptor instanceof RowDescriptor) {
-                    RowDescriptor rowDescriptor = (RowDescriptor) itemDescriptor;
+                    RowDescriptor<?> rowDescriptor = (RowDescriptor<?>) itemDescriptor;
                     if (!rowDescriptor.getDisabled()) {
                         cell.onCellSelected();
                     }
@@ -98,7 +98,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
     @Override
-    public void onRowAdded(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowAdded(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
         if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowAdded(rowDescriptor, sectionDescriptor);
@@ -106,7 +106,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
     @Override
-    public void onRowRemoved(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowRemoved(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
         if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowRemoved(rowDescriptor, sectionDescriptor);
@@ -114,7 +114,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
     @Override
-    public void onRowChanged(RowDescriptor rowDescriptor, SectionDescriptor sectionDescriptor) {
+    public void onRowChanged(RowDescriptor<?> rowDescriptor, SectionDescriptor sectionDescriptor) {
         updateRows();
         if (mOnFormRowChangeListener != null) {
             mOnFormRowChangeListener.onRowChanged(rowDescriptor, sectionDescriptor);
@@ -122,7 +122,7 @@ public class FormManager implements OnFormRowChangeListener, OnFormRowValueChang
     }
 
     @Override
-    public void onValueChanged(RowDescriptor rowDescriptor, Value<?> oldValue, Value<?> newValue) {
+    public void onValueChanged(RowDescriptor<?> rowDescriptor, Value<?> oldValue, Value<?> newValue) {
         if (mOnFormRowValueChangedListener != null) {
             mOnFormRowValueChangedListener.onValueChanged(rowDescriptor, oldValue, newValue);
         }

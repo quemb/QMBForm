@@ -8,9 +8,9 @@ import android.content.Context;
 public class RowValidationError {
 
     private int mResourceMessage;
-    private RowDescriptor mRowDescriptor;
+    private RowDescriptor<?> mRowDescriptor;
 
-    public RowValidationError(RowDescriptor tRowDescriptor, int resourceMessage) {
+    public RowValidationError(RowDescriptor<?> tRowDescriptor, int resourceMessage) {
         mResourceMessage = resourceMessage;
         mRowDescriptor = tRowDescriptor;
     }
@@ -24,7 +24,7 @@ public class RowValidationError {
                 context.getString(getResourceMessage());
     }
 
-    public RowDescriptor getRowDescriptor() {
+    public RowDescriptor<?> getRowDescriptor() {
         return mRowDescriptor;
     }
 }

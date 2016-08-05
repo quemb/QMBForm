@@ -1,12 +1,12 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.descriptor.RowDescriptor;
-import com.quemb.qmbform.descriptor.Value;
-
 import android.content.Context;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
+
+import com.quemb.qmbform.descriptor.RowDescriptor;
+import com.quemb.qmbform.descriptor.Value;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -16,7 +16,7 @@ public class FormEditNumberFieldCell extends FormEditTextFieldCell {
     private static final String TAG = "FormEditNumberFieldCell";
 
     public FormEditNumberFieldCell(Context context,
-                                   RowDescriptor rowDescriptor) {
+                                   RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -35,7 +35,7 @@ public class FormEditNumberFieldCell extends FormEditTextFieldCell {
 
         @SuppressWarnings("unchecked") Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
         if (value != null) {
-            String valueString = String.valueOf(value.getValue());
+            String valueString = String.valueOf(value.getData());
             getEditView().setText(valueString);
         }
 

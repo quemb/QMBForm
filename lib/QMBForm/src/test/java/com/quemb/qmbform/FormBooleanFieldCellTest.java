@@ -1,5 +1,7 @@
 package com.quemb.qmbform;
 
+import android.app.Activity;
+
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.view.FormBooleanFieldCell;
 
@@ -10,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-
-import android.app.Activity;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -34,7 +34,7 @@ public class FormBooleanFieldCellTest {
     @Test
     public void shouldBeDisabled(){
 
-        RowDescriptor rowDescriptor = RowDescriptor.newInstance("disabled", RowDescriptor.FormRowDescriptorTypeBooleanSwitch);
+        RowDescriptor<Boolean> rowDescriptor = RowDescriptor.newInstance("disabled", RowDescriptor.FormRowDescriptorTypeBooleanSwitch);
         rowDescriptor.setDisabled(true);
 
         FormBooleanFieldCell testCell = new FormBooleanFieldCell(activity, rowDescriptor);

@@ -1,13 +1,13 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
-
-import android.content.Context;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -17,7 +17,7 @@ public class FormCheckFieldCell extends FormBaseCell {
     private CheckBox mCheckBox;
 
     public FormCheckFieldCell(Context context,
-                              RowDescriptor rowDescriptor) {
+                              RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -47,8 +47,8 @@ public class FormCheckFieldCell extends FormBaseCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
-
         mCheckBox.setText(title);
+
         if (getRowDescriptor().getDisabled())
         {
             mCheckBox.setEnabled(false);
@@ -59,7 +59,7 @@ public class FormCheckFieldCell extends FormBaseCell {
 
         @SuppressWarnings("unchecked") Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
         if (value != null) {
-            mCheckBox.setChecked(value.getValue());
+            mCheckBox.setChecked(value.getData());
         }
 
     }

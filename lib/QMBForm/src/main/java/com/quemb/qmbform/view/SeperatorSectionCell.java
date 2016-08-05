@@ -1,10 +1,11 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
-
-import android.content.Context;
-import android.widget.LinearLayout;
 
 /**
  * Created by tonimoeckel on 18.02.15.
@@ -13,7 +14,7 @@ public class SeperatorSectionCell extends FormBaseCell {
 
 
     public SeperatorSectionCell(Context context,
-                                RowDescriptor rowDescriptor) {
+                                RowDescriptor<?> rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -30,6 +31,11 @@ public class SeperatorSectionCell extends FormBaseCell {
     @Override
     public boolean shouldAddDivider() {
         return false;
+    }
+
+    @Override
+    protected View getDividerView() {
+        return null;
     }
 
     @Override

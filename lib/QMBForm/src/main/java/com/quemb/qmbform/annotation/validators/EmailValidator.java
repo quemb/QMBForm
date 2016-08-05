@@ -10,21 +10,19 @@ import com.quemb.qmbform.descriptor.Value;
 /**
  * Created by pmaccamp on 8/26/2015.
  */
-
-
-public class EmailValidator implements FormValidator {
+public class EmailValidator<T> implements FormValidator<T> {
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     @Override
-    public RowValidationError validate(RowDescriptor descriptor) {
+    public RowValidationError validate(RowDescriptor<T> descriptor) {
 
         RowValidationError result = null;
 
-        Value value = descriptor.getValue();
-        if (value.getValue() != null && value.getValue() instanceof String) {
-            String val = (String) value.getValue();
+        Value<T> value = descriptor.getValue();
+        if (value.getData() != null && value.getData() instanceof String) {
+            String val = (String) value.getData();
             if (!val.matches(EMAIL_PATTERN)){
                 result = new RowValidationError(descriptor, R.string.validation_invalid_email);
             }
