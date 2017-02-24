@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class FormEditURLFieldCell extends FormEditTextFieldCell {
 
     public FormEditURLFieldCell(Context context,
-                                RowDescriptor rowDescriptor) {
+            RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -24,6 +24,7 @@ public class FormEditURLFieldCell extends FormEditTextFieldCell {
         EditText editView = getEditView();
         editView.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
     }
+
 
 
 }

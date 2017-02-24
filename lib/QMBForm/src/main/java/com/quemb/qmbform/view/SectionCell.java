@@ -1,9 +1,12 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 
 import android.content.Context;
+import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -16,7 +19,7 @@ public class SectionCell extends Cell {
     private TextView mTextView;
 
     public SectionCell(Context context,
-                       SectionDescriptor sectionDescriptor) {
+            SectionDescriptor sectionDescriptor) {
         super(context, sectionDescriptor);
     }
 
@@ -28,7 +31,7 @@ public class SectionCell extends Cell {
 
         setClickable(false);
 
-        mTextView = (TextView) findViewById(R.id.textView);
+        mTextView = (TextView)findViewById(R.id.textView);
         mTextView.setTextColor(getThemeValue(R.attr.colorAccent));
 
     }

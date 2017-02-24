@@ -1,5 +1,7 @@
 package com.quemb.qmbform.descriptor;
 
+import com.quemb.qmbform.R;
+
 import android.content.Context;
 
 /**
@@ -11,6 +13,7 @@ public class RowValidationError {
     private RowDescriptor mRowDescriptor;
 
     public RowValidationError(RowDescriptor tRowDescriptor, int resourceMessage) {
+
         mResourceMessage = resourceMessage;
         mRowDescriptor = tRowDescriptor;
     }
@@ -19,9 +22,12 @@ public class RowValidationError {
         return mResourceMessage;
     }
 
-    public String getMessage(Context context) {
-        return getRowDescriptor().getTitle() + " " +
-                context.getString(getResourceMessage());
+    public String getMessage(Context context){
+        if (getResourceMessage() == R.string.validation_is_required){
+            return getRowDescriptor().getTitle() + " " + context.getString(R.string.msg_x_is_required);
+        }else {
+            return context.getString(R.string.msg_check_form);
+        }
     }
 
     public RowDescriptor getRowDescriptor() {

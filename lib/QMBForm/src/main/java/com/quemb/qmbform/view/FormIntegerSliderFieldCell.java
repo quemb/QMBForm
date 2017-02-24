@@ -1,18 +1,20 @@
 package com.quemb.qmbform.view;
 
+import android.content.Context;
+import android.widget.DatePicker;
+import android.widget.SeekBar;
+
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
-import android.content.Context;
-import android.widget.SeekBar;
-
+import java.util.Date;
 import java.util.HashMap;
 
 /**
  * Created by tonimoeckel on 25.08.14.
  */
-public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
+public class FormIntegerSliderFieldCell extends FormDetailTextFieldCell {
 
     private SeekBar mSeekBar;
     public final static String CellConfigMaxKey = "CellConfigMaxKey";
@@ -69,8 +71,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextInlineFieldCell {
         mSeekBar.setEnabled(!getRowDescriptor().getDisabled());
 
     }
-
-    public SeekBar getSeekBar() {
+    public SeekBar getSeekBar(){
         return mSeekBar;
     }
 }

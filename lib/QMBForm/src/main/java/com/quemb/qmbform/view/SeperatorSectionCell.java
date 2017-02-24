@@ -1,9 +1,15 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.FormItemDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 /**
@@ -13,7 +19,7 @@ public class SeperatorSectionCell extends FormBaseCell {
 
 
     public SeperatorSectionCell(Context context,
-                                RowDescriptor rowDescriptor) {
+            RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 

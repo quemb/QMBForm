@@ -14,27 +14,16 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FormElement {
+
+
     public int label() default android.R.string.untitled;
-
-    public String rowDescriptorType() default RowDescriptor.FormRowDescriptorTypeDetailInline;
-
+    public String rowDescriptorType() default RowDescriptor.FormRowDescriptorTypeName;
     public String tag() default "";
-
     public int hint() default android.R.string.untitled;
-
     public int sortId() default 100;
-
     public boolean required() default false;
-
     public String dateFormat() default "yyyy-MM-dd HH:mm:ss";
-
     public int section() default android.R.string.untitled;
-
     public boolean disabled() default false;
-
     public boolean multiValue() default false;
-
-    public Class<?>[] validatorClasses() default {};
-
-    public FormOptionsObjectElement[] selectorOptions() default {};
 }

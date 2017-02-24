@@ -5,7 +5,7 @@ package com.quemb.qmbform.exceptions;
  */
 public class NoDataSourceException extends RuntimeException {
 
-    public NoDataSourceException() {
+    public NoDataSourceException(){
         super("No Data Source Defined");
     }
 

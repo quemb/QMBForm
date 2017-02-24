@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="section_cell_background">#FFFFFFFF</color>
-    <color name="section_cell_text">#000000</color>
+	<color name="section_cell_background">#FFFFFFFF</color>
+	<color name="section_cell_text">#000000</color>
 
-    <color name="form_cell_background">#FFFFFF</color>
+	<color name="form_cell_background">#FFFFFF</color>
     <color name="form_cell_disabled">#777777</color>
     <color name="transparentColor">#00000000</color>
     <color name="redColor">#ffa13b3a</color>
