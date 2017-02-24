@@ -14,7 +14,7 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
 
 
     public FormButtonFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                               RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -45,7 +45,6 @@ public class FormButtonFieldCell extends FormTitleFieldCell {
     @Override
     public void onCellSelected() {
         super.onCellSelected();
-
 
 
     }

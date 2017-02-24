@@ -4,23 +4,22 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
 import android.content.Context;
-import android.text.InputType;
-import android.widget.EditText;
+import android.util.Log;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Currency;
 
 /**
  * Created by tonimoeckel on 15.07.14.
  */
 public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
 
+    private static final String TAG = "FormEditCurrencyFieldCell";
+
     public FormEditCurrencyFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                     RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
-
 
 
     @Override
@@ -36,19 +35,18 @@ public class FormEditCurrencyFieldCell extends FormEditNumberFieldCell {
     }
 
 
-
     protected void onEditTextChanged(String string) {
 
         try {
             NumberFormat format = NumberFormat.getCurrencyInstance();
             Number floatValue = (Number) format.parse(string);
             onValueChanged(new Value<Number>(floatValue));
-        } catch (NumberFormatException e){
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            Log.e(TAG, e.getMessage(), e);
         } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (ClassCastException e){
-            e.printStackTrace();
+            Log.e(TAG, e.getMessage(), e);
+        } catch (ClassCastException e) {
+            Log.e(TAG, e.getMessage(), e);
         }
 
 

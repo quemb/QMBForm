@@ -1,17 +1,12 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -22,7 +17,7 @@ public class FormTimeDialogFieldCell extends FormTimeFieldCell implements
     private Calendar mCalendar;
 
     public FormTimeDialogFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                   RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -36,7 +31,7 @@ public class FormTimeDialogFieldCell extends FormTimeFieldCell implements
     public void onCellSelected() {
         super.onCellSelected();
 
-        TimePickerDialog dialog = new TimePickerDialog(getContext(),this,getCalendar().get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE),true);
+        TimePickerDialog dialog = new TimePickerDialog(getContext(), this, getCalendar().get(Calendar.HOUR_OF_DAY), mCalendar.get(Calendar.MINUTE), true);
         dialog.show();
 
     }
@@ -45,10 +40,11 @@ public class FormTimeDialogFieldCell extends FormTimeFieldCell implements
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        Date date = new Date();
-        date.setTime(TimeUnit.HOURS.toMillis(hourOfDay)+TimeUnit.MINUTES.toMillis(minute));
+        Calendar calendar = getCalendar();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
 
-        onDateChanged(date);
+        onDateChanged(calendar.getTime());
 
     }
 

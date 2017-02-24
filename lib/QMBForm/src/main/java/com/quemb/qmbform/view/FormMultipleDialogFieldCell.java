@@ -15,6 +15,7 @@ import com.quemb.qmbform.exceptions.NoDataSourceException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Nico Ziegler on 05.01.15.
@@ -35,7 +36,7 @@ public class FormMultipleDialogFieldCell extends FormDetailTextVerticalFieldCell
         } else {
             getRowDescriptor().getDataSource().loadData(new DataSourceListener() {
                 @Override
-                public void onDataSourceLoaded(ArrayList list) {
+                public void onDataSourceLoaded(List list) {
 
                     final ArrayList<String> selectedItems = new ArrayList((ArrayList<String>) getRowDescriptor().getValue().getValue());
 

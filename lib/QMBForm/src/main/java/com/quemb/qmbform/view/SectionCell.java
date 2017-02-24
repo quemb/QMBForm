@@ -5,8 +5,6 @@ import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.SectionDescriptor;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -19,7 +17,7 @@ public class SectionCell extends Cell {
     private TextView mTextView;
 
     public SectionCell(Context context,
-            SectionDescriptor sectionDescriptor) {
+                       SectionDescriptor sectionDescriptor) {
         super(context, sectionDescriptor);
     }
 

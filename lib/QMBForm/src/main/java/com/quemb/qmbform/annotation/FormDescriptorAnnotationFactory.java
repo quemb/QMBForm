@@ -267,6 +267,3 @@ public class FormDescriptorAnnotationFactory {
         }
     }
 }
-
-import java.util.HashMap;
-import java.util.List;

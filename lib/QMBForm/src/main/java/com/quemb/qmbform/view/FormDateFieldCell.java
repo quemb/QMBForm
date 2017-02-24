@@ -15,12 +15,12 @@ import java.util.Date;
 /**
  * Created by tonimoeckel on 15.07.14.
  */
-public class FormDateFieldCell extends FormDetailTextFieldCell {
+public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 
     private TextView mTextView;
 
     public FormDateFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                             RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -28,7 +28,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
     protected void init() {
 
         super.init();
-        mTextView = (TextView)findViewById(R.id.textView);
+        mTextView = (TextView) findViewById(R.id.textView);
 
         setStyleId(mTextView, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
 
@@ -44,7 +44,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
-        mTextView.setVisibility(title == null?GONE:VISIBLE);
+        mTextView.setVisibility(title == null ? GONE : VISIBLE);
 
         @SuppressWarnings("unchecked") Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
         if (value == null || value.getValue() == null) {
@@ -65,7 +65,6 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
             setClickable(false);
             setEnabled(false);
-       
         }
 
     }
@@ -109,7 +108,7 @@ public class FormDateFieldCell extends FormDetailTextFieldCell {
 
     }
 
-    public TextView getTextView(){
+    public TextView getTextView() {
         return mTextView;
     }
 }

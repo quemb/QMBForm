@@ -2,7 +2,6 @@ package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
 import com.quemb.qmbform.descriptor.CellDescriptor;
-import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
@@ -11,9 +10,7 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -23,7 +20,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
     private EditText mEditView;
 
     public FormEditTextFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                 RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -34,7 +31,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
     protected void init() {
 
         super.init();
-        mEditView = (EditText)findViewById(R.id.editText);
+        mEditView = (EditText) findViewById(R.id.editText);
         mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
         setStyleId(mEditView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
@@ -90,7 +87,7 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
     protected void updateEditView() {
 
         String hint = getRowDescriptor().getHint(getContext());
-        if (hint!=null){
+        if (hint != null) {
             mEditView.setHint(hint);
         }
 

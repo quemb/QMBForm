@@ -4,21 +4,13 @@ import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.StyleRes;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,27 +35,27 @@ public abstract class Cell extends LinearLayout {
 
     }
 
-    protected void afterInit(){
+    protected void afterInit() {
 
     }
 
-    protected void init(){
+    protected void init() {
 
         setOrientation(LinearLayout.VERTICAL);
         setGravity(Gravity.CENTER);
 
         int resource = getResource();
-        if (resource>0){
-            inflate(getContext(), resource, getSuperViewForLayoutInflation());
+        if (resource > 0) {
+            inflate(getContext(), getResource(), getSuperViewForLayoutInflation());
         }
 
-        if (shouldAddDivider()){
+        if (shouldAddDivider()) {
             addView(getDividerView());
         }
 
     }
 
-    protected ViewGroup getSuperViewForLayoutInflation(){
+    protected ViewGroup getSuperViewForLayoutInflation() {
         return this;
     }
 
@@ -82,12 +74,12 @@ public abstract class Cell extends LinearLayout {
 
     }
 
-    public void onCellSelected(){
+    public void onCellSelected() {
 
     }
 
     protected View getDividerView() {
-        if (mDividerView == null){
+        if (mDividerView == null) {
             mDividerView = new View(getContext());
             configDivider(mDividerView);
         }
@@ -96,7 +88,7 @@ public abstract class Cell extends LinearLayout {
 
     private void configDivider(View dividerView) {
 
-        dividerView.setLayoutParams(new LinearLayout.LayoutParams(
+        dividerView.setLayoutParams(new LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 1
         ));
@@ -113,11 +105,11 @@ public abstract class Cell extends LinearLayout {
         return typedValue.data;
     }
 
-    public boolean shouldAddDivider(){
+    public boolean shouldAddDivider() {
         return true;
     }
 
-    public void lastInSection(){
+    public void lastInSection() {
 
     }
 

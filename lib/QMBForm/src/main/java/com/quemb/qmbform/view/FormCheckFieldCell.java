@@ -8,7 +8,6 @@ import com.quemb.qmbform.descriptor.Value;
 import android.content.Context;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -18,7 +17,7 @@ public class FormCheckFieldCell extends FormBaseCell {
     private CheckBox mCheckBox;
 
     public FormCheckFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                              RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 

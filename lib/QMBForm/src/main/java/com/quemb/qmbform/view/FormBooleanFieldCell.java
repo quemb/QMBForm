@@ -9,9 +9,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.TextView;
 
 /**
  * Created by tonimoeckel on 15.07.14.
@@ -21,7 +19,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     private Switch mSwitch;
 
     public FormBooleanFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -29,7 +27,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     protected void init() {
 
         super.init();
-        
+
         mSwitch = (Switch) findViewById(R.id.switchControl);
         setStyleId(mSwitch, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
 
@@ -52,6 +50,7 @@ public class FormBooleanFieldCell extends FormBaseCell {
     protected void update() {
 
         String title = getFormItemDescriptor().getTitle();
+
         mSwitch.setText(title);
         if (getRowDescriptor().getDisabled())
         {

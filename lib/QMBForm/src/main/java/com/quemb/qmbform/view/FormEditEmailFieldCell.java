@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class FormEditEmailFieldCell extends FormEditTextFieldCell {
 
     public FormEditEmailFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                  RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -24,7 +24,6 @@ public class FormEditEmailFieldCell extends FormEditTextFieldCell {
         EditText editView = getEditView();
         editView.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
     }
-
 
 
 }

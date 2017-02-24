@@ -4,6 +4,7 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 
 import android.content.Context;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.widget.EditText;
 
 /**
@@ -12,7 +13,7 @@ import android.widget.EditText;
 public class FormEditPasswordFieldCell extends FormEditTextFieldCell {
 
     public FormEditPasswordFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                     RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -23,8 +24,8 @@ public class FormEditPasswordFieldCell extends FormEditTextFieldCell {
 
         EditText editView = getEditView();
         editView.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        editView.setTransformationMethod(PasswordTransformationMethod.getInstance());
     }
-
 
 
 }

@@ -14,7 +14,7 @@ public class FormExternalButtonFieldCell extends FormButtonFieldCell {
 
 
     public FormExternalButtonFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                       RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 

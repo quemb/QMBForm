@@ -1,5 +1,16 @@
 apply plugin: 'com.android.library'
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1"
+    }
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -49,8 +60,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'info.hoang8f:android-segmented:1.0.5'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.2.1'

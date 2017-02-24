@@ -6,11 +6,8 @@ import com.quemb.qmbform.descriptor.RowDescriptor;
 import android.content.Context;
 import android.os.Build;
 import android.text.format.DateFormat;
-import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +21,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     private TimePicker mTimePicker;
 
     public FormTimeInlineFieldCell(Context context,
-            RowDescriptor rowDescriptor) {
+                                   RowDescriptor rowDescriptor) {
         super(context, rowDescriptor);
     }
 
@@ -33,7 +30,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     protected void init() {
 
         super.init();
-        mTimePicker = (TimePicker)findViewById(R.id.timePicker);
+        mTimePicker = (TimePicker) findViewById(R.id.timePicker);
 
 
     }
@@ -80,7 +77,7 @@ public class FormTimeInlineFieldCell extends FormTimeFieldCell implements
     public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
 
         Date date = new Date();
-        date.setTime(TimeUnit.HOURS.toMillis(hourOfDay)+TimeUnit.MINUTES.toMillis(minute));
+        date.setTime(TimeUnit.HOURS.toMillis(hourOfDay) + TimeUnit.MINUTES.toMillis(minute));
 
         onDateChanged(date);
 
