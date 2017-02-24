@@ -35,8 +35,8 @@ public class FormEditNumberFieldCell extends FormEditTextFieldCell {
     @Override
     protected void updateEditView() {
 
-        Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
-        if (value != null){
+        @SuppressWarnings("unchecked") Value<Number> value = (Value<Number>) getRowDescriptor().getValue();
+        if (value != null) {
             String valueString = String.valueOf(value.getValue());
             getEditView().setText(valueString);
         }

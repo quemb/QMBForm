@@ -1,11 +1,13 @@
 package com.quemb.qmbform.view;
 
-import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.os.Build;
+import android.support.annotation.StyleRes;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,6 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.HashMap;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -120,4 +125,101 @@ public abstract class Cell extends LinearLayout {
         mDividerView = dividerView;
     }
 
+    // ===== Colors ===========
+
+    /**
+     * Set the style ID for the specified 'styleConfig' parameter if defined in CellDescriptor,
+     * or apply the default Style Id and the default android:textColor.
+     */
+    protected boolean setStyleId(final TextView textView, final String styleConfig, final String colorConfig) //, final @StyleRes int defaultStyleId
+    {
+        boolean styleFound = false;
+
+        // Get textAppearance from the cellConfig (APPEARANCE_XXX) in FormItemDescriptor
+
+        HashMap<String,Object> cellConfig = null;
+        FormItemDescriptor itemDescriptor = getFormItemDescriptor();
+        if (itemDescriptor != null)
+        {
+            cellConfig = itemDescriptor.getCellConfig();
+            if (cellConfig != null && cellConfig.containsKey(styleConfig))
+            {
+                Object configId = cellConfig.get(styleConfig);
+                if (configId instanceof Integer)
+                {
+                    // Apply style if exists
+
+                    @StyleRes int styleId = ((Integer) configId).intValue();
+                    setTextAppearance(textView, styleId);
+
+                    styleFound = true;
+                }
+            }
+        }
+
+        // If defined, default color is set from cellConfig 'COLOR_XXX' parameter.
+        // Otherwise, save the default android color (before applying style).
+
+        int defaultColor;
+        if (cellConfig != null && colorConfig != null && cellConfig.containsKey(colorConfig))
+        {
+            Object configId = cellConfig.get(colorConfig);
+            if (configId instanceof Integer)
+                defaultColor =  ((Integer) configId).intValue();
+            else
+                defaultColor = getDefaultColor(colorConfig);
+        }
+        else
+            defaultColor = getDefaultColor(colorConfig);
+
+        textView.setTextColor(defaultColor);
+
+        return styleFound;
+    }
+
+    @SuppressWarnings("deprecation")
+    private void setTextAppearance(final TextView textView, final int styleId)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            textView.setTextAppearance(styleId);
+        else
+            textView.setTextAppearance(textView.getContext(), styleId);
+    }
+
+    /**
+     * Get the default color for TextView (android:textColor in theme).
+     * Note that default EditText color is android:editTextColor in theme.
+     * Force to default TextView color for CheckBox and Switch views.
+     */
+    private int getDefaultColor(final String colorConfig)
+    {
+        if (colorConfig != null && colorConfig.equals(CellDescriptor.COLOR_VALUE))
+        {
+            return getThemeValue(android.R.attr.editTextColor);
+        }
+        return getThemeValue(android.R.attr.textColor);
+    }
+
+    /**
+     * Set the TextView color from the cellConfig using 'colorConfig' parameter, if defined in CellDescriptor.
+     * Only used for COLOR_XXX_DISABLED colors.
+     */
+    protected void setTextColor(final TextView textView, final String colorConfig)
+    {
+        // Get color from the cellConfig in FormItemDescriptor
+
+        FormItemDescriptor itemDescriptor = getFormItemDescriptor();
+        if (itemDescriptor != null)
+        {
+            HashMap<String,Object> config = itemDescriptor.getCellConfig();
+            if (config != null && config.containsKey(colorConfig))
+            {
+                Object configColor = config.get(colorConfig);
+                if (configColor instanceof Integer)
+                {
+                    textView.setTextColor(((Integer) configColor).intValue());
+                }
+            }
+        }
+    }
 }

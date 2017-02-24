@@ -29,6 +29,13 @@ public class FormPickerDialogFieldCell extends FormDetailTextFieldCell {
         super(context, rowDescriptor);
     }
 
+    @Override
+    protected void update() {
+
+        super.update();
+        setEnabled(!getRowDescriptor().getDisabled());
+
+    }
 
     @Override
     public void onCellSelected() {

@@ -29,6 +29,7 @@ public class SeperatorSectionCell extends FormBaseCell {
 
         setOrientation(LinearLayout.VERTICAL);
         setClickable(false);
+        setEnabled(false);
 
     }
 

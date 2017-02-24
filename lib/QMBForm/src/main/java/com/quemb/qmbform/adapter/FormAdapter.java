@@ -44,7 +44,12 @@ public class FormAdapter extends BaseAdapter {
 
             mItems.addAll(sectionDescriptor.getRows());
 
-            if (getEnableSectionSeperator() && sectionCount<mFormDescriptor.getSections().size()){
+            if (getEnableSectionSeperator() && sectionCount < mFormDescriptor.getSections().size()) {
+
+                FormItemDescriptor itemDescriptor = mItems.get(mItems.size() - 1);
+                if (itemDescriptor instanceof RowDescriptor)
+                    ((RowDescriptor) itemDescriptor).setLastRowInSection(true);
+
                 mItems.add(RowDescriptor.newInstance(null, RowDescriptor.FormRowDescriptorTypeSectionSeperator));
             }
             sectionCount++;

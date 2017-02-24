@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="horizontal"
               android:padding="@dimen/qmb_padding"
+              android:gravity="center_horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
-    <Switch
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/switchControl"
-            android:checked="false"
-            tools:ignore="NewApi" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:id="@+id/textView"/>
+
 
 </LinearLayout>

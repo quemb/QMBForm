@@ -61,7 +61,7 @@ public class FormIntegerSliderFieldCell extends FormDetailTextFieldCell {
 
         super.update();
 
-        Value<Integer> value = (Value<Integer>) getRowDescriptor().getValue();
+        @SuppressWarnings("unchecked") Value<Integer> value = (Value<Integer>) getRowDescriptor().getValue();
 
         HashMap<String, Object> config = getRowDescriptor().getCellConfig();
         Integer max = config != null && config.containsKey(CellConfigMaxKey) ? (Integer) config.get(CellConfigMaxKey) : 100;

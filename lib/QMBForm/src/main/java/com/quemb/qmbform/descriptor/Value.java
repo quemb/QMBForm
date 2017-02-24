@@ -22,9 +22,8 @@ public class Value<T> {
         return mValue;
     }
 
-
-
-    public void setValue(T value){
+    @SuppressWarnings("unchecked")
+    public void setValue(T value) {
         mValue = value;
         if (mOnValueChangeListener != null){
             mOnValueChangeListener.onChange(value);

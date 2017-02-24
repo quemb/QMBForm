@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.OnFormRowValueChangedListener;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
@@ -35,7 +36,8 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
         super.init();
         mEditView = (EditText)findViewById(R.id.editText);
         mEditView.setRawInputType(InputType.TYPE_CLASS_TEXT);
-        mEditView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Body1);
+
+        setStyleId(mEditView, CellDescriptor.APPEARANCE_TEXT_VALUE, CellDescriptor.COLOR_VALUE);
     }
 
     @Override
@@ -75,7 +77,13 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
 
         updateEditView();
 
-        mEditView.setEnabled(!getRowDescriptor().getDisabled());
+        if (getRowDescriptor().getDisabled())
+        {
+            mEditView.setEnabled(false);
+            setTextColor(mEditView, CellDescriptor.COLOR_VALUE_DISABLED);
+        }
+        else
+            mEditView.setEnabled(true);
 
     }
 
@@ -86,8 +94,8 @@ public class FormEditTextFieldCell extends FormTitleFieldCell {
             mEditView.setHint(hint);
         }
 
-        Value<String> value = (Value<String>) getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null){
+        @SuppressWarnings("unchecked") Value<String> value = (Value<String>) getRowDescriptor().getValue();
+        if (value != null && value.getValue() != null) {
             String valueString = value.getValue();
             mEditView.setText(valueString);
         }

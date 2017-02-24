@@ -21,8 +21,8 @@ public class FormEditHTMLTextViewFieldCell extends FormEditTextViewFieldCell {
 
     protected void updateEditView() {
 
-        Value<String> value = (Value<String>) getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null){
+        @SuppressWarnings("unchecked") Value<String> value = (Value<String>) getRowDescriptor().getValue();
+        if (value != null && value.getValue() != null) {
             String valueString = value.getValue();
             if (valueString != null){
                 valueString = Html.fromHtml(valueString).toString();

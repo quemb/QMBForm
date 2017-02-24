@@ -1,6 +1,8 @@
 package com.quemb.qmbform.descriptor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by tonimoeckel on 14.07.14.
@@ -44,15 +46,28 @@ public class SectionDescriptor extends FormItemDescriptor {
         return mTitle;
     }
 
-    public void addRow(RowDescriptor row){
-        insertRowAtIndex(row, mRows.size());
+    public void addRow(RowDescriptor row) {
+        addRow(row, mRows.size());
     }
 
     public void addRow(RowDescriptor row, int index){
         insertRowAtIndex(row, index);
+
+        // Propagate the CellConfig from Section to Row
+
+        HashMap<String, Object> cellConfig = getCellConfig();
+        if (cellConfig != null)
+            row.setCellConfig(cellConfig);
     }
 
-    public void removeRow(RowDescriptor row){
+    public void addRow(RowDescriptor row, HashMap<String, Object> cellConfig) {
+        addRow(row, mRows.size());
+
+        if (cellConfig != null)
+            row.setCellConfig(cellConfig);
+    }
+
+    public void removeRow(RowDescriptor row) {
         int index = mRows.indexOf(row);
         removeRowAtIndex(index);
     }

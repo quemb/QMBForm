@@ -1,6 +1,7 @@
 package com.quemb.qmbform.view;
 
 import com.quemb.qmbform.R;
+import com.quemb.qmbform.descriptor.CellDescriptor;
 import com.quemb.qmbform.descriptor.RowDescriptor;
 import com.quemb.qmbform.descriptor.Value;
 
@@ -30,6 +31,8 @@ public class FormBooleanFieldCell extends FormBaseCell {
         super.init();
         
         mSwitch = (Switch) findViewById(R.id.switchControl);
+        setStyleId(mSwitch, CellDescriptor.APPEARANCE_TEXT_LABEL, CellDescriptor.COLOR_LABEL);
+
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -50,10 +53,16 @@ public class FormBooleanFieldCell extends FormBaseCell {
 
         String title = getFormItemDescriptor().getTitle();
         mSwitch.setText(title);
-        mSwitch.setEnabled(!getRowDescriptor().getDisabled());
+        if (getRowDescriptor().getDisabled())
+        {
+            mSwitch.setEnabled(false);
+            setTextColor(mSwitch, CellDescriptor.COLOR_LABEL_DISABLED);
+        }
+        else
+            mSwitch.setEnabled(true);
 
-        Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
-        if (value != null && value.getValue() != null){
+        @SuppressWarnings("unchecked") Value<Boolean> value = (Value<Boolean>) getRowDescriptor().getValue();
+        if (value != null && value.getValue() != null) {
             mSwitch.setChecked(value.getValue());
         }
 

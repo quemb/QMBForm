@@ -9,12 +9,35 @@ android {
         targetSdkVersion 25
         versionCode 2
         versionName "1.1"
+
+        // Gradle Plugin 1.5 vectorDrawables support: stop the Gradle plugin’s automatic rasterization of vectors
+        generatedDensities = []
+    }
+    aaptOptions {
+        // Gradle Plugin 1.5 vectorDrawables support: tell aapt to keep the attribute ids around
+        additionalParameters "--no-version-vectors"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+            res.srcDirs = [ 'src/test/resources' ]
+        }
+        
+        test {
+            setRoot('src/test')
+            res.srcDirs = [ 'src/test/resources' ]
+        }
+
+        test.java.srcDirs += 'build/generated/source/r/debug'
     }
 
     lintOptions {
@@ -26,4 +49,78 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'info.hoang8f:android-segmented:1.0.5'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:hamcrest-core:1.2.1'
+    testCompile 'org.robolectric:robolectric:3.0'
+}
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        testOutputDir = file('build/test-classes/debug')
+    }
+}
+
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.jdbc.url", "jdbc:mysql://localhost/sonar"
+        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+        property "sonar.jdbc.username", "sonar"
+        property "sonar.jdbc.password", "sonar"
+
+        property "sonar.java.binaries", "$buildDir"
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+
+        property 'sonar.junit.reportsPath', "$buildDir/test-results/release/"
+        property "sonar.jacoco.reportPath", "$buildDir/jacoco/testDebugUnitTest.exec"
+    }
+}
+
+
+apply plugin: "jacoco"
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+task jacocoTestReport(type: JacocoReport ) {
+    description = "Generates Jacoco coverage reports: XML and HTML"
+    group = "Reporting"
+
+    jacocoClasspath = project.configurations['androidJacocoAnt']
+
+    def fileFilter = ['**/R.class',
+                      '**/R$*.class',
+                      '**/BuildConfig.*',
+                      '**/Manifest*.*',
+                      '**/*Test*.*',
+                      'android/**/*.*']
+
+    def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.projectDir, includes: ['**/*.exec', '**/*.ec'])
+
+    reports {
+        xml {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+        }
+        csv.enabled false
+        html {
+            enabled = true
+            destination = "${project.buildDir}/reports/jacoco"
+        }
+    }
 }
