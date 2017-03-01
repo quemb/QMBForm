@@ -2,11 +2,13 @@ apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
+        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
+
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1"
     }
 }
@@ -133,3 +135,8 @@ task jacocoTestReport(type: JacocoReport ) {
         }
     }
 }
+
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.quemb'
