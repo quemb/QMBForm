@@ -18,7 +18,7 @@ import static org.hamcrest.core.Is.is;
  */
 
 // @Config(constants = BuildConfig.class)
-// @RunWith(RobolectricGradleTestRunner.class)
+// @RunWith(RobolectricTestRunner.class)
 public class ValidationTest {
     @Before
     public void setUp() {

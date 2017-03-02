@@ -39,12 +39,9 @@ android {
     lintOptions {
         abortOnError false
     }
+
     sourceSets {
-        androidTest {
-            setRoot('src/test')
-            res.srcDirs = [ 'src/test/resources' ]
-        }
-        
+
         test {
             setRoot('src/test')
             res.srcDirs = [ 'src/test/resources' ]
@@ -57,6 +54,9 @@ android {
         abortOnError false
     }
 
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -65,7 +65,8 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-core:1.2.1'
-    testCompile 'org.robolectric:robolectric:3.0'
+    testCompile "org.robolectric:robolectric:3.2.2"
+
 }
 
 apply plugin: 'idea'

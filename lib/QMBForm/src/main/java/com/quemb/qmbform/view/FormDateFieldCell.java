@@ -45,6 +45,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
         String title = getFormItemDescriptor().getTitle();
         mTextView.setText(title);
         mTextView.setVisibility(title == null ? GONE : VISIBLE);
+        mTextView.setEnabled(!getRowDescriptor().getDisabled());
 
         @SuppressWarnings("unchecked") Value<Date> value = (Value<Date>) getRowDescriptor().getValue();
         if (value == null || value.getValue() == null) {
@@ -79,7 +80,7 @@ public class FormDateFieldCell extends FormDetailTextInlineFieldCell {
 //        calendar.set(year, monthOfYear, dayOfMonth);
 //        Date date = new Date(calendar.getTimeInMillis());
 
-        updateDateLabel(date, false);
+        updateDateLabel(date, getRowDescriptor().getDisabled());
 
         onValueChanged(new Value<Date>(date));
 

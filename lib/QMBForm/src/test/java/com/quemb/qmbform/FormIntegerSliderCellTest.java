@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import android.app.Activity;
@@ -21,7 +21,7 @@ import static org.hamcrest.core.Is.is;
  * Created by tonimoeckel on 02.09.14.
  */
 @Config(constants = BuildConfig.class)
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class FormIntegerSliderCellTest {
 
 
