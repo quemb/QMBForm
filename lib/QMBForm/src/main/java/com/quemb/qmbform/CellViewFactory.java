@@ -76,6 +76,13 @@ public class CellViewFactory {
         int currentapiVersion = Build.VERSION.SDK_INT;
 
         mViewRowTypeMap = new HashMap<String, Class<? extends FormBaseCell>>();
+
+        //---
+        // Deprecated
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeName, FormDetailTextFieldCell.class);
+        mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeNameVertical, FormDetailTextInlineFieldCell.class);
+        // --
+
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDetailInline, FormDetailTextInlineFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeDetail, FormDetailTextFieldCell.class);
         mViewRowTypeMap.put(RowDescriptor.FormRowDescriptorTypeText, FormEditTextFieldCell.class);
@@ -129,7 +136,13 @@ public class CellViewFactory {
             try {
                 FormBaseCell formBaseCell;
 
-                formBaseCell = mViewRowTypeMap.get(row.getRowType()).getConstructor(Context.class, RowDescriptor.class).newInstance(
+                // Fallback to FormRowDescriptorTypeDetail if no RowType is defined
+                String rowType = row.getRowType();
+                if (!mViewRowTypeMap.containsKey(rowType)){
+                    rowType = RowDescriptor.FormRowDescriptorTypeDetail;
+                }
+
+                formBaseCell = mViewRowTypeMap.get(rowType).getConstructor(Context.class, RowDescriptor.class).newInstance(
                         context, row);
                 rowView = formBaseCell;
             } catch (InstantiationException e) {
