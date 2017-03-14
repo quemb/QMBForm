@@ -69,6 +69,7 @@ public class SampleAnnotationFormFragment extends Fragment implements OnFormRowV
         super.onViewCreated(view, savedInstanceState);
 
         Entry entry = new Entry();
+        entry.display = "Its me";
         entry.title = "Hello";
         entry.description = "World";
         entry.date = new Date();

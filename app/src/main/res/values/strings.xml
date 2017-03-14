@@ -17,5 +17,6 @@
     <string name="lb_multi_value">Multiple Value</string>
     <string name="section_multiValue">Multiple Value</string>
     <string name="lb_add_new_tag">Add new tag</string>
+    <string name="lb_display">Display</string>
 
 </resources>

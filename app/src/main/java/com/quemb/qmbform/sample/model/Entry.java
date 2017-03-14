@@ -15,6 +15,14 @@ import java.util.Date;
 public class Entry implements FormElementDelegate {
 
     @FormElement(
+            label = R.string.lb_display,
+            rowDescriptorType = RowDescriptor.FormRowDescriptorTypeDetail,
+            sortId = 0,
+            section = R.string.section_general
+    )
+    public String display;
+
+    @FormElement(
             label = R.string.lb_title,
             rowDescriptorType = RowDescriptor.FormRowDescriptorTypeText,
             sortId = 1,
