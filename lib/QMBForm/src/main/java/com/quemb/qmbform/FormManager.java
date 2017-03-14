@@ -1,6 +1,5 @@
 package com.quemb.qmbform;
 
-import com.quemb.qmbform.OnFormRowClickListener;
 import com.quemb.qmbform.adapter.FormAdapter;
 import com.quemb.qmbform.descriptor.FormDescriptor;
 import com.quemb.qmbform.descriptor.FormItemDescriptor;
@@ -13,17 +12,11 @@ import com.quemb.qmbform.view.Cell;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 
 /**
