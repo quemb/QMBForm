@@ -173,7 +173,9 @@ public class FormDescriptorAnnotationFactory {
                 }
             }
 
-            formDescriptor.addSection(sectionDescriptor);
+            if (sectionDescriptor.getRowCount()>0){
+                formDescriptor.addSection(sectionDescriptor);
+            }
         }
 
         return formDescriptor;
